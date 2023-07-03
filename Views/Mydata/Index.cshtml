@@ -2,105 +2,111 @@
 
 @{
     ViewBag.Title = "Index";
-    
 }
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+        </div>
+    </div><!-- End Breadcrumbs -->
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MyId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OperationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Height)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Menopause)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CellType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ER)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PR)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Her)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OperationType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TreatPlan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Note)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InputDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MyId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OperationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Menopause)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CellType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Her)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OperationType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TreatPlan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InputDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MyId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OperationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Height)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Menopause)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CellType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PR)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Her)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OperationType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TreatPlan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Note)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InputDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MyId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OperationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Height)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Menopause)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CellType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Her)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OperationType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TreatPlan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InputDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.ActionLink("Create New", "MydataCreate")
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MyId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MyId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MyId })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</main>

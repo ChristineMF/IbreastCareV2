@@ -11,6 +11,7 @@ namespace IbreastCare.Controllers
         // GET: Patient
         public ActionResult Index()
         {
+            ViewBag.userid = Session["UserId"].ToString();
             return View();
         }
     }

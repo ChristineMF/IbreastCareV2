@@ -64,8 +64,9 @@ namespace IbreastCare.Controllers
                 }
                 if (member.RoleId == 2 && member.Status == "on")
                 {
-                    //return RedirectToAction("Index", "Patient", new { id = member.UserId });
-                    return RedirectToAction("Index", "Patient");
+                    return RedirectToAction("Index", "Mydata", new { id = member.UserId });
+                    //Session["UserId"] = member.UserId;
+                    //return RedirectToAction("Index", "Mydata");
 
                 }
                 else
@@ -122,19 +123,29 @@ namespace IbreastCare.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register([Bind(Prefix = "Register")] RegisterViewModel member)
+        public ActionResult Register([Bind(Prefix = "Register")] RegisterViewModel member, MydataViewModel mydata)
         {
             if (ModelState.IsValid)
             {
                 //1.存資料庫  RegisterViewModel=>Member
                 member.RoleId = 2;
                 member.InputDate = DateTime.Now;
-                member.Status = "off";
-
+                member.Status = "on";
 
                 Member model = Common.MapTo<RegisterViewModel, Member>(member);
-
                 Db.Members.Add(model);
+
+                //2.取Member資料庫,Member=>RegisterViewModel
+                RegisterViewModel detailmodel = Common.MapTo<Member, RegisterViewModel>(model);
+
+                //3-1.將Member.UserId存入MydataViewModel.UserId
+                //3-2.設定系統時間為inputDate的時間
+                mydata.UserId = detailmodel.UserId;
+                mydata.InputDate = DateTime.Now;
+
+                //4.存資料庫 Personal_Data=>MydataViewModel
+                Personal_Data mydataAll = Common.MapTo<MydataViewModel, Personal_Data>(mydata);
+                Db.Personal_Data.Add(mydataAll);
 
                 Db.SaveChanges();
                 return RedirectToAction("Index", "Home");

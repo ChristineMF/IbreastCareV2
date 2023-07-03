@@ -32,7 +32,7 @@ namespace IbreastCare.ViewModel
         public string Note { get; set; }
         [DisplayName("建立日期")]
         public System.DateTime InputDate { get; set; }
-        [DisplayName("ID")]
-        public int UserId { get; set; }
+        [DisplayName("UserID")]
+        public int ? UserId { get; set; }
     }
 }

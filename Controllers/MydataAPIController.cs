@@ -6,15 +6,15 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace IbreastCare.ViewModel
+namespace IbreastCare.Controllers
 {
     public class MydataAPIController : ApiController
     {
         private IbreastDBEntities Db = new IbreastDBEntities();
         // GET: api/MydataAPI
-        public IEnumerable<string> Get()
+        public IEnumerable<Personal_Data> Get()
         {
-            return new string[] { "value1", "value2" };
+            return this.Db.Personal_Data.ToList();
         }
 
         // GET: api/MydataAPI/5

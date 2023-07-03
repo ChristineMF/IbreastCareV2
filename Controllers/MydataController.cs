@@ -14,14 +14,38 @@ namespace IbreastCare.Controllers
     public class MydataController : Controller
     {
         private IbreastDBEntities Db = new IbreastDBEntities(); //新建Db 為IbreastDBEntities
-        // GET: Mydata
-        public ActionResult Index()
+                                                                // GET: Mydata
+        public ActionResult Index(int? id)
         {
+            //ViewBag.userid = Session["UserId"].ToString();//接Session取得的UserID
+            //var myuserid = Session["UserId"];
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            //Personal_Data mydataList = Db.Personal_Data.FirstOrDefault(m => m.UserId == id);
+            //if (mydataList == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
             List<Personal_Data> mydata = Db.Personal_Data.ToList();
+
             List<MydataViewModel> model = Common.MapToList<Personal_Data, MydataViewModel>(mydata);
-            return View(model);
-           
+            List<MydataViewModel> dataList = new List<MydataViewModel>();
+            foreach (var item in model)
+            {
+                if (item.UserId == id)
+                {
+                    dataList.Add(item);
+                }
+               
+            }
+            
+            return View(dataList);
+
         }
+
         public ActionResult MydataCreate()
         {
             return View();
@@ -33,7 +57,7 @@ namespace IbreastCare.Controllers
             {
                 //1.存資料庫  RegisterViewModel=>Member  
                 mydata.InputDate = DateTime.Now;
-              
+
                 Personal_Data model = Common.MapTo<MydataViewModel, Personal_Data>(mydata);
 
                 Db.Personal_Data.Add(model);
@@ -45,7 +69,7 @@ namespace IbreastCare.Controllers
             {
                 return View(mydata);
             }
-           
+
         }
         //public ActionResult MydataEdit()
         //{
