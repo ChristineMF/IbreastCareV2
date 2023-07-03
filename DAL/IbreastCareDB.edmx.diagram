@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="20ded7f7bb274027b08b01d6cd0f8d0d" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="IbreastDBModel.Member" Width="1.5" PointX="1.875" PointY="5.5" />
+        <EntityTypeShape EntityType="IbreastDBModel.MyOperation" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="IbreastDBModel.MyTreat" Width="1.5" PointX="7.875" PointY="4.5" />
+        <EntityTypeShape EntityType="IbreastDBModel.OperationType" Width="1.5" PointX="11" PointY="6.75" />
+        <EntityTypeShape EntityType="IbreastDBModel.Permission" Width="1.5" PointX="7.375" PointY="2.625" />
+        <EntityTypeShape EntityType="IbreastDBModel.Personal_Data" Width="1.5" PointX="4.375" PointY="5.875" />
+        <EntityTypeShape EntityType="IbreastDBModel.RolePermission" Width="1.5" PointX="4.75" PointY="2.5" />
+        <EntityTypeShape EntityType="IbreastDBModel.Role" Width="1.5" PointX="2.25" PointY="2.5" />
+        <EntityTypeShape EntityType="IbreastDBModel.TreatPlan" Width="1.5" PointX="11" PointY="4.5" />
+        <AssociationConnector Association="IbreastDBModel.FK_Members_Roles" />
+        <AssociationConnector Association="IbreastDBModel.FK_Personal_Datas_Members" />
+        <AssociationConnector Association="IbreastDBModel.FK_MyOperations_OperationType" />
+        <AssociationConnector Association="IbreastDBModel.FK_MyOperations_Personal_Datas" />
+        <AssociationConnector Association="IbreastDBModel.FK_MyTreats_Personal_Datas" />
+        <AssociationConnector Association="IbreastDBModel.FK_MyTreats_TreatPlan" />
+        <AssociationConnector Association="IbreastDBModel.FK_RolePermissions_Permissions" />
+        <AssociationConnector Association="IbreastDBModel.FK_RolePermissions_Roles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

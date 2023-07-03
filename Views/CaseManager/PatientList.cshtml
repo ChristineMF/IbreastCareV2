@@ -1,0 +1,99 @@
+﻿@model IEnumerable<IbreastCare.ViewModel.PatientViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+        </div>
+    </div><!-- End Breadcrumbs -->
+    <div class="container">
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RealName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NickName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.CellPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InputDate)
+                </th>
+
+
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.UserId
+                    </td>
+                    <td>
+                        @item.RealName
+                    </td>
+                    <td>
+                        @item.NickName
+                    </td>
+                    <td>
+                        @item.UserName
+                    </td>
+
+
+                    <td>
+                        @item.CellPhone
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+
+                    <td>
+                        @item.age
+                    </td>
+                    <td>
+                        @item.InputDate
+                    </td>
+
+
+                    <td>
+                        @*@Html.ActionLink("編輯", "Edit", new { id=item.UserId }) |
+                            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.UserId })*@
+                        <!--</td>-->
+                </tr>
+            }
+
+        </table>
+    </div>
+</main>

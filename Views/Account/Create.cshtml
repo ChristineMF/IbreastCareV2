@@ -1,0 +1,251 @@
+﻿@model IbreastCare.ViewModel.RegisterViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="slide navbar style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Jost', sans-serif;
+            /*background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);*/
+            /* background: linear-gradient(to bottom, #FFD9E6, #FFC0CB, #24243e);*/
+            background: linear-gradient(#FF1493, #FFB3E6, #FFD9E6);
+        }
+
+        .main {
+            width: 350px;
+            height: 600px;
+            background: red;
+            overflow: hidden;
+            background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
+            border-radius: 10px;
+            box-shadow: 5px 20px 50px #000;
+        }
+
+        #chk {
+            display: none;
+        }
+
+        .login {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        label {
+            color: #fff;
+            font-size: 2.3em;
+            justify-content: center;
+            display: flex;
+            margin: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .5s ease-in-out;
+        }
+
+        input {
+            width: 100%;
+            height: 35px;
+            background: #e0dede;
+            justify-content: center;
+            display: flex;
+            margin: 0px 20px 10px 20px;
+            padding: 20px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 60%;
+            height: 40px;
+            margin: 10px auto;
+            justify-content: center;
+            display: block;
+            color: #fff;
+            /*background: #573b8a;*/
+            background: #FF1493;
+            font-size: 1em;
+            font-weight: bold;
+            margin-top: 20px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            transition: .2s ease-in;
+            cursor: pointer;
+        }
+
+            button:hover {
+                /*background: #6d44b8;*/
+                background: #FF66CC;
+            }
+
+
+        .signup {
+            height: 550px;
+            background: #eee;
+            border-radius: 60% / 10%;
+            transform: translateY(-115px);
+            transition: .8s ease-in-out;
+        }
+
+            .signup label {
+                color: gray;
+                font-size: 1em;
+                margin: 0px;
+            }
+
+        #register {
+            /* color: #573b8a;*/
+            font-size: 2.3em;
+            color: #FF0DA6;
+            transform: scale(.8);
+        }
+
+        #chk:checked ~ .signup {
+            transform: translateY(-600px);
+        }
+
+            #chk:checked ~ .signup label {
+                padding: 10px;
+                transform: scale(1);
+            }
+
+        #chk:checked ~ .login label {
+            transform: scale(.6) translateY(-80px);
+        }
+
+        .input-group-prepend {
+            margin: 0px 0px 0px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <div class="login">
+            @*@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                {*@
+            <label for="chk" aria-hidden="true">登入</label>
+            @*@Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "login__input", placeholder = "User name / Email" } })
+                @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "login__input", placeholder = "Password" } })*@
+            <button>登入</button>
+            @*}*@
+        </div>
+        <div class="signup">
+            @*@using (Html.BeginForm("Signup", "Account", FormMethod.Post))
+                {*@
+            <label for="chk" aria-hidden="true" id="register">註冊</label>
+            @*@Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "login__input", placeholder = "User name / Email" } })
+                @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "login__input", placeholder = "Password" } })*@
+            <div class="container">
+                @using (Html.BeginForm("Create", "Account", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", @class = "form-horizontal form-without-legend" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        @Html.EditorFor(model => model.RealName, new { htmlAttributes = new { @class = "form-control", placeholder = "姓名", id = "first-name" } })
+                        @Html.ValidationMessageFor(model => model.RealName, "", new { @class = "text-danger" })
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        @Html.EditorFor(model => model.NickName, new { htmlAttributes = new { @class = "form-control", placeholder = "暱稱", id = "nick-name" } })
+                        @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "帳號", id = "user-name" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "密碼" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "再次輸入密碼" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                        </div>
+                        @Html.EditorFor(model => model.CellPhone, new { htmlAttributes = new { @class = "form-control", placeholder = "手機" } })
+                        @Html.ValidationMessageFor(model => model.CellPhone, "", new { @class = "text-danger" })
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入有效的Email" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control", placeholder = "出生日期" } })
+                        @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group">
+                        @*<button type="submit" class="btn btn-primary btn-block"> 註冊  </button>*@
+                        <button type="submit"> 註冊  </button>
+                    </div> <!-- form-group// -->
+                    @*<div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+
+                                <input type="submit" value="註冊" class="btn btn-default" />
+                            </div>
+                        </div>*@
+
+
+
+                }
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+</body>

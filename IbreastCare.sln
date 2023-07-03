@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IbreastCare", "IbreastCare.csproj", "{D7E377BB-3594-4DFE-B05F-C5B128EC706E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IbreastCareAdmin", "..\IbreastCareAdmin\IbreastCareAdmin.csproj", "{9F5F636C-C455-416B-89D7-5B014247B587}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7E377BB-3594-4DFE-B05F-C5B128EC706E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E377BB-3594-4DFE-B05F-C5B128EC706E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E377BB-3594-4DFE-B05F-C5B128EC706E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E377BB-3594-4DFE-B05F-C5B128EC706E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F5F636C-C455-416B-89D7-5B014247B587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F5F636C-C455-416B-89D7-5B014247B587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F5F636C-C455-416B-89D7-5B014247B587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F5F636C-C455-416B-89D7-5B014247B587}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD59708D-FF2B-40F3-8152-CF29F9C59F5E}
+	EndGlobalSection
+EndGlobal

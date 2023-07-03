@@ -1,0 +1,608 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IbreastDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CellPhone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="InputDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="10" />
+          <Property Name="SettingUser" Type="nvarchar" MaxLength="20" />
+          <Property Name="SettingDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MyOperations">
+          <Key>
+            <PropertyRef Name="MyOpeId" />
+          </Key>
+          <Property Name="MyOpeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MyId" Type="int" Nullable="false" />
+          <Property Name="OpeTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="MyTreats">
+          <Key>
+            <PropertyRef Name="MyTreatId" />
+          </Key>
+          <Property Name="MyTreatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MyId" Type="int" Nullable="false" />
+          <Property Name="TreatId" Type="int" />
+        </EntityType>
+        <EntityType Name="OperationType">
+          <Key>
+            <PropertyRef Name="OpeTypeId" />
+          </Key>
+          <Property Name="OpeTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OpeTypeName" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Name="PermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PermissionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personal_Datas">
+          <Key>
+            <PropertyRef Name="MyId" />
+          </Key>
+          <Property Name="MyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperationDate" Type="date" />
+          <Property Name="Height" Type="float" />
+          <Property Name="Menopause" Type="nvarchar" MaxLength="10" />
+          <Property Name="CellType" Type="nvarchar" MaxLength="20" />
+          <Property Name="ER" Type="nvarchar" MaxLength="10" />
+          <Property Name="PR" Type="nvarchar" MaxLength="10" />
+          <Property Name="Her" Type="nvarchar" MaxLength="20" />
+          <Property Name="OperationType" Type="nvarchar" MaxLength="50" />
+          <Property Name="TreatPlan" Type="nvarchar" MaxLength="20" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="InputDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="RolePermissions">
+          <Key>
+            <PropertyRef Name="RolePerId" />
+          </Key>
+          <Property Name="RolePerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="PermissionID" Type="int" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TreatPlan">
+          <Key>
+            <PropertyRef Name="TreatId" />
+          </Key>
+          <Property Name="TreatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TreatName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Members_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyOperations_OperationType">
+          <End Role="OperationType" Type="Self.OperationType" Multiplicity="0..1" />
+          <End Role="MyOperations" Type="Self.MyOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperationType">
+              <PropertyRef Name="OpeTypeId" />
+            </Principal>
+            <Dependent Role="MyOperations">
+              <PropertyRef Name="OpeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyOperations_Personal_Datas">
+          <End Role="Personal_Datas" Type="Self.Personal_Datas" Multiplicity="1" />
+          <End Role="MyOperations" Type="Self.MyOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Datas">
+              <PropertyRef Name="MyId" />
+            </Principal>
+            <Dependent Role="MyOperations">
+              <PropertyRef Name="MyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyTreats_Personal_Datas">
+          <End Role="Personal_Datas" Type="Self.Personal_Datas" Multiplicity="1" />
+          <End Role="MyTreats" Type="Self.MyTreats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Datas">
+              <PropertyRef Name="MyId" />
+            </Principal>
+            <Dependent Role="MyTreats">
+              <PropertyRef Name="MyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyTreats_TreatPlan">
+          <End Role="TreatPlan" Type="Self.TreatPlan" Multiplicity="0..1" />
+          <End Role="MyTreats" Type="Self.MyTreats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TreatPlan">
+              <PropertyRef Name="TreatId" />
+            </Principal>
+            <Dependent Role="MyTreats">
+              <PropertyRef Name="TreatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_Datas_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="Personal_Datas" Type="Self.Personal_Datas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Personal_Datas">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="0..1" />
+          <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="PermissionID" />
+            </Principal>
+            <Dependent Role="RolePermissions">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RolePermissions">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IbreastDBModelStoreContainer">
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MyOperations" EntityType="Self.MyOperations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MyTreats" EntityType="Self.MyTreats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OperationType" EntityType="Self.OperationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal_Datas" EntityType="Self.Personal_Datas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TreatPlan" EntityType="Self.TreatPlan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Members_Roles" Association="Self.FK_Members_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyOperations_OperationType" Association="Self.FK_MyOperations_OperationType">
+            <End Role="OperationType" EntitySet="OperationType" />
+            <End Role="MyOperations" EntitySet="MyOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyOperations_Personal_Datas" Association="Self.FK_MyOperations_Personal_Datas">
+            <End Role="Personal_Datas" EntitySet="Personal_Datas" />
+            <End Role="MyOperations" EntitySet="MyOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyTreats_Personal_Datas" Association="Self.FK_MyTreats_Personal_Datas">
+            <End Role="Personal_Datas" EntitySet="Personal_Datas" />
+            <End Role="MyTreats" EntitySet="MyTreats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyTreats_TreatPlan" Association="Self.FK_MyTreats_TreatPlan">
+            <End Role="TreatPlan" EntitySet="TreatPlan" />
+            <End Role="MyTreats" EntitySet="MyTreats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_Datas_Members" Association="Self.FK_Personal_Datas_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Personal_Datas" EntitySet="Personal_Datas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Permissions" Association="Self.FK_RolePermissions_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="RolePermissions" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Roles" Association="Self.FK_RolePermissions_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RolePermissions" EntitySet="RolePermissions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IbreastDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="IbreastDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Members" EntityType="IbreastDBModel.Member" />
+          <EntitySet Name="MyOperations" EntityType="IbreastDBModel.MyOperation" />
+          <EntitySet Name="MyTreats" EntityType="IbreastDBModel.MyTreat" />
+          <EntitySet Name="OperationTypes" EntityType="IbreastDBModel.OperationType" />
+          <EntitySet Name="Permissions" EntityType="IbreastDBModel.Permission" />
+          <EntitySet Name="Personal_Data" EntityType="IbreastDBModel.Personal_Data" />
+          <EntitySet Name="RolePermissions" EntityType="IbreastDBModel.RolePermission" />
+          <EntitySet Name="Roles" EntityType="IbreastDBModel.Role" />
+          <EntitySet Name="TreatPlans" EntityType="IbreastDBModel.TreatPlan" />
+          <AssociationSet Name="FK_Members_Roles" Association="IbreastDBModel.FK_Members_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_Datas_Members" Association="IbreastDBModel.FK_Personal_Datas_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Personal_Datas" EntitySet="Personal_Data" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyOperations_OperationType" Association="IbreastDBModel.FK_MyOperations_OperationType">
+            <End Role="OperationType" EntitySet="OperationTypes" />
+            <End Role="MyOperation" EntitySet="MyOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyOperations_Personal_Datas" Association="IbreastDBModel.FK_MyOperations_Personal_Datas">
+            <End Role="Personal_Datas" EntitySet="Personal_Data" />
+            <End Role="MyOperation" EntitySet="MyOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyTreats_Personal_Datas" Association="IbreastDBModel.FK_MyTreats_Personal_Datas">
+            <End Role="Personal_Datas" EntitySet="Personal_Data" />
+            <End Role="MyTreat" EntitySet="MyTreats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyTreats_TreatPlan" Association="IbreastDBModel.FK_MyTreats_TreatPlan">
+            <End Role="TreatPlan" EntitySet="TreatPlans" />
+            <End Role="MyTreat" EntitySet="MyTreats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Permissions" Association="IbreastDBModel.FK_RolePermissions_Permissions">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="RolePermission" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Roles" Association="IbreastDBModel.FK_RolePermissions_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="RolePermission" EntitySet="RolePermissions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RealName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="InputDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SettingUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SettingDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="IbreastDBModel.FK_Members_Roles" FromRole="Member" ToRole="Role" />
+          <NavigationProperty Name="Personal_Datas" Relationship="IbreastDBModel.FK_Personal_Datas_Members" FromRole="Member" ToRole="Personal_Datas" />
+        </EntityType>
+        <EntityType Name="MyOperation">
+          <Key>
+            <PropertyRef Name="MyOpeId" />
+          </Key>
+          <Property Name="MyOpeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MyId" Type="Int32" Nullable="false" />
+          <Property Name="OpeTypeId" Type="Int32" />
+          <NavigationProperty Name="OperationType" Relationship="IbreastDBModel.FK_MyOperations_OperationType" FromRole="MyOperation" ToRole="OperationType" />
+          <NavigationProperty Name="Personal_Datas" Relationship="IbreastDBModel.FK_MyOperations_Personal_Datas" FromRole="MyOperation" ToRole="Personal_Datas" />
+        </EntityType>
+        <EntityType Name="MyTreat">
+          <Key>
+            <PropertyRef Name="MyTreatId" />
+          </Key>
+          <Property Name="MyTreatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MyId" Type="Int32" Nullable="false" />
+          <Property Name="TreatId" Type="Int32" />
+          <NavigationProperty Name="Personal_Datas" Relationship="IbreastDBModel.FK_MyTreats_Personal_Datas" FromRole="MyTreat" ToRole="Personal_Datas" />
+          <NavigationProperty Name="TreatPlan" Relationship="IbreastDBModel.FK_MyTreats_TreatPlan" FromRole="MyTreat" ToRole="TreatPlan" />
+        </EntityType>
+        <EntityType Name="OperationType">
+          <Key>
+            <PropertyRef Name="OpeTypeId" />
+          </Key>
+          <Property Name="OpeTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OpeTypeName" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="MyOperations" Relationship="IbreastDBModel.FK_MyOperations_OperationType" FromRole="OperationType" ToRole="MyOperation" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Name="PermissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RolePermissions" Relationship="IbreastDBModel.FK_RolePermissions_Permissions" FromRole="Permission" ToRole="RolePermission" />
+        </EntityType>
+        <EntityType Name="Personal_Data">
+          <Key>
+            <PropertyRef Name="MyId" />
+          </Key>
+          <Property Name="MyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperationDate" Type="DateTime" Precision="0" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="Menopause" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CellType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ER" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Her" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OperationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TreatPlan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InputDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="IbreastDBModel.FK_Personal_Datas_Members" FromRole="Personal_Datas" ToRole="Member" />
+          <NavigationProperty Name="MyOperations" Relationship="IbreastDBModel.FK_MyOperations_Personal_Datas" FromRole="Personal_Datas" ToRole="MyOperation" />
+          <NavigationProperty Name="MyTreats" Relationship="IbreastDBModel.FK_MyTreats_Personal_Datas" FromRole="Personal_Datas" ToRole="MyTreat" />
+        </EntityType>
+        <EntityType Name="RolePermission">
+          <Key>
+            <PropertyRef Name="RolePerId" />
+          </Key>
+          <Property Name="RolePerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="PermissionID" Type="Int32" />
+          <NavigationProperty Name="Permission" Relationship="IbreastDBModel.FK_RolePermissions_Permissions" FromRole="RolePermission" ToRole="Permission" />
+          <NavigationProperty Name="Role" Relationship="IbreastDBModel.FK_RolePermissions_Roles" FromRole="RolePermission" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Members" Relationship="IbreastDBModel.FK_Members_Roles" FromRole="Role" ToRole="Member" />
+          <NavigationProperty Name="RolePermissions" Relationship="IbreastDBModel.FK_RolePermissions_Roles" FromRole="Role" ToRole="RolePermission" />
+        </EntityType>
+        <EntityType Name="TreatPlan">
+          <Key>
+            <PropertyRef Name="TreatId" />
+          </Key>
+          <Property Name="TreatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TreatName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MyTreats" Relationship="IbreastDBModel.FK_MyTreats_TreatPlan" FromRole="TreatPlan" ToRole="MyTreat" />
+        </EntityType>
+        <Association Name="FK_Members_Roles">
+          <End Type="IbreastDBModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="IbreastDBModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_Datas_Members">
+          <End Type="IbreastDBModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="IbreastDBModel.Personal_Data" Role="Personal_Datas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Personal_Datas">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyOperations_OperationType">
+          <End Type="IbreastDBModel.OperationType" Role="OperationType" Multiplicity="0..1" />
+          <End Type="IbreastDBModel.MyOperation" Role="MyOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperationType">
+              <PropertyRef Name="OpeTypeId" />
+            </Principal>
+            <Dependent Role="MyOperation">
+              <PropertyRef Name="OpeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyOperations_Personal_Datas">
+          <End Type="IbreastDBModel.Personal_Data" Role="Personal_Datas" Multiplicity="1" />
+          <End Type="IbreastDBModel.MyOperation" Role="MyOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Datas">
+              <PropertyRef Name="MyId" />
+            </Principal>
+            <Dependent Role="MyOperation">
+              <PropertyRef Name="MyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyTreats_Personal_Datas">
+          <End Type="IbreastDBModel.Personal_Data" Role="Personal_Datas" Multiplicity="1" />
+          <End Type="IbreastDBModel.MyTreat" Role="MyTreat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Datas">
+              <PropertyRef Name="MyId" />
+            </Principal>
+            <Dependent Role="MyTreat">
+              <PropertyRef Name="MyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyTreats_TreatPlan">
+          <End Type="IbreastDBModel.TreatPlan" Role="TreatPlan" Multiplicity="0..1" />
+          <End Type="IbreastDBModel.MyTreat" Role="MyTreat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TreatPlan">
+              <PropertyRef Name="TreatId" />
+            </Principal>
+            <Dependent Role="MyTreat">
+              <PropertyRef Name="TreatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Permissions">
+          <End Type="IbreastDBModel.Permission" Role="Permission" Multiplicity="0..1" />
+          <End Type="IbreastDBModel.RolePermission" Role="RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="PermissionID" />
+            </Principal>
+            <Dependent Role="RolePermission">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Roles">
+          <End Type="IbreastDBModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="IbreastDBModel.RolePermission" Role="RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RolePermission">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IbreastDBModelStoreContainer" CdmEntityContainer="IbreastDBEntities">
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="IbreastDBModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="SettingDate" ColumnName="SettingDate" />
+                <ScalarProperty Name="SettingUser" ColumnName="SettingUser" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="InputDate" ColumnName="InputDate" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyOperations">
+            <EntityTypeMapping TypeName="IbreastDBModel.MyOperation">
+              <MappingFragment StoreEntitySet="MyOperations">
+                <ScalarProperty Name="OpeTypeId" ColumnName="OpeTypeId" />
+                <ScalarProperty Name="MyId" ColumnName="MyId" />
+                <ScalarProperty Name="MyOpeId" ColumnName="MyOpeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyTreats">
+            <EntityTypeMapping TypeName="IbreastDBModel.MyTreat">
+              <MappingFragment StoreEntitySet="MyTreats">
+                <ScalarProperty Name="TreatId" ColumnName="TreatId" />
+                <ScalarProperty Name="MyId" ColumnName="MyId" />
+                <ScalarProperty Name="MyTreatId" ColumnName="MyTreatId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OperationTypes">
+            <EntityTypeMapping TypeName="IbreastDBModel.OperationType">
+              <MappingFragment StoreEntitySet="OperationType">
+                <ScalarProperty Name="OpeTypeName" ColumnName="OpeTypeName" />
+                <ScalarProperty Name="OpeTypeId" ColumnName="OpeTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="IbreastDBModel.Permission">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal_Data">
+            <EntityTypeMapping TypeName="IbreastDBModel.Personal_Data">
+              <MappingFragment StoreEntitySet="Personal_Datas">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="InputDate" ColumnName="InputDate" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="TreatPlan" ColumnName="TreatPlan" />
+                <ScalarProperty Name="OperationType" ColumnName="OperationType" />
+                <ScalarProperty Name="Her" ColumnName="Her" />
+                <ScalarProperty Name="PR" ColumnName="PR" />
+                <ScalarProperty Name="ER" ColumnName="ER" />
+                <ScalarProperty Name="CellType" ColumnName="CellType" />
+                <ScalarProperty Name="Menopause" ColumnName="Menopause" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+                <ScalarProperty Name="MyId" ColumnName="MyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolePermissions">
+            <EntityTypeMapping TypeName="IbreastDBModel.RolePermission">
+              <MappingFragment StoreEntitySet="RolePermissions">
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RolePerId" ColumnName="RolePerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="IbreastDBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TreatPlans">
+            <EntityTypeMapping TypeName="IbreastDBModel.TreatPlan">
+              <MappingFragment StoreEntitySet="TreatPlan">
+                <ScalarProperty Name="TreatName" ColumnName="TreatName" />
+                <ScalarProperty Name="TreatId" ColumnName="TreatId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
