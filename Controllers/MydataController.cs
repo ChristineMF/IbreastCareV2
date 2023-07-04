@@ -49,7 +49,7 @@ namespace IbreastCare.Controllers
 
         public ActionResult MydataCreate()
         {
-            ViewBag.userid = Session["UserId"];
+            ViewBag.userid = (int)Session["UserId"];
             ViewBag.inputdate = Session["InputDate"];
             return View();
         }

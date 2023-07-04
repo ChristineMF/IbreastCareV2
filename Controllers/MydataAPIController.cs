@@ -27,7 +27,8 @@ namespace IbreastCare.ViewModel
         public void Post(Personal_Data mydata)
         {
             //mydata.UserId = Session["UserId"];
-           
+            mydata.InputDate = DateTime.Now;
+
             Db.Personal_Data.Add(mydata);
 
             Db.SaveChanges();
