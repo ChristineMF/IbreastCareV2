@@ -393,6 +393,7 @@
     <Content Include="Views\CaseManager\Index.cshtml" />
     <Content Include="Views\Mydata\Index.cshtml" />
     <Content Include="Views\Mydata\MydataCreate.cshtml" />
+    <Content Include="Views\Mydata\MydataCreate2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

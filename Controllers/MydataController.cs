@@ -41,22 +41,26 @@ namespace IbreastCare.Controllers
                 }
                
             }
-            
+            Session["UserId"]=id;
+            Session["InputDate"] = DateTime.Now;
             return View(dataList);
 
         }
 
         public ActionResult MydataCreate()
         {
+            ViewBag.userid = Session["UserId"];
+            ViewBag.inputdate = Session["InputDate"];
             return View();
         }
         [HttpPost]
-        public ActionResult MydataCreate(MydataViewModel mydata)
+        public ActionResult MydataCreate(MydataViewModel mydata, int id)
         {
             if (ModelState.IsValid)
             {
                 //1.存資料庫  RegisterViewModel=>Member  
                 mydata.InputDate = DateTime.Now;
+                mydata.UserId = id;
 
                 Personal_Data model = Common.MapTo<MydataViewModel, Personal_Data>(mydata);
 

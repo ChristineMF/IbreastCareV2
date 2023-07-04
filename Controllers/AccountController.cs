@@ -64,9 +64,8 @@ namespace IbreastCare.Controllers
                 }
                 if (member.RoleId == 2 && member.Status == "on")
                 {
-                    return RedirectToAction("Index", "Mydata", new { id = member.UserId });
-                    //Session["UserId"] = member.UserId;
-                    //return RedirectToAction("Index", "Mydata");
+                    //return RedirectToAction("Index", "Patient", new { id = member.UserId });
+                    return RedirectToAction("Index", "Patient");
 
                 }
                 else
