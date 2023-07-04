@@ -161,6 +161,10 @@
     <Content Include="assets\img\trainers\trainer-1.jpg" />
     <Content Include="assets\img\trainers\trainer-2.jpg" />
     <Content Include="assets\img\trainers\trainer-3.jpg" />
+    <Content Include="assets\jsgrid-1.5.3\jsgrid-theme.css" />
+    <Content Include="assets\jsgrid-1.5.3\jsgrid-theme.min.css" />
+    <Content Include="assets\jsgrid-1.5.3\jsgrid.css" />
+    <Content Include="assets\jsgrid-1.5.3\jsgrid.min.css" />
     <Content Include="assets\js\bootstrap-checkbox.js" />
     <Content Include="assets\js\i18n\bg.js" />
     <Content Include="assets\js\i18n\es.js" />
@@ -233,6 +237,19 @@
     <Content Include="datatables.html" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\i18n\jsgrid-de.js" />
+    <Content Include="Scripts\i18n\jsgrid-es.js" />
+    <Content Include="Scripts\i18n\jsgrid-fr.js" />
+    <Content Include="Scripts\i18n\jsgrid-he.js" />
+    <Content Include="Scripts\i18n\jsgrid-ja.js" />
+    <Content Include="Scripts\i18n\jsgrid-ka.js" />
+    <Content Include="Scripts\i18n\jsgrid-pl.js" />
+    <Content Include="Scripts\i18n\jsgrid-pt-br.js" />
+    <Content Include="Scripts\i18n\jsgrid-pt.js" />
+    <Content Include="Scripts\i18n\jsgrid-ru.js" />
+    <Content Include="Scripts\i18n\jsgrid-tr.js" />
+    <Content Include="Scripts\i18n\jsgrid-zh-cn.js" />
+    <Content Include="Scripts\i18n\jsgrid-zh-tw.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -240,6 +257,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jsgrid.js" />
+    <Content Include="Scripts\jsgrid.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
