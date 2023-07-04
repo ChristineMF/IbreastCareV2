@@ -32,6 +32,7 @@ namespace IbreastCare.ViewModel
             Db.Personal_Data.Add(mydata);
 
             Db.SaveChanges();
+            
         }
 
         // PUT: api/MydataAPI/5

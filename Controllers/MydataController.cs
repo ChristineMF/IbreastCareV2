@@ -39,10 +39,9 @@ namespace IbreastCare.Controllers
                 {
                     dataList.Add(item);
                 }
-               
             }
             Session["UserId"]=id;
-            Session["InputDate"] = DateTime.Now;
+            //Session["InputDate"] = DateTime.Now;
             return View(dataList);
 
         }
@@ -50,7 +49,7 @@ namespace IbreastCare.Controllers
         public ActionResult MydataCreate()
         {
             ViewBag.userid = (int)Session["UserId"];
-            ViewBag.inputdate = Session["InputDate"];
+            //ViewBag.inputdate = Session["InputDate"];
             return View();
         }
         [HttpPost]
@@ -75,10 +74,10 @@ namespace IbreastCare.Controllers
             }
 
         }
-        //public ActionResult MydataEdit()
-        //{
-        //    return View();
-        //}
+        public ActionResult MydataEdit()
+        {
+            return View();
+        }
         //public ActionResult MydataDetails()
         //{
         //    return View();
