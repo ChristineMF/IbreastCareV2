@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Index";
 }
+@section Styles{
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/ruang-admin.min.css" rel="stylesheet">
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+}
 <main id="main">
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
@@ -11,102 +17,113 @@
             <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
         </div>
     </div><!-- End Breadcrumbs -->
+    <div class="col-lg-12">
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">DataTables with Hover</h6>
+            </div>
+            <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTableHover_length"><label>Show <select name="dataTableHover_length" aria-controls="dataTableHover" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTableHover_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTableHover"></label></div></div></div>
+            <div class="table-responsive p-3">
+                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MyId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OperationDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Height)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Menopause)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CellType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ER)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PR)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Her)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OperationType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TreatPlan)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Note)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InputDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserId)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MyId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OperationDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Height)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Menopause)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CellType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ER)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PR)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Her)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OperationType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TreatPlan)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Note)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InputDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserId)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Create New", "MydataCreate")
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.MyId }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.MyId }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.MyId })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MyId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OperationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Height)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Menopause)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CellType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ER)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PR)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Her)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OperationType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TreatPlan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Note)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InputDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MyId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OperationDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Height)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Menopause)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CellType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ER)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PR)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Her)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OperationType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TreatPlan)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Note)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InputDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                </td>
-                <td>
-                    @Html.ActionLink("Create New", "MydataCreate")
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MyId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MyId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MyId })
-                </td>
-            </tr>
-        }
-
-    </table>
 </main>
