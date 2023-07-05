@@ -10,25 +10,25 @@ namespace IbreastCare.ViewModel
     {
         [DisplayName("我的ID")]
         public int MyId { get; set; }
-        [DisplayName("手術日期")]
+        [DisplayName("手術日")]
         public Nullable<System.DateTime> OperationDate { get; set; }
-        [DisplayName("我的身高")]
+        [DisplayName("身高")]
         public Nullable<double> Height { get; set; }
-        [DisplayName("是否停經")]
+        [DisplayName("停經")]
         public string Menopause { get; set; }
-        [DisplayName("細胞類型")]
+        [DisplayName("細胞")]
         public string CellType { get; set; }
         [DisplayName("ER")]
         public string ER { get; set; }
         [DisplayName("PR")]
         public string PR { get; set; }
-        [DisplayName("HER-2/neu基因表現")]
+        [DisplayName("HER-2/neu")]
         public string Her { get; set; }
-        [DisplayName("手術型式")]
+        [DisplayName("手術")]
         public string OperationType { get; set; }
-        [DisplayName("療程計畫")]
+        [DisplayName("療程")]
         public string TreatPlan { get; set; }
-        [DisplayName("其他備註")]
+        [DisplayName("備註")]
         public string Note { get; set; }
         [DisplayName("建立日期")]
         public System.DateTime InputDate { get; set; }

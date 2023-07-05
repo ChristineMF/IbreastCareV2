@@ -3,7 +3,7 @@
 @{
     if (Session["RoleId"] == null)
     {
-        Response.Redirect("~/Account/Combine");
+        Response.Redirect("~/Home/Index");
         return;
     }
     string Name = Session["NickName"].ToString();

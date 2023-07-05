@@ -74,6 +74,34 @@ namespace IbreastCare.Controllers
             }
 
         }
+        public ActionResult MyCreate()
+        {
+            ViewBag.userid = (int)Session["UserId"];
+            //ViewBag.inputdate = Session["InputDate"];
+            return View();
+        }
+        [HttpPost]
+        public ActionResult MyCreate(MydataViewModel mydata, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                //1.存資料庫  RegisterViewModel=>Member  
+                mydata.InputDate = DateTime.Now;
+                mydata.UserId = id;
+
+                Personal_Data model = Common.MapTo<MydataViewModel, Personal_Data>(mydata);
+
+                Db.Personal_Data.Add(model);
+
+                Db.SaveChanges();
+                return RedirectToAction("Index", "Mydata");
+            }
+            else
+            {
+                return View(mydata);
+            }
+
+        }
         public ActionResult MydataEdit(int? id)
         {
             if (id == null)

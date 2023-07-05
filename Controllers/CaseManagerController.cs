@@ -13,5 +13,9 @@ namespace IbreastCareAdmin.Controllers
         {
             return View();
         }
+        public ActionResult PatientList()
+        {
+            return View();
+        }
     }
 }
