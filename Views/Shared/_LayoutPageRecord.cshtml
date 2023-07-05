@@ -417,6 +417,7 @@
                                     <li class="breadcrumb-item active" aria-current="page">DataTables</li>
                                 </ol>
                             </div>
+                            <p id="path"></p>
 
                             <!-- Row -->
                             <div class="row">
@@ -586,6 +587,26 @@
                     $('#dataTable').DataTable(); // ID From dataTable
                     $('#dataTableHover').DataTable(); // ID From dataTable with Hover
                 });
+                </script>
+               <script>
+                   $(document).ready(function() {
+                      var path=window.location.pathname;
+                      var name='' ;
+                      if (path==='/' ) {
+                      name='首頁' ;
+                      } else if (path.match(/\/Mydata\/(.*)/)) {
+                      name='我的' ;
+                      } else if (path.match( /\/MydataCreate\/(.*)/)) {
+                      name='新增資料' ;
+                      } else {
+                      name='其他頁面' ;
+                      }
+                      $('#path').text(name);
+                      } );
+
+
+
+         
             </script>
             @RenderSection("Scripts", false)
 
