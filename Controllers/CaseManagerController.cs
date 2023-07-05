@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace IbreastCare.Controllers
+namespace IbreastCareAdmin.Controllers
 {
     public class CaseManagerController : Controller
     {

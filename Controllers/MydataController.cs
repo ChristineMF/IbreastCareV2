@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
-
 using IbreastCare.Models;
 using IbreastCare.ViewModel;
 
@@ -74,8 +73,48 @@ namespace IbreastCare.Controllers
             }
 
         }
-        public ActionResult MydataEdit()
+        public ActionResult MydataEdit(int? id)
         {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Personal_Data mydata = Db.Personal_Data.FirstOrDefault(m => m.UserId == id);
+
+            if (mydata == null)
+            {
+                return HttpNotFound();
+            }
+            MydataViewModel editmodel = Common.MapTo<Personal_Data, MydataViewModel>(mydata);
+            return View(editmodel);
+           
+        }
+        [HttpPost]
+        public ActionResult MydataEdit(MydataViewModel mydataView)
+        {
+            if (ModelState.IsValid)
+            {
+                //1.存資料庫  RegisterViewModel=>Member
+
+                Personal_Data editmodel = Db.Personal_Data.FirstOrDefault(m => m.UserId == mydataView.UserId);
+              
+               
+
+                //2.取Personal_Data資料庫,Personal_Data=>MydataViewModel
+                MydataViewModel mydataList = Common.MapTo<Personal_Data, MydataViewModel>(editmodel); 
+                
+              
+
+                
+                editmodel.CellPhone = mydataView.CellPhone;
+                editmodel.Email = mydataView.Email;
+                Db.SaveChanges();
+                return RedirectToAction("Details", "Account", new { id = editmodel.UserId });
+            }
+            else
+            {
+                return View(editmodel);
+            }
             return View();
         }
         //public ActionResult MydataDetails()
