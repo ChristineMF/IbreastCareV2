@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@section Styles{
+    @*<link rel="stylesheet" href="/assets/css/bootstrap.min.css">*@
+    <link rel="stylesheet" href="/assets/css/templatemo.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    @*<link rel="stylesheet" href="/assets/css/fontawesome.min.css">*@
+    <link href="~/assets/css/fontawesome.css" rel="stylesheet" />
+
+}
+<!-- Start Categories of The Month -->
+<body>
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>記吧</h2>
+            <p>記錄治療、身體測量數據、運動、心情狀態及活動行事曆</p>
+        </div>
+    </div>
+    <section class="container py-5">
+        @*<div class="row text-center pt-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Categories of The Month</h1>
+                    <p>
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </div>*@
+        <div id="wrapper">
+            <div class="row">
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    @*@Html.ActionLink("我的", "Index", "Mydata", new { id = ViewBag.myuserid }, new { @class = "rounded-circle img-fluid border" })*@
+                    @*@Html.ActionLink("", "Index", "Mydata", new { id = Session["UserId"].ToString() }, new { @class = "rounded-circle img-fluid border" })<img src="~/assets/img/record/record1.png" />*@
+                    @*@Html.ActionLink("", "ActionName", "ControllerName", null, new { @class = "link-class" })*@
+                    @*<img src="~/Content/Images/image.png" alt="Link Text" />*@
+                    <a href="~/Mydata/Index/@ViewBag.myuserid"><img src="~/assets/img/record/record1.png" class="rounded-circle img-fluid border"></a>
+                    @*<h5 class="text-center mt-3 mb-3">Watches</h5>*@<br />
+                    <p class="text-center"><a class="btn btn-success" href="~/Mydata/Index/@ViewBag.myuserid">我的</a></p>
+                </div>
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    <a href="#"><img src="~/assets/img/record/record2.png" class="rounded-circle img-fluid border"></a>
+                    @*<h2 class="h5 text-center mt-3 mb-3">Shoes</h2>*@<br />
+                    <p class="text-center"><a class="btn btn-success">治療</a></p>
+                </div>
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    <a href="#"><img src="~/assets/img/record/record3.jpg" class="rounded-circle img-fluid border"></a>
+                    @*<h2 class="h5 text-center mt-3 mb-3">Accessories</h2>*@<br />
+                    <p class="text-center"><a class="btn btn-success">身體</a></p>
+                </div>
+                @*<div class="col-12 col-md-4 p-5 mt-3">
+                        <a href="#"><img src="./assets/img/category_img_03.jpg" class="rounded-circle img-fluid border"></a>
+                        <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
+                        <p class="text-center"><a class="btn btn-success">飲食</a></p>
+                    </div>*@
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    <a href="#"><img src="~/assets/img/record/record4.jpg" class="rounded-circle img-fluid border"></a>
+                    @*<h2 class="h5 text-center mt-3 mb-3">Accessories</h2>*@
+                    <p class="text-center"><a class="btn btn-success">運動</a></p>
+                </div>
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    <a href="#"><img src="~/assets/img/record/record5.jpg" class="rounded-circle img-fluid border"></a>
+                    @*<h2 class="h5 text-center mt-3 mb-3">Accessories</h2>*@
+                    <p class="text-center"><a class="btn btn-success">心情</a></p>
+                </div>
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    <a href="#"><img src="~/assets/img/record/record6.png" class="rounded-circle img-fluid border"></a>
+                    @*<h2 class="h5 text-center mt-3 mb-3">Accessories</h2>*@
+                    <p class="text-center"><a class="btn btn-success">活動</a></p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- End Categories of The Month -->
+</body>
+@section Scripts{
+    <!-- Start Script -->
+    <script src="/assets/js/jquery-1.11.0.min.js"></script>
+    <script src="/assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/templatemo.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <!-- End Scri/pt -->
+}

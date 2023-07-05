@@ -137,7 +137,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.html" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\news\style.css" />
+    <Content Include="assets\css\news\style.min.css" />
+    <Content Include="assets\css\custom.css" />
+    <Content Include="assets\css\fontawesome.css" />
+    <Content Include="assets\css\fontawesome.min.css" />
+    <Content Include="assets\css\slick-theme.css" />
+    <Content Include="assets\css\slick-theme.min.css" />
+    <Content Include="assets\css\slick.min.css" />
     <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\templatemo.css" />
+    <Content Include="assets\css\templatemo.min.css" />
     <Content Include="assets\img\about.jpg" />
     <Content Include="assets\img\apple-touch-icon.png" />
     <Content Include="assets\img\course-1.jpg" />
@@ -153,6 +164,9 @@
     <Content Include="assets\img\events-2.jpg" />
     <Content Include="assets\img\favicon.png" />
     <Content Include="assets\img\hero-bg.jpg" />
+    <Content Include="assets\img\record\myPerson.png" />
+    <Content Include="assets\img\record\myPersonmin.png" />
+    <Content Include="assets\img\record\record1.png" />
     <Content Include="assets\img\testimonials\testimonials-1.jpg" />
     <Content Include="assets\img\testimonials\testimonials-2.jpg" />
     <Content Include="assets\img\testimonials\testimonials-3.jpg" />
@@ -166,15 +180,35 @@
     <Content Include="assets\jsgrid-1.5.3\jsgrid.css" />
     <Content Include="assets\jsgrid-1.5.3\jsgrid.min.css" />
     <Content Include="assets\js\bootstrap-checkbox.js" />
+    <Content Include="assets\js\bootstrap.bundle.min.js" />
+    <Content Include="assets\js\custom.js" />
     <Content Include="assets\js\i18n\bg.js" />
     <Content Include="assets\js\i18n\es.js" />
     <Content Include="assets\js\i18n\pl.js" />
     <Content Include="assets\js\i18n\pt.js" />
     <Content Include="assets\js\i18n\ru.js" />
     <Content Include="assets\js\i18n\tr.js" />
+    <Content Include="assets\js\jquery-1.11.0.min.js" />
+    <Content Include="assets\js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="assets\js\news\main.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\ruang-admin.js" />
     <Content Include="assets\js\ruang-admin.min.js" />
+    <Content Include="assets\js\slick.min.js" />
+    <Content Include="assets\js\templatemo.js" />
+    <Content Include="assets\js\templatemo.min.js" />
+    <Content Include="assets\lib\easing\easing.js" />
+    <Content Include="assets\lib\easing\easing.min.js" />
+    <Content Include="assets\lib\owlcarousel\assets\ajax-loader.gif" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.carousel.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.carousel.min.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.theme.default.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.theme.default.min.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.theme.green.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.theme.green.min.css" />
+    <Content Include="assets\lib\owlcarousel\assets\owl.video.play.png" />
+    <Content Include="assets\lib\owlcarousel\owl.carousel.js" />
+    <Content Include="assets\lib\owlcarousel\owl.carousel.min.js" />
     <Content Include="assets\scss\Readme.txt" />
     <Content Include="assets\vendor\animate.css\animate.compat.css" />
     <Content Include="assets\vendor\animate.css\animate.css" />
@@ -253,6 +287,7 @@
     <Content Include="assets\vendor\jquery\jquery.slim.min.map" />
     <Content Include="font\Nunito-Regular.ttf" />
     <Content Include="img\logo\logo.ai" />
+    <Content Include="assets\lib\owlcarousel\LICENSE" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="img\boy.png" />
     <Content Include="img\error.svg" />
@@ -261,9 +296,25 @@
     <Content Include="img\logo\logo.png" />
     <Content Include="img\logo\logo2.png" />
     <Content Include="img\man.png" />
+    <Content Include="img\news-110x110-1.jpg" />
+    <Content Include="img\news-110x110-2.jpg" />
+    <Content Include="img\news-110x110-3.jpg" />
+    <Content Include="img\news-110x110-4.jpg" />
+    <Content Include="img\news-110x110-5.jpg" />
+    <Content Include="img\news-700x435-1.jpg" />
+    <Content Include="img\news-700x435-2.jpg" />
+    <Content Include="img\news-700x435-3.jpg" />
+    <Content Include="img\news-700x435-4.jpg" />
+    <Content Include="img\news-700x435-5.jpg" />
+    <Content Include="img\news-800x500-1.jpg" />
+    <Content Include="img\news-800x500-2.jpg" />
+    <Content Include="img\news-800x500-3.jpg" />
     <Content Include="img\screenshot\ss2.png" />
     <Content Include="img\think.svg" />
     <Content Include="img\undraw_posting_photo.svg" />
+    <Content Include="img\user.jpg" />
+    <Content Include="index.html" />
+    <Content Include="index_news.html" />
     <Content Include="js\demo\chart-area-demo.js" />
     <Content Include="js\demo\chart-bar-demo.js" />
     <Content Include="js\demo\chart-pie-demo.js" />
@@ -2202,6 +2253,7 @@
     <Compile Include="Controllers\MydataAPIController.cs" />
     <Compile Include="Controllers\MydataController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\RecordController.cs" />
     <Compile Include="DAL\IbreastCareDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2306,10 +2358,10 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index_OK.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Index_old.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Indextest.cshtml" />
     <Content Include="Views\Home\Index_normal.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
@@ -2319,7 +2371,7 @@
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Create - Copy.cshtml" />
-    <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\Patient\Index2.cshtml" />
     <Content Include="Views\CaseManager\PatientList.cshtml" />
     <Content Include="Views\Account\Combine.cshtml" />
     <Content Include="Views\CaseManager\Index.cshtml" />
@@ -2509,6 +2561,8 @@
     <Content Include="vendor\select2\src\scss\_multiple.scss" />
     <Content Include="vendor\select2\src\scss\_single.scss" />
     <Content Include="Views\Mydata\MydataEdit.cshtml" />
+    <Content Include="Views\Record\Index.cshtml" />
+    <Content Include="Views\Patient\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

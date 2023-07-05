@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace IbreastCare.Controllers
 {
-    public class PatientController : Controller
+    public class RecordController : Controller
     {
-        // GET: Patient
-        public ActionResult Index(int? id)
+        // GET: Record
+        public ActionResult Index()
         {
-            //ViewBag.userid = Session["UserId"].ToString();
+            ViewBag.myuserid = (int)Session["UserId"];
             return View();
         }
     }

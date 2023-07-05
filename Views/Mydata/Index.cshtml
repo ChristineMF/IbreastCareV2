@@ -27,9 +27,9 @@
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                         <tr>
-                            <th>
+                            @*<th>
                                 @Html.DisplayNameFor(model => model.MyId)
-                            </th>
+                            </th>*@
                             <th>
                                 @Html.DisplayNameFor(model => model.OperationDate)
                             </th>
@@ -63,9 +63,9 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.InputDate)
                             </th>
-                            <th>
+                            @*<th>
                                 @Html.DisplayNameFor(model => model.UserId)
-                            </th>
+                            </th>*@
                             <th></th>
                         </tr>
                     </thead>
@@ -73,9 +73,9 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>
+                                @*<td>
                                     @Html.DisplayFor(modelItem => item.MyId)
-                                </td>
+                                </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.OperationDate)
                                 </td>
@@ -109,9 +109,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.InputDate)
                                 </td>
-                                <td>
+                                @*<td>
                                     @Html.DisplayFor(modelItem => item.UserId)
-                                </td>
+                                </td>*@
                                 <td>
 
                                     @Html.ActionLink("Edit", "Edit", new { id = item.MyId }) |

@@ -62,10 +62,14 @@ namespace IbreastCare.Controllers
                     ViewBag.Msg = "帳號或密碼錯誤";
                     return View("Combine");
                 }
+                Session["RoleId"] = member.RoleId;
+                Session["NickName"] = member.NickName;
+                Session["UserId"] = member.UserId;
                 if (member.RoleId == 2 && member.Status == "on")
                 {
-                    //return RedirectToAction("Index", "Patient", new { id = member.UserId });
-                    return RedirectToAction("Index", "Patient");
+                    return RedirectToAction("Index", "Patient", new { id = member.UserId });
+
+                    //return RedirectToAction("Index", "Patient");
 
                 }
                 else

@@ -1,10 +1,15 @@
 ﻿@model IbreastCare.ViewModel.PatientViewModel
 
 @{
-    ViewBag.Title = "Index";
+    Layout = null;
 }
 
-@section Styles{
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index_Patient</title>
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,21 +22,14 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/assets/css/news/style.css" rel="stylesheet">
-}
-<!-- ======= Breadcrumbs ======= -->
-<div class="breadcrumbs" data-aos="fade-in">
-    <div class="container">
-        <h2>About Us</h2>
-        <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
-    </div>
-</div>
-
+</head>
+<body>
     <div>
         <!-- Featured News Slider Start -->
         <div class="container-fluid pt-5 mb-3">
             <div class="container">
                 <div class="section-title">
-                    <h4 class="m-0 text-uppercase font-weight-bold">活動訊息</h4>
+                    <h4 class="m-0 text-uppercase font-weight-bold">Featured News</h4>
                 </div>
                 <div class="owl-carousel news-carousel carousel-item-4 position-relative">
                     <div class="position-relative overflow-hidden" style="height: 300px;">
@@ -104,5 +102,9 @@
         <!-- Template Javascript -->
         <script src="/assets/js/news/main.js"></script>
     }
+    <script>
 
+    </script>
+</body>
 
+</html>

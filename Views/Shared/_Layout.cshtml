@@ -1,5 +1,16 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+@{
+    if (Session["RoleId"] == null)
+    {
+        Response.Redirect("~/Account/Combine");
+        return;
+    }
+    string Name = Session["NickName"].ToString();
+    ViewBag.MsgName = Name + "，你好";
+    //RueiEntities db = new RueiEntities();
+    //List<Workspace> workspace = db.Workspaces.ToList();
+}
 
 <head>
     <meta charset="utf-8">
@@ -18,12 +29,12 @@
 
     <!-- Vendor CSS Files -->
     <link href="/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+        <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+        <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
@@ -50,12 +61,12 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a class="active" href="about.html">About</a></li>
+                    <li><a href="/Home/Index">Home</a></li>
+                    <li><a class="active" href="/Record/Index">記吧</a></li>
                     <li><a href="courses.html">Courses</a></li>
                     <li><a href="trainers.html">Trainers</a></li>
                     <li><a href="events.html">Events</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="/Account/Combine">登入</a></li>
 
                     <li class="dropdown">
                         <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
@@ -80,8 +91,15 @@
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-
-            <a href="courses.html" class="get-started-btn">Get Started</a>
+            @if (Session["RoleId"] == null)
+            {
+                <a href="/Account/Combine" class="get-started-btn" target="_top">登入</a>
+            }
+            else
+            {
+                @ViewBag.MsgName
+            }
+            @*<a href="/Account/Combine" class="get-started-btn" target="_top">登入</a>*@
 
         </div>
     </header><!-- End Header -->
