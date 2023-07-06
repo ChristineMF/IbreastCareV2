@@ -1,7 +1,4 @@
 ﻿
-@model IEnumerable<IbreastCare.ViewModel.MydataViewModel>
-
-
 <title>@ViewBag.Title</title>
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
@@ -416,8 +413,11 @@
                                     <li class="breadcrumb-item">Tables</li>
                                     <li class="breadcrumb-item active" aria-current="page">DataTables</li>
                                 </ol>
+                                @Html.MvcSiteMap().Menu()
+                                <hr />
+                                @Html.MvcSiteMap().SiteMapPath()
                             </div>
-                            <p id="path"></p>
+                            @*<p id="path"></p>*@
 
                             <!-- Row -->
                             <div class="row">
@@ -440,7 +440,7 @@
                             </div>
 
                             <!-- Modal Logout -->
-                            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+                            @*<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
                                  aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -459,7 +459,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
 
                         </div>
                         <!---Container Fluid-->
@@ -584,11 +584,11 @@
             <!-- Page level custom scripts -->
             <script>
                 $(document).ready(function () {
-                    $('#dataTable').DataTable(); // ID From dataTable
+                   /* $('#dataTable').DataTable(); // ID From dataTable*/
                     $('#dataTableHover').DataTable(); // ID From dataTable with Hover
                 });
                 </script>
-               <script>
+               @*<script>
                    $(document).ready(function() {
                       var path=window.location.pathname;
                       var name='' ;
@@ -607,7 +607,7 @@
 
 
          
-            </script>
+            </script>*@
             @RenderSection("Scripts", false)
 
         </main>

@@ -89,7 +89,7 @@
 
 
 
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("回列表", "Index")
 </div>
 @section Scripts{
 
@@ -99,7 +99,7 @@
             data() {
                 return {
                     mydata: {
-                        MyId:"",
+                        MyId: "",
                         OperationDate: "",
                         Height: "",
                         Menopause: "",
@@ -126,7 +126,8 @@
                         contentType: "application/json",
                         success: function (data) {
                             alert("OK");
-                        }
+                            location.href="/Mydata/Index" 
+                    }
                     })
                 },
             },
