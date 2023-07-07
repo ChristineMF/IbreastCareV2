@@ -1,3 +1,30 @@
 /*
 Custom Css
 */
+.sidebar-light .sidebar-brand {
+    color: #fafafa;
+    background-color: #fafafa
+}
+.sidebar-light .sidebar-heading {
+    color: #F3F6F4
+}
+.sidebar-light .sidebar-heading {
+    color: #F3F6F4
+}
+.sidebar-light .nav-item .nav-link[data-toggle=collapse]::after {
+    color: #b7b9cc
+}
+
+.sidebar-light .nav-item.active .nav-link {
+    color: #6e707e
+}
+
+    .sidebar-light .nav-item.active .nav-link i {
+        color: #6e707e
+    }
+#accordionSidebar {
+    color:#F3F6F4
+}
+    /*/*/ /**nav{
+    background-color:white;*/
+
