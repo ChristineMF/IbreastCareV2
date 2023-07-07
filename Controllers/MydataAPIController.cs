@@ -29,6 +29,7 @@ namespace IbreastCare.ViewModel
             //mydata.UserId = Session["UserId"];
             mydata.InputDate = DateTime.Now;
 
+
             Db.Personal_Data.Add(mydata);
 
             Db.SaveChanges();

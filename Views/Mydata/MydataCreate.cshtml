@@ -7,6 +7,17 @@
 
 @section Styles{
     @*<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">*@
+    <!--非共用Vendor -->
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+
+    <!-- Template Main CSS File -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <!-- RuangAdmin CSS -->
+    <link href="/css/ruang-admin.min.css" rel="stylesheet">
     <!-- Select2 -->
     <link href="/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
     <!-- Bootstrap DatePicker -->
@@ -15,232 +26,374 @@
     <link href="/assets/css/custom.css" rel="stylesheet" />
 }
 <!-- TopBar -->
-<nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" style="background-color: #F3F6F4 ">
-    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
-        <i class="fa fa-bars"></i>
-    </button>
-    <h1 class="h3 mb-0 text-gray-800">DataTables</h1>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="./">Home</a></li>
-        <li class="breadcrumb-item">Tables</li>
-        <li class="breadcrumb-item" aria-current="page">DataTables</li>
-    </ol>
-    @Html.MvcSiteMap().Menu()
-    @Html.MvcSiteMap().SiteMapPath()
-    @*<ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-search fa-fw"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                     aria-labelledby="searchDropdown">
-                    <form class="navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
-                                   aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" style="background-color: #F3F6F4 ">
+            <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+            <h1 class="h3 mb-0 text-gray-800">我的</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Home</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item" aria-current="page">DataTables</li>
+            </ol>
+            @Html.MvcSiteMap().Menu()
+            @Html.MvcSiteMap().SiteMapPath()
+            @*<ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                             aria-labelledby="searchDropdown">
+                            <form class="navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
+                                           aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <span class="badge badge-danger badge-counter">3+</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Alerts Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 12, 2019</div>
+                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-donate text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 7, 2019</div>
+                                    $290.29 has been deposited into your account!
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-warning">
+                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 2, 2019</div>
+                                    Spending Alert: We've noticed unusually high spending for your account.
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-envelope fa-fw"></i>
+                            <span class="badge badge-warning badge-counter">2</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">
+                                Message Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="img/man.png" style="max-width: 60px" alt="">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">
+                                        Hi there! I am wondering if you can help me with a problem I've been
+                                        having.
+                                    </div>
+                                    <div class="small text-gray-500">Udin Cilok · 58m</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="img/girl.png" style="max-width: 60px" alt="">
+                                    <div class="status-indicator bg-default"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">
+                                        Am I a good boy? The reason I ask is because someone told me that people
+                                        say this to all dogs, even if they aren't good...
+                                    </div>
+                                    <div class="small text-gray-500">Jaenab · 2w</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-tasks fa-fw"></i>
+                            <span class="badge badge-success badge-counter">3</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">
+                                Task
+                            </h6>
+                            <a class="dropdown-item align-items-center" href="#">
+                                <div class="mb-3">
+                                    <div class="small text-gray-500">
+                                        Design Button
+                                        <div class="small float-right"><b>50%</b></div>
+                                    </div>
+                                    <div class="progress" style="height: 12px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item align-items-center" href="#">
+                                <div class="mb-3">
+                                    <div class="small text-gray-500">
+                                        Make Beautiful Transitions
+                                        <div class="small float-right"><b>30%</b></div>
+                                    </div>
+                                    <div class="progress" style="height: 12px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item align-items-center" href="#">
+                                <div class="mb-3">
+                                    <div class="small text-gray-500">
+                                        Create Pie Chart
+                                        <div class="small float-right"><b>75%</b></div>
+                                    </div>
+                                    <div class="progress" style="height: 12px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">View All Taks</a>
+                        </div>
+                    </li>
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
+                            <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>*@
+        </nav>
+    </div>
+    <!-- Topbar -->
+    <!-- Container Fluid-->
+    <!--SiteMap-->
+    <div class="container-fluid" id="container-wrapper" style="background-color: #F3F6F4 ">
+        <!--<div class="d-sm-flex align-items-center justify-content-between mb-4"style="background-color: #F3F6F4 ">-->
+        @*<h1 class="h3 mb-0 text-gray-800">DataTables</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Home</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item" aria-current="page">DataTables</li>
+            </ol>*@
+        @*@Html.MvcSiteMap().Menu()
+            <hr />
+            @Html.MvcSiteMap().SiteMapPath()*@
+        <!--</div>-->
+        <div id="app">
+            
+                <div class="row">
+                    <!--內容開始-->
+                    <div class="col-lg-6">
+                        <!-- Select2 -->
+                        <div class="card mb-4">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
                             </div>
-                        </div>
-                    </form>
-                </div>
-            </li>
-            <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-bell fa-fw"></i>
-                    <span class="badge badge-danger badge-counter">3+</span>
-                </a>
-                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                     aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header">
-                        Alerts Center
-                    </h6>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-primary">
-                                <i class="fas fa-file-alt text-white"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="small text-gray-500">December 12, 2019</div>
-                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                        </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-success">
-                                <i class="fas fa-donate text-white"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="small text-gray-500">December 7, 2019</div>
-                            $290.29 has been deposited into your account!
-                        </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-warning">
-                                <i class="fas fa-exclamation-triangle text-white"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="small text-gray-500">December 2, 2019</div>
-                            Spending Alert: We've noticed unusually high spending for your account.
-                        </div>
-                    </a>
-                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-envelope fa-fw"></i>
-                    <span class="badge badge-warning badge-counter">2</span>
-                </a>
-                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                     aria-labelledby="messagesDropdown">
-                    <h6 class="dropdown-header">
-                        Message Center
-                    </h6>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="dropdown-list-image mr-3">
-                            <img class="rounded-circle" src="img/man.png" style="max-width: 60px" alt="">
-                            <div class="status-indicator bg-success"></div>
-                        </div>
-                        <div class="font-weight-bold">
-                            <div class="text-truncate">
-                                Hi there! I am wondering if you can help me with a problem I've been
-                                having.
-                            </div>
-                            <div class="small text-gray-500">Udin Cilok · 58m</div>
-                        </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="dropdown-list-image mr-3">
-                            <img class="rounded-circle" src="img/girl.png" style="max-width: 60px" alt="">
-                            <div class="status-indicator bg-default"></div>
-                        </div>
-                        <div>
-                            <div class="text-truncate">
-                                Am I a good boy? The reason I ask is because someone told me that people
-                                say this to all dogs, even if they aren't good...
-                            </div>
-                            <div class="small text-gray-500">Jaenab · 2w</div>
-                        </div>
-                    </a>
-                    <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-tasks fa-fw"></i>
-                    <span class="badge badge-success badge-counter">3</span>
-                </a>
-                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                     aria-labelledby="messagesDropdown">
-                    <h6 class="dropdown-header">
-                        Task
-                    </h6>
-                    <a class="dropdown-item align-items-center" href="#">
-                        <div class="mb-3">
-                            <div class="small text-gray-500">
-                                Design Button
-                                <div class="small float-right"><b>50%</b></div>
-                            </div>
-                            <div class="progress" style="height: 12px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50"
-                                     aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="dropdown-item align-items-center" href="#">
-                        <div class="mb-3">
-                            <div class="small text-gray-500">
-                                Make Beautiful Transitions
-                                <div class="small float-right"><b>30%</b></div>
-                            </div>
-                            <div class="progress" style="height: 12px;">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30"
-                                     aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="dropdown-item align-items-center" href="#">
-                        <div class="mb-3">
-                            <div class="small text-gray-500">
-                                Create Pie Chart
-                                <div class="small float-right"><b>75%</b></div>
-                            </div>
-                            <div class="progress" style="height: 12px;">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75"
-                                     aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="dropdown-item text-center small text-gray-500" href="#">View All Taks</a>
-                </div>
-            </li>
-            <div class="topbar-divider d-none d-sm-block"></div>
-            <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
-                    <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Activity Log
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
-                    </a>
-                </div>
-            </li>
-        </ul>*@
-</nav>
-<!-- Topbar -->
-<!-- Container Fluid-->
-<!--SiteMap-->
-<div class="container-fluid" id="container-wrapper" style="background-color: #F3F6F4 ">
-    <!--<div class="d-sm-flex align-items-center justify-content-between mb-4"style="background-color: #F3F6F4 ">-->
-    @*<h1 class="h3 mb-0 text-gray-800">DataTables</h1>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="./">Home</a></li>
-            <li class="breadcrumb-item">Tables</li>
-            <li class="breadcrumb-item" aria-current="page">DataTables</li>
-        </ol>*@
-    @*@Html.MvcSiteMap().Menu()
-        <hr />
-        @Html.MvcSiteMap().SiteMapPath()*@
-    <!--</div>-->
-    <div class="row" id="app">
-        <!--內容開始-->
-        <div class="col-lg-6">
-            <!-- Select2 -->
-            <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
-                </div>
-                <div class="card-body">
-                    <p>Select2 is a jQuery based replacement for select boxes</p>
+                            <div class="card-body">
+                                <p>Select2 is a jQuery based replacement for select boxes</p>
 
 
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
+                                    <div class="col-lg-8">
+                                        <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">細胞類型</label>
+                                    <select v-model="mydata.CellType" class="select2-single form-control" name="selectCellType" id="selectCellType">
+                                        <option value="">請選擇</option>
+                                        <option value="浸潤性腺管癌">浸潤性腺管癌</option>
+                                        <option value="乳腺管原位癌">乳腺管原位癌</option>
+                                        <option value="浸潤性小葉癌">浸潤性小葉癌</option>
+                                        <option value="乳小葉原位癌">乳小葉原位癌</option>
+                                        <option value="其他">其他</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="select2Single">HER-2/neu基因表現</label>
+                                    <select v-model="mydata.Her" class="select2-single form-control" name="selectHer" id="selectHer">
+                                        <option value="">請選擇</option>
+                                        <option value="陰性">陰性</option>
+                                        <option value="陽性1+">陽性1+</option>
+                                        <option value="陽性2+">陽性2+</option>
+                                        <option value="陽性3+">陽性3+</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">是否停經</label>
+                                    <div class="col-lg-8">
+                                        <input v-model="mydata.Menopause" class="form-control" id="chkMenopause" type="checkbox" value="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">ER</label>
+                                    <div class="col-lg-8">
+                                        <input v-model="mydata.ER" class="form-control" id="chkER" type="checkbox" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">PR</label>
+                                    <div class="col-lg-8">
+                                        <input v-model="mydata.PR" class="form-control" id="chkPR" type="checkbox" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">治療</h6>
+                            </div>
+                            <div class="card-body">
+                                <p>記錄我的治療方式</p>
+                                <div class="form-group" id="simple-date1">
+                                    <label for="canOpDate">手術日期</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="select2Multiple">手術型式</label>
+                                    <select v-model="mydata.OperationType" class="select2-multiple form-control" name="states[]" multiple="multiple"
+                                            id="selectOpType">
+                                        <option value="">請選擇</option>
+                                        <option value="1">乳房保存手術</option>
+                                        <option value="2">單純性乳房全切除</option>
+                                        <option value="3">改良式根除性乳房切除</option>
+                                        <option value="4">前哨淋巴摘除</option>
+                                        <option value="5">腋窩淋巴清除</option>
+                                        <option value="6">重建手術</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="select2Multiple">療程計畫</label>
+                                    <select v-model="mydata.TreatPlan" class="select2-multiple form-control" name="states[]" multiple="multiple"
+                                            id="select2Multiple">
+                                        <option value="">請選擇</option>
+                                        <option value="1">化學治療</option>
+                                        <option value="2">放射線治療</option>
+                                        <option value="3">標靶治療</option>
+                                        <option value="4">荷爾蒙治療</option>
+                                        <option value="5">免疫治療</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <textarea v-model="mydata.Note" cols="30" style="height: 80px;"></textarea>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                                        <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+                                    </div>
+                                </div>
+                                <p>For documentations Bootstrap Datepicker you can visit <a href="https://github.com/uxsolutions/bootstrap-datepicker" target="_blank">here.</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>
+                        For documentations Select2 you can visit <a href="https://select2.org/"
+                                                                    target="_blank">here.</a>
+                    </p>
+                </div>
+            
+        </div>
+
+    </div>
+</div>
+
+@Html.ActionLink("回列表", "Index")
+@*</div>*@
+<!--Row-->
+@*@<div class="form-horizontal" style="background-color: #F3F6F4 ">
+    <div class="col-md-9 col-sm-7" id="app" style="background-color: #F3F6F4 ">
+        <h1>新增產品</h1>
+        <div class="content-form-page">
+            <div class="form-horizontal form-without-legend">
+                <input v-model="mydata.MyId" class="form-control" id="txtMyId" type="hidden" value="">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" for="canOpDate">手術日期</label>
+                    <div class="col-lg-8">
+                        <div class="panel-body">
+                            <input type="checkbox" style="display: none;">-->
+                            @*<div class="btn-group" tabindex="0">
+                                <a class="btn active btn-danger">No</a>
+                                <a class="btn btn-default">Yes</a></div>*@
+@*</div>
+                            <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="date" value="">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
                         <div class="col-lg-8">
@@ -277,358 +430,42 @@
                             <input v-model="mydata.Her" class="form-control" id="txtHer" type="checkbox" value="">
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Date Picker</h6>
-                </div>
-                <div class="card-body">
-                    <p>Simple and easy select a time for a text input using your mouse.</p>
-                    <div class="form-group" id="simple-date1">
-                        <label for="canOpDate">手術日期</label>
-                        <div class="input-group date">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                            </div>
-                            <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="date" value="">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">手術型式</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.OperationType" class="form-control" id="txtOperationType" type="checkbox" value="">
                         </div>
                     </div>
                     <div class="form-group">
-                        <input v-model="mydata.MyId" class="form-control" id="txtMyId" type="hidden" value="">
-                        <label for="select2Single">Single Select Box</label>
-                        <select class="select2-single form-control" name="state" id="select2Single">
-                            <option value="">Select</option>
-                            <option value="Aceh">Aceh</option>
-                            <option value="Sumatra Utara">Sumatra Utara</option>
-                            <option value="Sumatra Barat">Sumatra Barat</option>
-                            <option value="Riau">Riau</option>
-                            <option value="Kepulauan Riau">Kepulauan Riau</option>
-                            <option value="Jambi">Jambi</option>
-                            <option value="Bengkulu">Bengkulu</option>
-                            <option value="Sumatra Selatan">Sumatra Selatan</option>
-                            <option value="Kepulauan Bangka Belitung">Kepulauan Bangka Belitung</option>
-                            <option value="Lampung">Lampung</option>
-                            <option value="Banten">Banten</option>
-                            <option value="Jawa Barat">Jawa Barat</option>
-                            <option value="Jakarta">Jakarta</option>
-                            <option value="Jawa Tengah">Jawa Tengah</option>
-                            <option value="Yogyakarta">Yogyakarta</option>
-                            <option value="Jawa TImur">Jawa Timur</option>
-                            <option value="Bali">Bali</option>
-                            <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
-                            <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
-                            <option value="Kalimantan Barat">Kalimantan Barat</option>
-                            <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-                            <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-                            <option value="Kalimantan Timur">Kalimantan Timur</option>
-                            <option value="Kalimantan Utara">Kalimantan Utara</option>
-                            <option value="Gorontalo">Gorontalo</option>
-                            <option value="Sulawaesi Barat">Sulawesi Barat</option>
-                            <option value="Sulawesi Selatan">Sulawesi Selatan</option>
-                            <option value="Sulawesi Tengah">Sulawesi Tengah</option>
-                            <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
-                            <option value="Sulawesi Utara">Sulawesi Utara</option>
-                            <option value="Maluku">Maluku</option>
-                            <option value="Maluku Utara">Maluku Utara</option>
-                            <option value="Papua Barat">Papua Barat</option>
-                            <option value="Papua">Papua</option>
-                        </select>
+                        <label class="col-lg-2 control-label">療程計畫</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.TreatPlan" class="form-control" id="txtTreatPlan" type="checkbox" value="">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="select2SinglePlaceholder">Single Select Box with Placeholder</label>
-                        <select class="select2-single-placeholder form-control" name="state" id="select2SinglePlaceholder">
-                            <option value="">Select</option>
-                            <option value="Aceh">Aceh</option>
-                            <option value="Sumatra Utara">Sumatra Utara</option>
-                            <option value="Sumatra Barat">Sumatra Barat</option>
-                            <option value="Riau">Riau</option>
-                            <option value="Kepulauan Riau">Kepulauan Riau</option>
-                            <option value="Jambi">Jambi</option>
-                            <option value="Bengkulu">Bengkulu</option>
-                            <option value="Sumatra Selatan">Sumatra Selatan</option>
-                            <option value="Kepulauan Bangka Belitung">Kepulauan Bangka Belitung</option>
-                            <option value="Lampung">Lampung</option>
-                            <option value="Banten">Banten</option>
-                            <option value="Jawa Barat">Jawa Barat</option>
-                            <option value="Jakarta">Jakarta</option>
-                            <option value="Jawa Tengah">Jawa Tengah</option>
-                            <option value="Yogyakarta">Yogyakarta</option>
-                            <option value="Jawa TImur">Jawa Timur</option>
-                            <option value="Bali">Bali</option>
-                            <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
-                            <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
-                            <option value="Kalimantan Barat">Kalimantan Barat</option>
-                            <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-                            <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-                            <option value="Kalimantan Timur">Kalimantan Timur</option>
-                            <option value="Kalimantan Utara">Kalimantan Utara</option>
-                            <option value="Gorontalo">Gorontalo</option>
-                            <option value="Sulawaesi Barat">Sulawesi Barat</option>
-                            <option value="Sulawesi Selatan">Sulawesi Selatan</option>
-                            <option value="Sulawesi Tengah">Sulawesi Tengah</option>
-                            <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
-                            <option value="Sulawesi Utara">Sulawesi Utara</option>
-                            <option value="Maluku">Maluku</option>
-                            <option value="Maluku Utara">Maluku Utara</option>
-                            <option value="Papua Barat">Papua Barat</option>
-                            <option value="Papua">Papua</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="select2Multiple">Multiple-Select Boxes (pillbox)</label>
-                        <select class="select2-multiple form-control" name="states[]" multiple="multiple"
-                                id="select2Multiple">
-                            <option value="">Select</option>
-                            <option value="Aceh">Aceh</option>
-                            <option value="Sumatra Utara">Sumatra Utara</option>
-                            <option value="Sumatra Barat">Sumatra Barat</option>
-                            <option value="Riau">Riau</option>
-                            <option value="Kepulauan Riau" selected>Kepulauan Riau</option>
-                            <option value="Jambi">Jambi</option>
-                            <option value="Bengkulu">Bengkulu</option>
-                            <option value="Sumatra Selatan">Sumatra Selatan</option>
-                            <option value="Kepulauan Bangka Belitung">Kepulauan Bangka Belitung</option>
-                            <option value="Lampung">Lampung</option>
-                            <option value="Banten">Banten</option>
-                            <option value="Jawa Barat" selected>Jawa Barat</option>
-                            <option value="Jakarta">Jakarta</option>
-                            <option value="Jawa Tengah">Jawa Tengah</option>
-                            <option value="Yogyakarta">Yogyakarta</option>
-                            <option value="Jawa TImur">Jawa Timur</option>
-                            <option value="Bali">Bali</option>
-                            <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
-                            <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
-                            <option value="Kalimantan Barat">Kalimantan Barat</option>
-                            <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-                            <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-                            <option value="Kalimantan Timur">Kalimantan Timur</option>
-                            <option value="Kalimantan Utara">Kalimantan Utara</option>
-                            <option value="Gorontalo">Gorontalo</option>
-                            <option value="Sulawaesi Barat">Sulawesi Barat</option>
-                            <option value="Sulawesi Selatan">Sulawesi Selatan</option>
-                            <option value="Sulawesi Tengah">Sulawesi Tengah</option>
-                            <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
-                            <option value="Sulawesi Utara">Sulawesi Utara</option>
-                            <option value="Maluku">Maluku</option>
-                            <option value="Maluku Utara">Maluku Utara</option>
-                            <option value="Papua Barat">Papua Barat</option>
-                            <option value="Papua">Papua</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="simple-date4">
-                        <label for="dateRangePicker">Range Select</label>
-                        <div class="input-daterange input-group">
-                            <input type="text" class="input-sm form-control" name="start" />
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">to</span>
-                            </div>
-                            <input type="text" class="input-sm form-control" name="end" />
+                        <label class="col-lg-2 control-label">其他備註</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.Note" class="form-control" id="txtNote" type="checkbox" value="">
                         </div>
                     </div>
+                    <input v-model="mydata.InputDate" class="form-control" id="canInputDate" type="hidden" value="">
+                    <input v-model="mydata.UserId" class="form-control" id="txtUserId" type="hidden" value="">
 
-                    @*<div class="col-lg-8">*@
-                    @*<div class="panel-body">
-                        <input type="checkbox" style="display: none;">*@
-                    @*<div class="btn-group" tabindex="0">
-                        <a class="btn active btn-danger">No</a>
-                        <a class="btn btn-default">Yes</a></div>*@
-                    @*</div>
-                            <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="date" value="">
-                        </div>*@
-                    @*<div class="form-group" id="simple-date1">
-                            <label for="simpleDataInput">Simple Data Input</label>
-                            <div class="input-group date">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                </div>
-                                <input type="text" class="form-control" value="01/06/2020" id="simpleDataInput">
-                            </div>
+
+                    <div class="row">
+                        <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                            <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
                         </div>
-                        <div class="form-group" id="simple-date2">
-                            <label for="oneYearView">One Year View</label>
-                            <div class="input-group date">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                </div>
-                                <input type="text" class="form-control" value="01/06/2020" id="oneYearView">
-                            </div>
-                        </div>
-                        <div class="form-group" id="simple-date3">
-                            <label for="decadeView">Decade View</label>
-                            <div class="input-group date">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                </div>
-                                <input type="text" class="form-control" value="01/06/2020" id="decadeView">
-                            </div>
-                        </div>
-                        <div class="form-group" id="simple-date4">
-                            <label for="dateRangePicker">Range Select</label>
-                            <div class="input-daterange input-group">
-                                <input type="text" class="input-sm form-control" name="start" />
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">to</span>
-                                </div>
-                                <input type="text" class="input-sm form-control" name="end" />
-                            </div>
-                        </div>*@
-                    <p>For documentations Bootstrap Datepicker you can visit <a href="https://github.com/uxsolutions/bootstrap-datepicker" target="_blank">here.</a></p>
-                </div>
-            </div>
-        </div>
-
-        <p>
-            For documentations Select2 you can visit <a href="https://select2.org/"
-                                                        target="_blank">here.</a>
-        </p>
-    </div>
-</div>
-
-        </div>
-<div class="col-lg-6">
-    <div class="card mb-4">
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Date Picker</h6>
-        </div>
-        <div class="card-body">
-            <p>Simple and easy select a time for a text input using your mouse.</p>
-            <div class="form-group" id="simple-date1">
-                <label for="simpleDataInput">Simple Data Input</label>
-                <div class="input-group date">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                    </div>
-                    <input type="text" class="form-control" value="01/06/2020" id="simpleDataInput">
-                </div>
-            </div>
-            <div class="form-group" id="simple-date2">
-                <label for="oneYearView">One Year View</label>
-                <div class="input-group date">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                    </div>
-                    <input type="text" class="form-control" value="01/06/2020" id="oneYearView">
-                </div>
-            </div>
-            <div class="form-group" id="simple-date3">
-                <label for="decadeView">Decade View</label>
-                <div class="input-group date">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                    </div>
-                    <input type="text" class="form-control" value="01/06/2020" id="decadeView">
-                </div>
-            </div>
-            <div class="form-group" id="simple-date4">
-                <label for="dateRangePicker">Range Select</label>
-                <div class="input-daterange input-group">
-                    <input type="text" class="input-sm form-control" name="start" />
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">to</span>
-                    </div>
-                    <input type="text" class="input-sm form-control" name="end" />
-                </div>
-            </div>
-            <p>For documentations Bootstrap Datepicker you can visit <a href="https://github.com/uxsolutions/bootstrap-datepicker" target="_blank">here.</a></p>
-        </div>
-    </div>
-</div>
-@Html.ActionLink("回列表", "Index")
-    </div>
-<!--Row-->
-@*@<div class="form-horizontal" style="background-color: #F3F6F4 ">
-    <div class="col-md-9 col-sm-7" id="app" style="background-color: #F3F6F4 ">
-        <h1>新增產品</h1>
-        <div class="content-form-page">
-            <div class="form-horizontal form-without-legend">
-                <input v-model="mydata.MyId" class="form-control" id="txtMyId" type="hidden" value="">
-                <div class="form-group">
-                    <label class="col-lg-2 control-label" for="canOpDate">手術日期</label>
-                    <div class="col-lg-8">
-                        <div class="panel-body">
-                            <input type="checkbox" style="display: none;">-->
-                            @*<div class="btn-group" tabindex="0">
-                                <a class="btn active btn-danger">No</a>
-                                <a class="btn btn-default">Yes</a></div>*@
-                        @*</div>
-                        <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="date" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
-                    <div class="col-lg-8">
-                        <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">是否停經</label>
-                    <div class="col-lg-8">
-                        <input v-model="mydata.Menopause" class="form-control" id="chkMenopause" type="checkbox" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">細胞類型</label>
-                    <div class="col-lg-8">
-                        <input v-model="mydata.CellType" class="form-control" id="txtCellType" type="checkbox" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">ER</label>
-                    <div class="col-lg-8">
-                        <input v-model="mydata.ER" class="form-control" id="txtER" type="checkbox" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">PR</label>
-                    <div class="col-lg-8">
-                        <input v-model="mydata.PR" class="form-control" id="txtPR" type="checkbox" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">HER-2/neu基因表現</label>
-                    <div class="col-lg-8">
-                        <input v-model="mydata.Her" class="form-control" id="txtHer" type="checkbox" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">手術型式</label>
-                    <div class="col-lg-8">
-                        <input v-model="mydata.OperationType" class="form-control" id="txtOperationType" type="checkbox" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">療程計畫</label>
-                    <div class="col-lg-8">
-                        <input v-model="mydata.TreatPlan" class="form-control" id="txtTreatPlan" type="checkbox" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">其他備註</label>
-                    <div class="col-lg-8">
-                        <input v-model="mydata.Note" class="form-control" id="txtNote" type="checkbox" value="">
-                    </div>
-                </div>
-                <input v-model="mydata.InputDate" class="form-control" id="canInputDate" type="hidden" value="">
-                <input v-model="mydata.UserId" class="form-control" id="txtUserId" type="hidden" value="">
-
-
-                <div class="row">
-                    <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
-                        <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
 
-    @Html.ActionLink("回列表", "Index")
-</div>*@
+        @Html.ActionLink("回列表", "Index")
+    </div>*@
 @section Scripts{
     @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
         <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -636,23 +473,29 @@
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
-
+    <!-- Select2 -->
+    <script src="/vendor/select2/dist/js/select2.min.js"></script>
+    <!-- Bootstrap Datepicker -->
+    <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <!-- Bootstrap bootstrap-checkbox -->
     <script src="~/Scripts/bootstrap-checkbox.min.js"></script>
-    @*<script>
-            $(function () {
-                $('input[type="checkbox"]').checkboxpicker();
-            });
-        </script>*@
+    <!-- RuangAdmin Javascript -->
+    <script src="/js/ruang-admin.min.js"></script>
     <script>
-        //$(function () {
-        //    $('input[type="checkbox"]').checkboxpicker({
-        //        // OPTIONS
-        //        offLabel: '取消',
-        //        onLabel: '確定',
-        //        offActiveCls: 'btn-warning',
-        //    });
-        //});
-        $(function () {
+        $(document).ready(function () {
+
+            $('.select2-single').select2();
+
+            // Select2 Multiple
+            $('.select2-multiple').select2();
+
+            // Bootstrap Date Picker
+            $('#simple-date1 .input-group.date').datepicker({
+                format: 'yyyy-mm-dd',
+                todayBtn: 'linked',
+                todayHighlight: true,
+                autoclose: true,
+            });
             $('#chkMenopause').checkboxpicker({
                 // OPTIONS
                 offLabel: '否',
@@ -667,7 +510,42 @@
                 offActiveCls: 'btn-success',
                 onActiveCls: 'btn-warning',
             });
+
         });
+        //$(function () {
+        //    $('#chkMenopause').checkboxpicker({
+        //        // OPTIONS
+        //        offLabel: '否',
+        //        onLabel: '是',
+        //        offActiveCls: 'btn-success',
+        //        onActiveCls: 'btn-warning',
+        //    });
+        //    $('input[type="checkbox"]').checkboxpicker({
+        //        //        // OPTIONS
+    //ViewBagodel   //        offLabel: '陰性',
+        //        onLabel: '陽性',
+        //        offActiveCls: 'btn-success',
+        //        onActiveCls: 'btn-warning',
+        //    });
+        //});
+    </script>
+
+
+    @*<script>
+            $(function () {
+                $('input[type="checkbox"]').checkboxpicker();
+            });
+        </script>*@
+    <script>
+        //$(function () {
+        //    $('input[type="checkbox"]').checkboxpicker({
+        //        // OPTIONS
+        //        offLabel: '取消',
+        //        onLabel: '確定',
+        //        offActiveCls: 'btn-warning',
+        //    });
+        //});
+        
     </script>
 
 
@@ -681,16 +559,16 @@
             data() {
                 return {
                     mydata: {
-                        MyId: "",
+                        MyId: '',
                         OperationDate: "",
                         Height: "",
-                        Menopause: "",
+                        Menopause: false,
                         CellType: "",
-                        ER: "",
-                        PR: "",
+                        ER: false,
+                        PR: false,
                         Her: "",
-                        OperationType: "",
-                        TreatPlan: "",
+                        OperationType: [],
+                        TreatPlan: [],
                         Note: "",
                         InputDate: "",
                         UserId: '@ViewBag.userid'
@@ -699,10 +577,23 @@
             },
             methods: {
                 addData: function () {
+                    var self = this;
+                    self.Menopause = $("#chkMenopause")[0].checked;
+                    self.CellType = $("#select2-selectCellType-container").text();
+                    self.Her = $("#chkHer")[0].checked;//checkbox為看0或1,即checked的結果
+                    self.ER = $("#chkER")[0].checked;//checkbox為看0或1,即checked的結果
+                    self.PR = $("#chkPR")[0].checked;//checkbox為看0或1,即checked的結果
+                    self.OperationDate = $("#canOpDate")[0].value;
+                    OperationType: [],
+                        TreatPlan: [],
+                            Note: "",
+                   
+                    
+
                     $.ajax({
                         type: 'POST',
                         url: '/api/MydataAPI',
-                        data: JSON.stringify(this.mydata),
+                        data: JSON.stringify(self.mydata),
                         dataType: 'json',
                         contentType: "application/json",
                         success: function (data) {

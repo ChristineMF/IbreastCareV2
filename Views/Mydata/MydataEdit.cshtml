@@ -4,14 +4,33 @@
     ViewBag.Title = "MydataEdit";
     Layout = "~/Views/Shared/_LayoutPageRecord.cshtml";
 }
+@section Styles{
+    @*<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">*@
+    <!--非共用Vendor -->
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+
+    <!-- Template Main CSS File -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <!-- RuangAdmin CSS -->
+    <link href="/css/ruang-admin.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap DatePicker -->
+    <link href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+    <link href="/assets/css/custom.css" rel="stylesheet" />
+}
 
 @using (Html.BeginForm("MydataEdit", "Mydata", FormMethod.Post, new { id = "mydataeditForm", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        
+
         <hr />
         @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
         <div class="form-group">
@@ -129,3 +148,51 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+@section Scripts{
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
+    <!-- Select2 -->
+    <script src="/vendor/select2/dist/js/select2.min.js"></script>
+    <!-- Bootstrap Datepicker -->
+    <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <!-- Bootstrap bootstrap-checkbox -->
+    <script src="~/Scripts/bootstrap-checkbox.min.js"></script>
+    <!-- RuangAdmin Javascript -->
+    <script src="/js/ruang-admin.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('.select2-single').select2();
+
+            // Select2 Multiple
+            $('.select2-multiple').select2();
+
+            // Bootstrap Date Picker
+            $('#simple-date1 .input-group.date').datepicker({
+                format: 'yyyy-MM-dd',
+                todayBtn: 'linked',
+                todayHighlight: true,
+                autoclose: true,
+            });
+            $('#chkMenopause').checkboxpicker({
+                // OPTIONS
+                offLabel: '否',
+                onLabel: '是',
+                offActiveCls: 'btn-success',
+                onActiveCls: 'btn-warning',
+            });
+            $('input[type="checkbox"]').checkboxpicker({
+                //        // OPTIONS
+                offLabel: '陰性',
+                onLabel: '陽性',
+                offActiveCls: 'btn-success',
+                onActiveCls: 'btn-warning',
+            });
+
+        });
+    </script>
+    }
