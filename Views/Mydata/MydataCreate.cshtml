@@ -243,9 +243,9 @@
             <hr />
             @Html.MvcSiteMap().SiteMapPath()*@
         <!--</div>-->
-        <div id="app">
+      
             
-                <div class="row">
+                <div class="row"  id="app">
                     <!--內容開始-->
                     <div class="col-lg-6">
                         <!-- Select2 -->
@@ -264,7 +264,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">細胞類型</label>
+                                    <label class="col-lg-2 control-label" for="selectCellType">細胞類型</label>
                                     <select v-model="mydata.CellType" class="select2-single form-control" name="selectCellType" id="selectCellType">
                                         <option value="">請選擇</option>
                                         <option value="浸潤性腺管癌">浸潤性腺管癌</option>
@@ -275,7 +275,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="select2Single">HER-2/neu基因表現</label>
+                                    <label for="selectHer">HER-2/neu基因表現</label>
                                     <select v-model="mydata.Her" class="select2-single form-control" name="selectHer" id="selectHer">
                                         <option value="">請選擇</option>
                                         <option value="陰性">陰性</option>
@@ -285,20 +285,20 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">是否停經</label>
+                                    <label class="col-lg-2 control-label" for="chkMenopause">是否停經</label>
                                     <div class="col-lg-8">
                                         <input v-model="mydata.Menopause" class="form-control" id="chkMenopause" type="checkbox" value="">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">ER</label>
+                                    <label class="col-lg-2 control-label" for="chkER">ER</label>
                                     <div class="col-lg-8">
                                         <input v-model="mydata.ER" class="form-control" id="chkER" type="checkbox" value="">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">PR</label>
+                                    <label class="col-lg-2 control-label" for="chkPR">PR</label>
                                     <div class="col-lg-8">
                                         <input v-model="mydata.PR" class="form-control" id="chkPR" type="checkbox" value="">
                                     </div>
@@ -324,7 +324,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="select2Multiple">手術型式</label>
+                                    <label for="selectOpType">手術型式</label>
                                     <select v-model="mydata.OperationType" class="select2-multiple form-control" name="states[]" multiple="multiple"
                                             id="selectOpType">
                                         <option value="">請選擇</option>
@@ -337,9 +337,9 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="select2Multiple">療程計畫</label>
+                                    <label for="selectTreatPlan">療程計畫</label>
                                     <select v-model="mydata.TreatPlan" class="select2-multiple form-control" name="states[]" multiple="multiple"
-                                            id="select2Multiple">
+                                            id="selectTreatPlan">
                                         <option value="">請選擇</option>
                                         <option value="1">化學治療</option>
                                         <option value="2">放射線治療</option>
@@ -371,7 +371,7 @@
         </div>
 
     </div>
-</div>
+
 
 @Html.ActionLink("回列表", "Index")
 @*</div>*@
@@ -502,14 +502,28 @@
                 onLabel: '是',
                 offActiveCls: 'btn-success',
                 onActiveCls: 'btn-warning',
+               
             });
+            // uncheck the checkbox
+            $('#chkMenopause').prop('checked', '是');
+
+            // disable the checkbox
+            $('#chkMenopause').prop('disabled','否');
+           
+
             $('input[type="checkbox"]').checkboxpicker({
                 //        // OPTIONS
                 offLabel: '陰性',
                 onLabel: '陽性',
                 offActiveCls: 'btn-success',
                 onActiveCls: 'btn-warning',
+                /*checked: '陽',*/
             });
+            // uncheck the checkbox
+            $('input[type="checkbox"]').prop('checked', false);
+
+            // disable the checkbox
+            $('input[type="checkbox"]').prop('disabled', true);
 
         });
         //$(function () {
@@ -562,13 +576,13 @@
                         MyId: '',
                         OperationDate: "",
                         Height: "",
-                        Menopause: false,
+                        Menopause:"",
                         CellType: "",
-                        ER: false,
-                        PR: false,
+                        ER: "",
+                        PR: "",
                         Her: "",
-                        OperationType: [],
-                        TreatPlan: [],
+                        OperationType:"",
+                        TreatPlan: "",
                         Note: "",
                         InputDate: "",
                         UserId: '@ViewBag.userid'
@@ -577,23 +591,24 @@
             },
             methods: {
                 addData: function () {
-                    var self = this;
-                    self.Menopause = $("#chkMenopause")[0].checked;
-                    self.CellType = $("#select2-selectCellType-container").text();
-                    self.Her = $("#chkHer")[0].checked;//checkbox為看0或1,即checked的結果
-                    self.ER = $("#chkER")[0].checked;//checkbox為看0或1,即checked的結果
-                    self.PR = $("#chkPR")[0].checked;//checkbox為看0或1,即checked的結果
-                    self.OperationDate = $("#canOpDate")[0].value;
-                    OperationType: [],
-                        TreatPlan: [],
-                            Note: "",
+                    //var self = this.mydata;
+                    //self.Menopause = $("#chkMenopause")[0].checked;
+                    //self.CellType = $("#select2-selectCellType-container").text();//input是抓text值
+                   // self.Her = $("#select2-selectHer-container").text();//checkbox為看0或1,即checked的結果
+                   // self.ER = $("#chkER")[0].checked;//checkbox為看0或1,即checked的結果
+                   // self.PR = $("#chkPR")[0].checked;//checkbox為看0或1,即checked的結果
+                   // self.OperationDate = $("#canOpDate")[0].value;
+                    //self.OperationType = $("#selectOpType").selected;
+                    //self.TreatPlan = $("#selectTreatPlan").selected;
+                    var obj = {
+                        Menopause: $("#chkMenopause")[0].checked,
+                        CellType: $("#select2-selectCellType-container").text()
+                    };
                    
-                    
-
                     $.ajax({
                         type: 'POST',
                         url: '/api/MydataAPI',
-                        data: JSON.stringify(self.mydata),
+                        data: JSON.stringify(obj),
                         dataType: 'json',
                         contentType: "application/json",
                         success: function (data) {

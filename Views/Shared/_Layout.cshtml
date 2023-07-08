@@ -1,17 +1,17 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 @{
-//if (Session["RoleId"] == null)
-//{
-//    Response.Redirect("~/Home/Index");
-//    return;
-//}
-//string Name = Session["NickName"].ToString();
-//ViewBag.MsgName = Name + "，你好";
+    if (Session["RoleId"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+        return;
+    }
+    string Name = Session["NickName"].ToString();
+    ViewBag.MsgName = Name + "，你好";
 
 
-//RueiEntities db = new RueiEntities();
-//List<Workspace> workspace = db.Workspaces.ToList();
+    //RueiEntities db = new RueiEntities();
+    //List<Workspace> workspace = db.Workspaces.ToList();
 }
 
 <head>
@@ -150,9 +150,9 @@
                     <div class="col-lg-4 col-md-6 footer-newsletter">
                         <h4>Join Our Newsletter</h4>
                         <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                        <form action="" method="post">
+                        @*<form action="" method="post">
                             <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
+                        </form>*@
                     </div>
 
                 </div>
