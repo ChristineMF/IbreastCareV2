@@ -28,7 +28,7 @@ namespace IbreastCare.Controllers
             //    return HttpNotFound();
             //}
 
-            List<Personal_Data> mydata = Db.Personal_Data.Where(p=>p.UserId==myuserid).ToList();
+            List<Personal_Data> mydata = Db.Personal_Data.Where(p => p.UserId == myuserid).OrderByDescending(p => p.InputDate).ToList();
 
             List<MydataViewModel> model = Common.MapToList<Personal_Data, MydataViewModel>(mydata);
             //List<MydataViewModel> dataList = new List<MydataViewModel>();
@@ -39,7 +39,7 @@ namespace IbreastCare.Controllers
             //        dataList.Add(item);
             //    }
             //}
-           
+
             //ViewBag.myid = Session["UserId"]; 
             //Session["InputDate"] = DateTime.Now;
             return View(model);
@@ -87,42 +87,49 @@ namespace IbreastCare.Controllers
             {
                 return HttpNotFound();
             }
+            //List<OperationType> opType = Db.OperationTypes.ToList();
+            
             MydataViewModel editmodel = Common.MapTo<Personal_Data, MydataViewModel>(mydata);
+           // return View(editmodel.ToString(),opType.ToString());
             return View(editmodel);
 
+
         }
-        //[HttpPost]
-        //public ActionResult MydataEdit(MydataViewModel mydataView)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        //1.存資料庫  RegisterViewModel=>Member
+        [HttpPost]
+        public ActionResult MydataEdit(MydataViewModel mydataView)
+        {
+            if (ModelState.IsValid)
+            {
+                //1.存資料庫  RegisterViewModel=>Member
 
-        //        Personal_Data editmodel = Db.Personal_Data.FirstOrDefault(m => m.UserId == mydataView.UserId);
-
-
-
-        //        //2.取Personal_Data資料庫,Personal_Data=>MydataViewModel
-        //        MydataViewModel mydataList = Common.MapTo<Personal_Data, MydataViewModel>(editmodel);
+                Personal_Data editmodel = Db.Personal_Data.FirstOrDefault(m => m.UserId == mydataView.UserId);
 
 
 
+                //2.取Personal_Data資料庫,Personal_Data=>MydataViewModel
+                MydataViewModel mydataList = Common.MapTo<Personal_Data, MydataViewModel>(editmodel);
 
-        //        editmodel.CellPhone = mydataView.CellPhone;
-        //        editmodel.Email = mydataView.Email;
-        //        Db.SaveChanges();
-        //        return RedirectToAction("Details", "Account", new { id = editmodel.UserId });
-        //    }
-        //    else
-        //    {
-        //        return View(editmodel);
-        //    }
-        //    return View();
-        //}
-        //public ActionResult MydataDetails()
-        //{
-        //    return View();
-        //}
 
+
+
+                //        editmodel.CellPhone = mydataView.CellPhone;
+                //        editmodel.Email = mydataView.Email;
+                //        Db.SaveChanges();
+                //        return RedirectToAction("Details", "Account", new { id = editmodel.UserId });
+                //    }
+                //    else
+                //    {
+                //        return View(editmodel);
+                //    }
+                //    return View();
+                //}
+                //public ActionResult MydataDetails()
+                //{
+                //    return View();
+                //}
+
+            }
+        }
     }
 }
+        

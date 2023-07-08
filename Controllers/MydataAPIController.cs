@@ -24,19 +24,13 @@ namespace IbreastCare.ViewModel
         }
 
         // POST: api/MydataAPI
-        public void Post(List<Personal_Data> mydata)
+        public void Post(Personal_Data mydata)
         {
             //mydata.UserId = Session["UserId"];
-            // mydata.InputDate = DateTime.Now;
+            mydata.InputDate = DateTime.Now;
 
-            //Personal_Data my = new Personal_Data();
-            //my.CellType= mydata.CellType;
-            //my.Menopause = mydata.Menopause;
-            foreach (var item in mydata)
-            {
-                item.InputDate= DateTime.Now;
-            }
            
+
             Db.Personal_Data.Add(mydata);
 
             Db.SaveChanges();

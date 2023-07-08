@@ -23,12 +23,16 @@
     <!-- Bootstrap DatePicker -->
     <link href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
-    <link href="/assets/css/custom.css" rel="stylesheet" />
+    <!--<link href="/assets/css/custom.css" rel="stylesheet" />-->
 }
 <!-- TopBar -->
 <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Topbar -->
+    <!-- Container Fluid-->
+    <!--SiteMap-->
     <div id="content">
-        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" style="background-color: #F3F6F4 ">
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" style="background-color: #F3F6F4">
             <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
                 <i class="fa fa-bars"></i>
             </button>
@@ -228,10 +232,7 @@
                 </ul>*@
         </nav>
     </div>
-    <!-- Topbar -->
-    <!-- Container Fluid-->
-    <!--SiteMap-->
-    <div class="container-fluid" id="container-wrapper" style="background-color: #F3F6F4 ">
+    <div class="container-fluid" id="container-wrapper" >
         <!--<div class="d-sm-flex align-items-center justify-content-between mb-4"style="background-color: #F3F6F4 ">-->
         @*<h1 class="h3 mb-0 text-gray-800">DataTables</h1>
             <ol class="breadcrumb">
@@ -243,137 +244,132 @@
             <hr />
             @Html.MvcSiteMap().SiteMapPath()*@
         <!--</div>-->
-      
-            
-                <div class="row"  id="app">
-                    <!--內容開始-->
-                    <div class="col-lg-6">
-                        <!-- Select2 -->
-                        <div class="card mb-4">
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
+
+
+        <div class="row" id="app">
+            <!--內容開始-->
+            <div class="col-lg-6">
+                <!-- Select2 -->
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>Select2 is a jQuery based replacement for select boxes</p>
+
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
+                            <div class="col-lg-8">
+                                <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
                             </div>
-                            <div class="card-body">
-                                <p>Select2 is a jQuery based replacement for select boxes</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="selectCellType">細胞類型</label>
+                            <select v-model="mydata.CellType" class="select2-single form-control" name="selectCellType" id="selectCellType">
+                                <option value="">請選擇</option>
+                                <option value="浸潤性腺管癌">浸潤性腺管癌</option>
+                                <option value="乳腺管原位癌">乳腺管原位癌</option>
+                                <option value="浸潤性小葉癌">浸潤性小葉癌</option>
+                                <option value="乳小葉原位癌">乳小葉原位癌</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectHer">HER-2/neu基因表現</label>
+                            <select v-model="mydata.Her" class="select2-single form-control" name="selectHer" id="selectHer">
+                                <option value="">請選擇</option>
+                                <option value="陰性">陰性</option>
+                                <option value="陽性1+">陽性1+</option>
+                                <option value="陽性2+">陽性2+</option>
+                                <option value="陽性3+">陽性3+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="chkMenopause">是否停經</label>
+                            <div class="col-lg-8">
+                                <input v-model="mydata.Menopause" class="form-control" id="chkMenopause" type="checkbox" value="">
+                            </div>
+                        </div>
 
-
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
-                                    <div class="col-lg-8">
-                                        <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="selectCellType">細胞類型</label>
-                                    <select v-model="mydata.CellType" class="select2-single form-control" name="selectCellType" id="selectCellType">
-                                        <option value="">請選擇</option>
-                                        <option value="浸潤性腺管癌">浸潤性腺管癌</option>
-                                        <option value="乳腺管原位癌">乳腺管原位癌</option>
-                                        <option value="浸潤性小葉癌">浸潤性小葉癌</option>
-                                        <option value="乳小葉原位癌">乳小葉原位癌</option>
-                                        <option value="其他">其他</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="selectHer">HER-2/neu基因表現</label>
-                                    <select v-model="mydata.Her" class="select2-single form-control" name="selectHer" id="selectHer">
-                                        <option value="">請選擇</option>
-                                        <option value="陰性">陰性</option>
-                                        <option value="陽性1+">陽性1+</option>
-                                        <option value="陽性2+">陽性2+</option>
-                                        <option value="陽性3+">陽性3+</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="chkMenopause">是否停經</label>
-                                    <div class="col-lg-8">
-                                        <input v-model="mydata.Menopause" class="form-control" id="chkMenopause" type="checkbox" value="">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="chkER">ER</label>
-                                    <div class="col-lg-8">
-                                        <input v-model="mydata.ER" class="form-control" id="chkER" type="checkbox" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="chkPR">PR</label>
-                                    <div class="col-lg-8">
-                                        <input v-model="mydata.PR" class="form-control" id="chkPR" type="checkbox" value="">
-                                    </div>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="chkER">ER</label>
+                            <div class="col-lg-8">
+                                <input v-model="mydata.ER" class="form-control" id="chkER" type="checkbox" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="chkPR">PR</label>
+                            <div class="col-lg-8">
+                                <input v-model="mydata.PR" class="form-control" id="chkPR" type="checkbox" value="">
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="card mb-4">
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">治療</h6>
-                            </div>
-                            <div class="card-body">
-                                <p>記錄我的治療方式</p>
-                                <div class="form-group" id="simple-date1">
-                                    <label for="canOpDate">手術日期</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                        </div>
-                                        <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="text">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="selectOpType">手術型式</label>
-                                    <select v-model="mydata.OperationType" class="select2-multiple form-control" name="states[]" multiple="multiple"
-                                            id="selectOpType">
-                                        <option value="">請選擇</option>
-                                        <option value="1">乳房保存手術</option>
-                                        <option value="2">單純性乳房全切除</option>
-                                        <option value="3">改良式根除性乳房切除</option>
-                                        <option value="4">前哨淋巴摘除</option>
-                                        <option value="5">腋窩淋巴清除</option>
-                                        <option value="6">重建手術</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="selectTreatPlan">療程計畫</label>
-                                    <select v-model="mydata.TreatPlan" class="select2-multiple form-control" name="states[]" multiple="multiple"
-                                            id="selectTreatPlan">
-                                        <option value="">請選擇</option>
-                                        <option value="1">化學治療</option>
-                                        <option value="2">放射線治療</option>
-                                        <option value="3">標靶治療</option>
-                                        <option value="4">荷爾蒙治療</option>
-                                        <option value="5">免疫治療</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <textarea v-model="mydata.Note" cols="30" style="height: 80px;"></textarea>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
-                                        <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
-                                    </div>
-                                </div>
-                                <p>For documentations Bootstrap Datepicker you can visit <a href="https://github.com/uxsolutions/bootstrap-datepicker" target="_blank">here.</a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p>
-                        For documentations Select2 you can visit <a href="https://select2.org/"
-                                                                    target="_blank">here.</a>
-                    </p>
                 </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">治療</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>記錄我的治療方式</p>
+                        <div class="form-group" id="simple-date1">
+                            <label for="canOpDate">手術日期</label>
+                            <div class="input-group date">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="selectOpType">手術型式</label>
+                            <select v-model="mydata.OperationType" class="select2-multiple form-control" name="states[]" multiple="multiple"
+                                    id="selectOpType">
+                                <option value="">請選擇</option>
+                                <option value="1">乳房保存手術</option>
+                                <option value="2">單純性乳房全切除</option>
+                                <option value="3">改良式根除性乳房切除</option>
+                                <option value="4">前哨淋巴摘除</option>
+                                <option value="5">腋窩淋巴清除</option>
+                                <option value="6">重建手術</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectTreatPlan">療程計畫</label>
+                            <select v-model="mydata.TreatPlan" class="select2-multiple form-control" name="states[]" multiple="multiple"
+                                    id="selectTreatPlan">
+                                <option value="">請選擇</option>
+                                <option value="1">化學治療</option>
+                                <option value="2">放射線治療</option>
+                                <option value="3">標靶治療</option>
+                                <option value="4">荷爾蒙治療</option>
+                                <option value="5">免疫治療</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea v-model="mydata.Note" cols="30" style="height: 80px;"></textarea>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                                <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+                            </div>
+                        </div>
+                        
+            </div>
+                          @Html.ActionLink("回列表", "Index")
             
         </div>
-
     </div>
+            </div>
+
+</div>
 
 
-@Html.ActionLink("回列表", "Index")
+
 @*</div>*@
 <!--Row-->
 @*@<div class="form-horizontal" style="background-color: #F3F6F4 ">
@@ -502,14 +498,9 @@
                 onLabel: '是',
                 offActiveCls: 'btn-success',
                 onActiveCls: 'btn-warning',
-               
-            });
-            // uncheck the checkbox
-            $('#chkMenopause').prop('checked', '是');
 
-            // disable the checkbox
-            $('#chkMenopause').prop('disabled','否');
-           
+
+            });
 
             $('input[type="checkbox"]').checkboxpicker({
                 //        // OPTIONS
@@ -517,13 +508,8 @@
                 onLabel: '陽性',
                 offActiveCls: 'btn-success',
                 onActiveCls: 'btn-warning',
-                /*checked: '陽',*/
-            });
-            // uncheck the checkbox
-            $('input[type="checkbox"]').prop('checked', false);
 
-            // disable the checkbox
-            $('input[type="checkbox"]').prop('disabled', true);
+            });
 
         });
         //$(function () {
@@ -536,7 +522,7 @@
         //    });
         //    $('input[type="checkbox"]').checkboxpicker({
         //        //        // OPTIONS
-    //ViewBagodel   //        offLabel: '陰性',
+        //ViewBagodel   //        offLabel: '陰性',
         //        onLabel: '陽性',
         //        offActiveCls: 'btn-success',
         //        onActiveCls: 'btn-warning',
@@ -559,7 +545,7 @@
         //        offActiveCls: 'btn-warning',
         //    });
         //});
-        
+
     </script>
 
 
@@ -581,7 +567,7 @@
                         ER: "",
                         PR: "",
                         Her: "",
-                        OperationType:"",
+                        OperationType:[""],
                         TreatPlan: "",
                         Note: "",
                         InputDate: "",
@@ -591,28 +577,69 @@
             },
             methods: {
                 addData: function () {
-                    //var self = this.mydata;
-                    //self.Menopause = $("#chkMenopause")[0].checked;
-                    //self.CellType = $("#select2-selectCellType-container").text();//input是抓text值
-                   // self.Her = $("#select2-selectHer-container").text();//checkbox為看0或1,即checked的結果
-                   // self.ER = $("#chkER")[0].checked;//checkbox為看0或1,即checked的結果
-                   // self.PR = $("#chkPR")[0].checked;//checkbox為看0或1,即checked的結果
-                   // self.OperationDate = $("#canOpDate")[0].value;
-                    //self.OperationType = $("#selectOpType").selected;
-                    //self.TreatPlan = $("#selectTreatPlan").selected;
-                    var obj = {
-                        Menopause: $("#chkMenopause")[0].checked,
-                        CellType: $("#select2-selectCellType-container").text()
+                    var self = this;
+                    /*self.Menopause = $("#chkMenopause")[0].checked;*/
+                    if ($("#chkMenopause")[0].checked == true) {
+                        self.Menopause = "是";
+                    } else {
+                        self.Menopause = "否";
                     };
+
+                    self.CellType = $("#select2-selectCellType-container").text();//input是抓text值*/
+                    if ($("#select2-selectCellType-container").text() == '請選擇')
+                        self.CellType ="";
+                    else
+                        self.CellType = $("#select2-selectCellType-container").text();
+
+                    //self.Her = $("#select2-selectHer-container").text();
+                    if ($("#select2-selectHer-container").text() == '請選擇')
+                        self.selectHer ="";
+                    else
+                        self.selectHer = $("#select2-selectHer-container").text();
+
+                    //self.ER = $("#chkER")[0].checked;//checkbox為看0或1,即checked的結果
+                    if ($("#chkER")[0].checked == true)
+                        self.ER = "陽";
+                    else
+                        self.ER = "陰";
+
+                    //self.PR = $("#chkPR")[0].checked;//checkbox為看0或1,即checked的結果
+                    if($("#chkPR")[0].checked == true)
+                        self.PR = "陽";
+                    else
+                        self.PR = "陰";
+
+                    self.OperationDate = $("#canOpDate")[0].value;
+                    
+                    var myselects = [];
+
+                    //$('li').each(function () {
+                    //    var myselect = $('div[data-select2-id="10"] li.select2-selection__choice').attr('title');
+                    //    myselects.push(myselect);
+                    //});
+                    //alert(myselects);
+
+                    var myselects = $('div[data-select2-id="10"] li.select2-selection__choice').map(function () {
+                        return $(this).attr('title');
+                       
+                    }).get();
+
+                    self.OperationType = myselects.join(',');
                    
+                    /*self.OperationType = myselects;*/
+                    
+                    //self.TreatPlan = $("#selectTreatPlan").selected;
+
+
                     $.ajax({
                         type: 'POST',
                         url: '/api/MydataAPI',
-                        data: JSON.stringify(obj),
+                        data: JSON.stringify(self),
                         dataType: 'json',
                         contentType: "application/json",
                         success: function (data) {
                             alert("OK");
+                            self.mydata = data;//將值存入DB
                             location.href="/Mydata/Index"
                     }
                     })

@@ -18,181 +18,462 @@
     <!-- RuangAdmin CSS -->
     <link href="/css/ruang-admin.min.css" rel="stylesheet">
     <!-- Select2 -->
-    <link href="/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+    <!--<link href="/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">-->
     <!-- Bootstrap DatePicker -->
     <link href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
-    <link href="/assets/css/custom.css" rel="stylesheet" />
 }
+<!-- TopBar -->
+<div id="content-wrapper" class="d-flex flex-column">
+    <!-- Topbar -->
+    <!-- Container Fluid-->
+    <!--SiteMap-->
+    <div id="content">
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" style="background-color: #F3F6F4">
+            <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+            <h1 class="h3 mb-0 text-gray-800">我的</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Home</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item" aria-current="page">DataTables</li>
+            </ol>
+            @Html.MvcSiteMap().Menu()
+            @Html.MvcSiteMap().SiteMapPath()
+            @*<ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                             aria-labelledby="searchDropdown">
+                            <form class="navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
+                                           aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <span class="badge badge-danger badge-counter">3+</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Alerts Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 12, 2019</div>
+                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-donate text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 7, 2019</div>
+                                    $290.29 has been deposited into your account!
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-warning">
+                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 2, 2019</div>
+                                    Spending Alert: We've noticed unusually high spending for your account.
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-envelope fa-fw"></i>
+                            <span class="badge badge-warning badge-counter">2</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">
+                                Message Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="img/man.png" style="max-width: 60px" alt="">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">
+                                        Hi there! I am wondering if you can help me with a problem I've been
+                                        having.
+                                    </div>
+                                    <div class="small text-gray-500">Udin Cilok · 58m</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="img/girl.png" style="max-width: 60px" alt="">
+                                    <div class="status-indicator bg-default"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">
+                                        Am I a good boy? The reason I ask is because someone told me that people
+                                        say this to all dogs, even if they aren't good...
+                                    </div>
+                                    <div class="small text-gray-500">Jaenab · 2w</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-tasks fa-fw"></i>
+                            <span class="badge badge-success badge-counter">3</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">
+                                Task
+                            </h6>
+                            <a class="dropdown-item align-items-center" href="#">
+                                <div class="mb-3">
+                                    <div class="small text-gray-500">
+                                        Design Button
+                                        <div class="small float-right"><b>50%</b></div>
+                                    </div>
+                                    <div class="progress" style="height: 12px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item align-items-center" href="#">
+                                <div class="mb-3">
+                                    <div class="small text-gray-500">
+                                        Make Beautiful Transitions
+                                        <div class="small float-right"><b>30%</b></div>
+                                    </div>
+                                    <div class="progress" style="height: 12px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item align-items-center" href="#">
+                                <div class="mb-3">
+                                    <div class="small text-gray-500">
+                                        Create Pie Chart
+                                        <div class="small float-right"><b>75%</b></div>
+                                    </div>
+                                    <div class="progress" style="height: 12px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">View All Taks</a>
+                        </div>
+                    </li>
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
+                            <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>*@
+        </nav>
+    </div>
+    <div class="container-fluid" id="container-wrapper">
+        <div class="row">
+            <!--內容開始-->
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>Select2 is a jQuery based replacement for select boxes</p>
 
-@using (Html.BeginForm("MydataEdit", "Mydata", FormMethod.Post, new { id = "mydataeditForm", enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+                        @using (Html.BeginForm("MydataEdit", "Mydata", FormMethod.Post, new { id = "mydataeditForm", enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+                            @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Height, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                                <div class="col-lg-8">
+                                    @Html.EditorFor(model => model.Height, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group">
 
-        <hr />
-        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.MyId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MyId, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.MyId, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+                                @Html.LabelFor(model => model.CellType, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                                <select v-model="mydata.CellType" class="select2-single form-control" name="selectCellType" id="selectCellType">
+                                    <option value="">請選擇</option>
+                                    <option value="浸潤性腺管癌">浸潤性腺管癌</option>
+                                    <option value="乳腺管原位癌">乳腺管原位癌</option>
+                                    <option value="浸潤性小葉癌">浸潤性小葉癌</option>
+                                    <option value="乳小葉原位癌">乳小葉原位癌</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CellType, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.CellType, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="selectHer">HER-2/neu基因表現</label>
+                                <select v-model="mydata.Her" class="select2-single form-control" name="selectHer" id="selectHer">
+                                    <option value="">請選擇</option>
+                                    <option value="陰性">陰性</option>
+                                    <option value="陽性1+">陽性1+</option>
+                                    <option value="陽性2+">陽性2+</option>
+                                    <option value="陽性3+">陽性3+</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Her, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-8">
+                                    @Html.EditorFor(model => model.Her, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.Her, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="chkMenopause">是否停經</label>
+                                <div class="col-lg-8">
+                                    <input v-model="mydata.Menopause" class="form-control" id="chkMenopause" type="checkbox" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Menopause, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Menopause, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.Menopause, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.OperationDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OperationDate, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.OperationDate, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="chkER">ER</label>
+                                <div class="col-lg-8">
+                                    <input v-model="mydata.ER" class="form-control" id="chkER" type="checkbox" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ER, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                                <div class="col-lg-8">
+                                    @Html.EditorFor(model => model.ER, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.ER, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="chkPR">PR</label>
+                                <div class="col-lg-8">
+                                    <input v-model="mydata.PR" class="form-control" id="chkPR" type="checkbox" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PR, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                                <div class="col-lg-8">
+                                    @Html.EditorFor(model => model.PR, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.PR, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Height, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Height, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Menopause, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Menopause, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.Menopause, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+                <div class="col-lg-6">
+                    <div class="card mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">治療</h6>
+                        </div>
+                        <div class="card-body">
+                            <p>記錄我的治療方式</p>
+                            <div class="form-group" id="simple-date1">
+                                <label for="canOpDate">手術日期</label>
+                                <div class="input-group date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    </div>
+                                    <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="text">
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CellType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CellType, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.CellType, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.OperationDate, htmlAttributes: new { @class = "input - group - prepend" })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.OperationDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.OperationDate, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectOpType">手術型式</label>
+                            <select v-model="mydata.OperationType" class="select2-multiple form-control" name="states[]" multiple="multiple"
+                                    id="selectOpType">
+                                <option value="">請選擇</option>
+                                <option value="1">乳房保存手術</option>
+                                <option value="2">單純性乳房全切除</option>
+                                <option value="3">改良式根除性乳房切除</option>
+                                <option value="4">前哨淋巴摘除</option>
+                                <option value="5">腋窩淋巴清除</option>
+                                <option value="6">重建手術</option>
+                            </select>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ER, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ER, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.ER, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OperationType, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.OperationType, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.OperationType, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectTreatPlan">療程計畫</label>
+                            @*<select v-model="mydata.TreatPlan" class="select2-multiple form-control" name="states[]" multiple="multiple"
+                                    id="selectTreatPlan">
+                                <option value="">請選擇</option>
+                                <option value="1">化學治療</option>
+                                <option value="2">放射線治療</option>
+                                <option value="3">標靶治療</option>
+                                <option value="4">荷爾蒙治療</option>
+                                <option value="5">免疫治療</option>*@
+                            @*</select>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PR, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PR, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.PR, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Her, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Her, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.Her, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TreatPlan, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TreatPlan, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.TreatPlan, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea v-model="mydata.Note" cols="30" style="height: 80px;"></textarea>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.OperationType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OperationType, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.OperationType, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TreatPlan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TreatPlan, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.TreatPlan, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                                <input type="submit" value="修改" class="tn btn-primary" />
+                            </div>
+                        </div>
+                        <p>For documentations Bootstrap Datepicker you can visit <a href="https://github.com/uxsolutions/bootstrap-datepicker" target="_blank">here.</a></p>
+                    </div>
+                </div>
+                        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.InputDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.InputDate, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.InputDate, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+                        <div>
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+           
         </div>
     </div>
-}
+    </div>
+                        @section Scripts{
+                            @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+                                <script src="~/Scripts/jquery.validate.min.js"></script>
+                                <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+                            <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+                            <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+                            <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
+                            <!-- Select2 -->
+                            <script src="/vendor/select2/dist/js/select2.min.js"></script>
+                            <!-- Bootstrap Datepicker -->
+                            <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+                            <!-- Bootstrap bootstrap-checkbox -->
+                            <script src="~/Scripts/bootstrap-checkbox.min.js"></script>
+                            <!-- RuangAdmin Javascript -->
+                            <script src="/js/ruang-admin.min.js"></script>
+                            <script>
+                                $(document).ready(function () {
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-@section Scripts{
-    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
-    <!-- Select2 -->
-    <script src="/vendor/select2/dist/js/select2.min.js"></script>
-    <!-- Bootstrap Datepicker -->
-    <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-    <!-- Bootstrap bootstrap-checkbox -->
-    <script src="~/Scripts/bootstrap-checkbox.min.js"></script>
-    <!-- RuangAdmin Javascript -->
-    <script src="/js/ruang-admin.min.js"></script>
-    <script>
-        $(document).ready(function () {
+                                    $('.select2-single').select2();
 
-            $('.select2-single').select2();
+                                    // Select2 Multiple
+                                    $('.select2-multiple').select2();
 
-            // Select2 Multiple
-            $('.select2-multiple').select2();
+                                    // Bootstrap Date Picker
+                                    $('#simple-date1 .input-group.date').datepicker({
+                                        format: 'yyyy-MM-dd',
+                                        todayBtn: 'linked',
+                                        todayHighlight: true,
+                                        autoclose: true,
+                                    });
+                                    $('#chkMenopause').checkboxpicker({
+                                        // OPTIONS
+                                        offLabel: '否',
+                                        onLabel: '是',
+                                        offActiveCls: 'btn-success',
+                                        onActiveCls: 'btn-warning',
+                                    });
+                                    $('input[type="checkbox"]').checkboxpicker({
+                                        //        // OPTIONS
+                                        offLabel: '陰性',
+                                        onLabel: '陽性',
+                                        offActiveCls: 'btn-success',
+                                        onActiveCls: 'btn-warning',
+                                    });
 
-            // Bootstrap Date Picker
-            $('#simple-date1 .input-group.date').datepicker({
-                format: 'yyyy-MM-dd',
-                todayBtn: 'linked',
-                todayHighlight: true,
-                autoclose: true,
-            });
-            $('#chkMenopause').checkboxpicker({
-                // OPTIONS
-                offLabel: '否',
-                onLabel: '是',
-                offActiveCls: 'btn-success',
-                onActiveCls: 'btn-warning',
-            });
-            $('input[type="checkbox"]').checkboxpicker({
-                //        // OPTIONS
-                offLabel: '陰性',
-                onLabel: '陽性',
-                offActiveCls: 'btn-success',
-                onActiveCls: 'btn-warning',
-            });
-
-        });
-    </script>
-    }
+                                });
+                            </script>
+                        }
