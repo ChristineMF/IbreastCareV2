@@ -1,19 +1,19 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+
 @{
-    if (Session["RoleId"] == null)
-    {
-        Response.Redirect("~/Home/Index");
-        return;
-    }
-    string Name = Session["NickName"].ToString();
-    ViewBag.MsgName = Name + "，你好";
+//if (Session["RoleId"] == null)
+//{
+//    Response.Redirect("~/Home/Index");
+//    return;
+//}
+//string Name = Session["NickName"].ToString();
+//ViewBag.MsgName = Name + "，你好";
 
 
-    //RueiEntities db = new RueiEntities();
-    //List<Workspace> workspace = db.Workspaces.ToList();
+//RueiEntities db = new RueiEntities();
+//List<Workspace> workspace = db.Workspaces.ToList();
 }
-
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -31,12 +31,12 @@
 
     <!-- Vendor CSS Files -->
     <link href="/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-        <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="~/assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-        <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
@@ -151,8 +151,8 @@
                         <h4>Join Our Newsletter</h4>
                         <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
                         @*<form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>*@
+                                <input type="email" name="email"><input type="submit" value="Subscribe">
+                            </form>*@
                     </div>
 
                 </div>

@@ -21,7 +21,6 @@
     <!--<link href="/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">-->
     <!-- Bootstrap DatePicker -->
     <link href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
-    <link href="~/Content/chosen.css" rel="stylesheet" />
 
 }
 <!-- TopBar -->
@@ -230,20 +229,19 @@
                 </ul>*@
         </nav>
     </div>
-    @using (Html.BeginForm("MydataEdit", "Mydata", FormMethod.Post, new { id = "mydataeditForm", enctype = "multipart/form-data" }))
-    {
-        <div class="container-fluid" id="container-wrapper">
-            <div class="row">
-                <!--內容開始-->
-                <div class="col-lg-6">
-                    <div class="card mb-4">
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
-                        </div>
-                        <div class="card-body">
-                            <p>Select2 is a jQuery based replacement for select boxes</p>
+    <div class="container-fluid" id="container-wrapper">
+        <div class="row">
+            <!--內容開始-->
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>Select2 is a jQuery based replacement for select boxes</p>
 
-
+                        @using (Html.BeginForm("MydataEdit", "Mydata", FormMethod.Post, new { id = "mydataeditForm", enctype = "multipart/form-data" }))
+                        {
                             @Html.AntiForgeryToken()
 
                             @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
@@ -257,60 +255,76 @@
                             <div class="form-group">
 
                                 @Html.LabelFor(model => model.CellType, htmlAttributes: new { @class = "col-lg-2 control-label" })
-                                @Html.DropDownList("selectCellType", (SelectList)ViewBag.CellTypeList)
-                                <!--<select class="select2-single form-control" name="selectCellType" id="selectCellType">
+                                <select v-model="mydata.CellType" class="select2-single form-control" name="selectCellType" id="selectCellType">
                                     <option value="">請選擇</option>
                                     <option value="浸潤性腺管癌">浸潤性腺管癌</option>
                                     <option value="乳腺管原位癌">乳腺管原位癌</option>
                                     <option value="浸潤性小葉癌">浸潤性小葉癌</option>
                                     <option value="乳小葉原位癌">乳小葉原位癌</option>
-                                    <option value="其他">其他</option>-->
-                                @*<option value="6" @(Model.OperationType.Split(',').Any(x=>x == "6")?"selected":"")>重建手術</option>*@
-                                <!--</select>-->
-
-
+                                    <option value="其他">其他</option>
+                                </select>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CellType, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.CellType, "", new { @class = "text-danger" })*@
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="selectHer">HER-2/neu基因表現</label>
-                                @*<select class="select2-single form-control" name="selectHer" id="selectHer" >
-                                        @foreach (var item in ViewBag.List)
-                                        {
-                                            <option value="@item.Value">@item.Text</option>
-                                        }
-
-                                    </select>*@
-                                @Html.DropDownList("selectHer", (SelectList)ViewBag.HerList)
+                                <select v-model="mydata.Her" class="select2-single form-control" name="selectHer" id="selectHer">
+                                    <option value="">請選擇</option>
+                                    <option value="陰性">陰性</option>
+                                    <option value="陽性1+">陽性1+</option>
+                                    <option value="陽性2+">陽性2+</option>
+                                    <option value="陽性3+">陽性3+</option>
+                                </select>
                             </div>
-                            <!--<div class="form-group">
-
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Her, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-8">
-
-                                    @*@Html.EditorFor(model => model.Her, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.EditorFor(model => model.Her, new { htmlAttributes = new { @class = "form-control" } })
                                     @*@Html.ValidationMessageFor(model => model.Her, "", new { @class = "text-danger" })*@
-                                <!--</div>
-                            </div>-->
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-lg-2 control-label" for="chkMenopause">是否停經</label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" id="chkMenopause" type="checkbox" @(Model.Menopause == "否" ? "" : "checked='checked'")>
+                                    <input v-model="mydata.Menopause" class="form-control" id="chkMenopause" type="checkbox" value="">
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Menopause, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Menopause, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.Menopause, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label class="col-lg-2 control-label" for="chkER">ER</label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" id="chkER" type="checkbox" @(Model.ER == "陰" ? "" : "checked='checked'")>
+                                    <input v-model="mydata.ER" class="form-control" id="chkER" type="checkbox" value="">
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ER, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                                <div class="col-lg-8">
+                                    @Html.EditorFor(model => model.ER, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.ER, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-lg-2 control-label" for="chkPR">PR</label>
                                 <div class="col-lg-8">
-                                    <input v-model="mydata.PR" class="form-control" id="chkPR" type="checkbox" @(Model.PR == "陰" ? "" : "checked='checked'")>
+                                    <input v-model="mydata.PR" class="form-control" id="chkPR" type="checkbox" value="">
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PR, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                                <div class="col-lg-8">
+                                    @Html.EditorFor(model => model.PR, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.PR, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -329,44 +343,51 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                     </div>
-                                    <input value="@Model.OperationDate" class="form-control" id="canOpDate" type="text">
+                                    <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="text">
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.OperationDate, htmlAttributes: new { @class = "input - group - prepend" })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.OperationDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.OperationDate, "", new { @class = "text-danger" })*@
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="selectOpType">手術型式</label>
-                            <select class="select2-multiple form-control" name="SelectOpType" multiple="multiple" id="selectOpType">
+                            <select v-model="mydata.OperationType" class="select2-multiple form-control" name="states[]" multiple="multiple"
+                                    id="selectOpType">
                                 <option value="">請選擇</option>
-                                <option value="1" @(Model.OperationType.Split(',').Any(x => x == "1") ? "selected" : "")>乳房保存手術</option>
-                                <option value="2" @(Model.OperationType.Split(',').Any(x => x == "2") ? "selected" : "")>單純性乳房全切除</option>
-                                <option value="3" @(Model.OperationType.Split(',').Any(x => x == "3") ? "selected" : "")>改良式根除性乳房切除</option>
-                                <option value="4" @(Model.OperationType.Split(',').Any(x => x == "4") ? "selected" : "")>前哨淋巴摘除</option>
-                                <option value="5" @(Model.OperationType.Split(',').Any(x => x == "5") ? "selected" : "")>腋窩淋巴清除</option>
-                                <option value="6" @(Model.OperationType.Split(',').Any(x => x == "6") ? "selected" : "")>重建手術</option>
+                                <option value="1">乳房保存手術</option>
+                                <option value="2">單純性乳房全切除</option>
+                                <option value="3">改良式根除性乳房切除</option>
+                                <option value="4">前哨淋巴摘除</option>
+                                <option value="5">腋窩淋巴清除</option>
+                                <option value="6">重建手術</option>
                             </select>
-
-
                         </div>
 
-                        <!--<div class="form-group">
-                            @*@Html.LabelFor(model => model.SelectOpTypes, "本次療程最多選擇5種手術方式",htmlAttributes: new { @class = "control-label col-md-10" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OperationType, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.ListBoxFor(model => model.SelectOpTypes, Model.AllOpTypes,new { htmlAttributes = new { @class = "chosen" , multiple="multiple",style="widht:350px;"} })-->
-                                @*@Html.ValidationMessageFor(model => model.OperationType, "", new { @*@class = "text-danger" })*@
-                            <!--</div>
-                        </div>-->
+                                @Html.EditorFor(model => model.OperationType, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.OperationType, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="selectTreatPlan">療程計畫</label>
-                            <select v-model="mydata.TreatPlan" class="select2-multiple form-control" name="selectTreatPlan" multiple="multiple"
+                            @*<select v-model="mydata.TreatPlan" class="select2-multiple form-control" name="states[]" multiple="multiple"
                                     id="selectTreatPlan">
                                 <option value="">請選擇</option>
-                                <option value="1" @*@(ViewBag.treats.Any(x => x == 6) ? "selected" : "")*@>化學治療</option>
+                                <option value="1">化學治療</option>
                                 <option value="2">放射線治療</option>
                                 <option value="3">標靶治療</option>
                                 <option value="4">荷爾蒙治療</option>
-                                <option value="5">免疫治療</option>
-                            </select>
+                                <option value="5">免疫治療</option>*@
+                            @*</select>*@
 
                         </div>
 
@@ -378,7 +399,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea cols="30" style="height: 80px " value="@Model.Note"></textarea>
+                            <textarea v-model="mydata.Note" cols="30" style="height: 80px;"></textarea>
 
                         </div>
                         <div class="form-group">
@@ -397,78 +418,62 @@
                         <p>For documentations Bootstrap Datepicker you can visit <a href="https://github.com/uxsolutions/bootstrap-datepicker" target="_blank">here.</a></p>
                     </div>
                 </div>
-                @*}*@
+                        }
 
 
-                @Html.HiddenFor(model => model.MyId)
-                <div>
-                    @Html.ActionLink("Back to List", "Index")
-                </div>
 
-            </div>
-        </div>
-        @*</div>*@
-    }
-</div>
-@section Scripts{
-    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
-    <!-- Select2 -->
-    <script src="/vendor/select2/dist/js/select2.min.js"></script>
-    <!-- Bootstrap Datepicker -->
-    <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-    <!-- Bootstrap bootstrap-checkbox -->
-    <script src="~/Scripts/bootstrap-checkbox.min.js"></script>
-    <!-- RuangAdmin Javascript -->
-    <script src="/js/ruang-admin.min.js"></script>
-    <script src="~/Scripts/chosen.jquery.js"></script>
-    <script>
-        $(document).ready(function () {
-
-            $('.select2-single').select2();
-
-            // Select2 Multiple
-            $('.select2-multiple').select2();
-
-            // Bootstrap Date Picker
-            $('#simple-date1 .input-group.date').datepicker({
-                format: 'yyyy-MM-dd',
-                todayBtn: 'linked',
-                todayHighlight: true,
-                autoclose: true,
-            });
-            $('#chkMenopause').checkboxpicker({
-                // OPTIONS
-                offLabel: '否',
-                onLabel: '是',
-                offActiveCls: 'btn-success',
-                onActiveCls: 'btn-warning',
-            });
-            $('input[type="checkbox"]').checkboxpicker({
-                //        // OPTIONS
-                offLabel: '陰性',
-                onLabel: '陽性',
-                offActiveCls: 'btn-success',
-                onActiveCls: 'btn-warning',
-            });
-
-            $('.chosen').chosen({
-                max_selected_options: 5
-            });
-            $(".chosen-deselect").chosen({
-                allow_single_deselect: true
-            });
-            $(".chosen").chosen().change();
-            $(".chosen").trigger('liszt:updated');
-
-
+                        <div>
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
            
+        </div>
+    </div>
+    </div>
+                        @section Scripts{
+                            @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+                                <script src="~/Scripts/jquery.validate.min.js"></script>
+                                <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+                            <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+                            <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+                            <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
+                            <!-- Select2 -->
+                            <script src="/vendor/select2/dist/js/select2.min.js"></script>
+                            <!-- Bootstrap Datepicker -->
+                            <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+                            <!-- Bootstrap bootstrap-checkbox -->
+                            <script src="~/Scripts/bootstrap-checkbox.min.js"></script>
+                            <!-- RuangAdmin Javascript -->
+                            <script src="/js/ruang-admin.min.js"></script>
+                            <script>
+                                $(document).ready(function () {
 
-        });
-    </script>
-}
+                                    $('.select2-single').select2();
 
+                                    // Select2 Multiple
+                                    $('.select2-multiple').select2();
+
+                                    // Bootstrap Date Picker
+                                    $('#simple-date1 .input-group.date').datepicker({
+                                        format: 'yyyy-MM-dd',
+                                        todayBtn: 'linked',
+                                        todayHighlight: true,
+                                        autoclose: true,
+                                    });
+                                    $('#chkMenopause').checkboxpicker({
+                                        // OPTIONS
+                                        offLabel: '否',
+                                        onLabel: '是',
+                                        offActiveCls: 'btn-success',
+                                        onActiveCls: 'btn-warning',
+                                    });
+                                    $('input[type="checkbox"]').checkboxpicker({
+                                        //        // OPTIONS
+                                        offLabel: '陰性',
+                                        onLabel: '陽性',
+                                        offActiveCls: 'btn-success',
+                                        onActiveCls: 'btn-warning',
+                                    });
+
+                                });
+                            </script>
+                        }

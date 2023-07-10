@@ -1,5 +1,4 @@
 ﻿
-
 @{
     ViewBag.Title = "MydataCreate";
     Layout = "~/Views/Shared/_LayoutPageRecord.cshtml";
@@ -233,7 +232,7 @@
                 </ul>*@
         </nav>
     </div>
-    <div class="container-fluid" id="container-wrapper">
+    <div class="container-fluid" id="container-wrapper" >
         <!--<div class="d-sm-flex align-items-center justify-content-between mb-4"style="background-color: #F3F6F4 ">-->
         @*<h1 class="h3 mb-0 text-gray-800">DataTables</h1>
             <ol class="breadcrumb">
@@ -325,9 +324,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group" id="selectOP">
+                        <div class="form-group">
                             <label for="selectOpType">手術型式</label>
-                            <select v-model="mydata.OperationType" class="form-control" name="selectOpType" multiple="multiple"
+                            <select v-model="mydata.OperationType" class="select2-multiple form-control" name="states[]" multiple="multiple"
                                     id="selectOpType">
                                 <option value="">請選擇</option>
                                 <option value="1">乳房保存手術</option>
@@ -340,7 +339,7 @@
                         </div>
                         <div class="form-group">
                             <label for="selectTreatPlan">療程計畫</label>
-                            <select v-model="mydata.TreatPlan" class="form-control" name="selectTreatPlan" multiple="multiple"
+                            <select v-model="mydata.TreatPlan" class="select2-multiple form-control" name="states[]" multiple="multiple"
                                     id="selectTreatPlan">
                                 <option value="">請選擇</option>
                                 <option value="1">化學治療</option>
@@ -359,203 +358,202 @@
                                 <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
                             </div>
                         </div>
-
-                    </div>
-
-                </div>
-                @Html.ActionLink("回列表", "Index")
+                        
             </div>
+                          @Html.ActionLink("回列表", "Index")
+            
+        </div>
+    </div>
+            </div>
+
+</div>
+
+
+
+@*</div>*@
+<!--Row-->
+@*@<div class="form-horizontal" style="background-color: #F3F6F4 ">
+    <div class="col-md-9 col-sm-7" id="app" style="background-color: #F3F6F4 ">
+        <h1>新增產品</h1>
+        <div class="content-form-page">
+            <div class="form-horizontal form-without-legend">
+                <input v-model="mydata.MyId" class="form-control" id="txtMyId" type="hidden" value="">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" for="canOpDate">手術日期</label>
+                    <div class="col-lg-8">
+                        <div class="panel-body">
+                            <input type="checkbox" style="display: none;">-->
+                            @*<div class="btn-group" tabindex="0">
+                                <a class="btn active btn-danger">No</a>
+                                <a class="btn btn-default">Yes</a></div>*@
+@*</div>
+                            <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="date" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">是否停經</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.Menopause" class="form-control" id="chkMenopause" type="checkbox" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">細胞類型</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.CellType" class="form-control" id="txtCellType" type="checkbox" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">ER</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.ER" class="form-control" id="txtER" type="checkbox" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">PR</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.PR" class="form-control" id="txtPR" type="checkbox" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">HER-2/neu基因表現</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.Her" class="form-control" id="txtHer" type="checkbox" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">手術型式</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.OperationType" class="form-control" id="txtOperationType" type="checkbox" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">療程計畫</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.TreatPlan" class="form-control" id="txtTreatPlan" type="checkbox" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">其他備註</label>
+                        <div class="col-lg-8">
+                            <input v-model="mydata.Note" class="form-control" id="txtNote" type="checkbox" value="">
+                        </div>
+                    </div>
+                    <input v-model="mydata.InputDate" class="form-control" id="canInputDate" type="hidden" value="">
+                    <input v-model="mydata.UserId" class="form-control" id="txtUserId" type="hidden" value="">
+
+
+                    <div class="row">
+                        <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                            <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-    </div>
 
 
 
-    @*</div>*@
-    <!--Row-->
-    @*@<div class="form-horizontal" style="background-color: #F3F6F4 ">
-        <div class="col-md-9 col-sm-7" id="app" style="background-color: #F3F6F4 ">
-            <h1>新增產品</h1>
-            <div class="content-form-page">
-                <div class="form-horizontal form-without-legend">
-                    <input v-model="mydata.MyId" class="form-control" id="txtMyId" type="hidden" value="">
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label" for="canOpDate">手術日期</label>
-                        <div class="col-lg-8">
-                            <div class="panel-body">
-                                <input type="checkbox" style="display: none;">-->
-                                @*<div class="btn-group" tabindex="0">
-                                    <a class="btn active btn-danger">No</a>
-                                    <a class="btn btn-default">Yes</a></div>*@
-    @*</div>
-                                <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="date" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
-                            <div class="col-lg-8">
-                                <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">是否停經</label>
-                            <div class="col-lg-8">
-                                <input v-model="mydata.Menopause" class="form-control" id="chkMenopause" type="checkbox" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">細胞類型</label>
-                            <div class="col-lg-8">
-                                <input v-model="mydata.CellType" class="form-control" id="txtCellType" type="checkbox" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">ER</label>
-                            <div class="col-lg-8">
-                                <input v-model="mydata.ER" class="form-control" id="txtER" type="checkbox" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">PR</label>
-                            <div class="col-lg-8">
-                                <input v-model="mydata.PR" class="form-control" id="txtPR" type="checkbox" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">HER-2/neu基因表現</label>
-                            <div class="col-lg-8">
-                                <input v-model="mydata.Her" class="form-control" id="txtHer" type="checkbox" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">手術型式</label>
-                            <div class="col-lg-8">
-                                <input v-model="mydata.OperationType" class="form-control" id="txtOperationType" type="checkbox" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">療程計畫</label>
-                            <div class="col-lg-8">
-                                <input v-model="mydata.TreatPlan" class="form-control" id="txtTreatPlan" type="checkbox" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">其他備註</label>
-                            <div class="col-lg-8">
-                                <input v-model="mydata.Note" class="form-control" id="txtNote" type="checkbox" value="">
-                            </div>
-                        </div>
-                        <input v-model="mydata.InputDate" class="form-control" id="canInputDate" type="hidden" value="">
-                        <input v-model="mydata.UserId" class="form-control" id="txtUserId" type="hidden" value="">
+        @Html.ActionLink("回列表", "Index")
+    </div>*@
+@section Scripts{
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
+    <!-- Select2 -->
+    <script src="/vendor/select2/dist/js/select2.min.js"></script>
+    <!-- Bootstrap Datepicker -->
+    <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <!-- Bootstrap bootstrap-checkbox -->
+    <script src="~/Scripts/bootstrap-checkbox.min.js"></script>
+    <!-- RuangAdmin Javascript -->
+    <script src="/js/ruang-admin.min.js"></script>
+    <script>
+        $(document).ready(function () {
 
+            $('.select2-single').select2();
 
-                        <div class="row">
-                            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
-                                <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            // Select2 Multiple
+            $('.select2-multiple').select2();
 
+            // Bootstrap Date Picker
+            $('#simple-date1 .input-group.date').datepicker({
+                format: 'yyyy-mm-dd',
+                todayBtn: 'linked',
+                todayHighlight: true,
+                autoclose: true,
+            });
+            $('#chkMenopause').checkboxpicker({
+                // OPTIONS
+                offLabel: '否',
+                onLabel: '是',
+                offActiveCls: 'btn-success',
+                onActiveCls: 'btn-warning',
 
-
-
-            @Html.ActionLink("回列表", "Index")
-        </div>*@
-    @section Scripts{
-        @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-            <script src="~/Scripts/jquery.validate.min.js"></script>
-            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
-        <!-- Select2 -->
-        <script src="/vendor/select2/dist/js/select2.min.js"></script>
-        <!-- Bootstrap Datepicker -->
-        <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-        <!-- Bootstrap bootstrap-checkbox -->
-        <script src="~/Scripts/bootstrap-checkbox.min.js"></script>
-        <!-- RuangAdmin Javascript -->
-        <script src="/js/ruang-admin.min.js"></script>
-        <script>
-            $(document).ready(function () {
-
-                $('.select2-single').select2();
-
-                // Select2 Multiple
-                $('.select2-multiple').select2();
-
-                // Bootstrap Date Picker
-                $('#simple-date1 .input-group.date').datepicker({
-                    format: 'yyyy-mm-dd',
-                    todayBtn: 'linked',
-                    todayHighlight: true,
-                    autoclose: true,
-                });
-                $('#chkMenopause').checkboxpicker({
-                    // OPTIONS
-                    offLabel: '否',
-                    onLabel: '是',
-                    offActiveCls: 'btn-success',
-                    onActiveCls: 'btn-warning',
-
-
-                });
-
-                $('input[type="checkbox"]').checkboxpicker({
-                    //        // OPTIONS
-                    offLabel: '陰性',
-                    onLabel: '陽性',
-                    offActiveCls: 'btn-success',
-                    onActiveCls: 'btn-warning',
-
-                });
 
             });
-            //$(function () {
-            //    $('#chkMenopause').checkboxpicker({
-            //        // OPTIONS
-            //        offLabel: '否',
-            //        onLabel: '是',
-            //        offActiveCls: 'btn-success',
-            //        onActiveCls: 'btn-warning',
-            //    });
-            //    $('input[type="checkbox"]').checkboxpicker({
-            //        //        // OPTIONS
-            //ViewBagodel   //        offLabel: '陰性',
-            //        onLabel: '陽性',
-            //        offActiveCls: 'btn-success',
-            //        onActiveCls: 'btn-warning',
-            //    });
-            //});
-        </script>
+
+            $('input[type="checkbox"]').checkboxpicker({
+                //        // OPTIONS
+                offLabel: '陰性',
+                onLabel: '陽性',
+                offActiveCls: 'btn-success',
+                onActiveCls: 'btn-warning',
+
+            });
+
+        });
+        //$(function () {
+        //    $('#chkMenopause').checkboxpicker({
+        //        // OPTIONS
+        //        offLabel: '否',
+        //        onLabel: '是',
+        //        offActiveCls: 'btn-success',
+        //        onActiveCls: 'btn-warning',
+        //    });
+        //    $('input[type="checkbox"]').checkboxpicker({
+        //        //        // OPTIONS
+        //ViewBagodel   //        offLabel: '陰性',
+        //        onLabel: '陽性',
+        //        offActiveCls: 'btn-success',
+        //        onActiveCls: 'btn-warning',
+        //    });
+        //});
+    </script>
 
 
-        @*<script>
-                $(function () {
-                    $('input[type="checkbox"]').checkboxpicker();
-                });
-            </script>*@
-        <script>
-            //$(function () {
-            //    $('input[type="checkbox"]').checkboxpicker({
-            //        // OPTIONS
-            //        offLabel: '取消',
-            //        onLabel: '確定',
-            //        offActiveCls: 'btn-warning',
-            //    });
-            //});
+    @*<script>
+            $(function () {
+                $('input[type="checkbox"]').checkboxpicker();
+            });
+        </script>*@
+    <script>
+        //$(function () {
+        //    $('input[type="checkbox"]').checkboxpicker({
+        //        // OPTIONS
+        //        offLabel: '取消',
+        //        onLabel: '確定',
+        //        offActiveCls: 'btn-warning',
+        //    });
+        //});
 
-        </script>
+    </script>
 
 
-        @* $('#mychk1').on('change', function () {
-                console.log($(this).is(":checked"));
-            });*@
+    @* $('#mychk1').on('change', function () {
+            console.log($(this).is(":checked"));
+        });*@
 
-        @*});*@
+    @*});*@
 <script>
         Vue.createApp({
             data() {
@@ -569,19 +567,17 @@
                         ER: "",
                         PR: "",
                         Her: "",
-                        OperationType:"",
+                        OperationType:[],
                         TreatPlan: "",
                         Note: "",
                         InputDate: "",
-                        UserId: ''
+                        UserId: '@ViewBag.userid',
                     }
                 };
             },
             methods: {
                 addData: function () {
                     var self = this;
-                   
-
                     /*self.Menopause = $("#chkMenopause")[0].checked;*/
                     if ($("#chkMenopause")[0].checked == true) {
                         self.Menopause = "是";
@@ -597,7 +593,7 @@
 
                     //self.Her = $("#select2-selectHer-container").text();
                     if ($("#select2-selectHer-container").text() == '請選擇')
-                        self.selectHer ="";
+                        self.Her = "";
                     else
                         self.Her = $("#select2-selectHer-container").text();
 
@@ -613,18 +609,28 @@
                     else
                         self.PR = "陰";
 
+                    self.OperationDate = $("#canOpDate")[0].value;
                     self.UserId=@ViewBag.userid;
 
-                    /*var Optypes = String.join(',', selectOpType);*/
-                    /*var Optypes = selectOpType.toString();*/
-                    
-                    var sOpType = $("select[name='selectOpType']").val();
-                    self.OperationType = sOpType.toString();
-                    
-                    var selectTreatPlan = $("select[name='selectTreatPlan']").val();
-                    self.TreatPlan = selectTreatPlan.toString();
+                   /* var myselects = [];*/
 
-                    self.OperationDate = $("#canOpDate")[0].value;
+                    //$('li').each(function () {
+                    //    var myselect = $('div[data-select2-id="10"] li.select2-selection__choice').attr('title');
+                    //    myselects.push(myselect);
+                    //});
+                    //alert(myselects);
+
+                    //var myselects = $('div[data-select2-id="10"] li.select2-selection__choice').map(function () {
+                    //    return $(this).attr('title');
+
+                    //}).get();
+
+                    //self.OperationType = myselects.join(',');
+
+                    /*self.OperationType = myselects;*/
+
+                    //self.TreatPlan = $("#selectTreatPlan").selected;
+
 
                     $.ajax({
                         type: 'POST',
@@ -643,9 +649,6 @@
         }).mount("#app");
 </script>
 
-    }
-
-
-
+}
 
 

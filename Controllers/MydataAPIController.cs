@@ -41,11 +41,15 @@ namespace IbreastCare.ViewModel
         // PUT: api/MydataAPI/5
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE: api/MydataAPI/5
         public void Delete(int id)
         {
+            Personal_Data personData = Db.Personal_Data.FirstOrDefault(p => p.MyId == id);
+            Db.Personal_Data.Remove(personData);
+            Db.SaveChanges();
         }
     }
 }

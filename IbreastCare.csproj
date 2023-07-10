@@ -3463,12 +3463,12 @@
     <Content Include="vendor\select2\src\scss\_dropdown.scss" />
     <Content Include="vendor\select2\src\scss\_multiple.scss" />
     <Content Include="vendor\select2\src\scss\_single.scss" />
-    <Content Include="Views\Mydata\MydataEdit.cshtml" />
+    <Content Include="Views\Mydata\MydataEdit2.cshtml" />
     <Content Include="Views\Record\Index.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\Mydata\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPageRecord.cshtml" />
-    <Content Include="Views\Mydata\MydataCreate_ok.cshtml" />
+    <Content Include="Views\Mydata\MydataCreate_OK2.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
@@ -3488,8 +3488,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Mydata\MydataCreate.cshtml" />
+    <Content Include="Views\Mydata\MydataCreate_跑版.cshtml" />
     <Content Include="Views\Mydata\Index_OK1.cshtml" />
+    <Content Include="Views\Mydata\MydataCreatenotok.cshtml" />
+    <Content Include="Views\Mydata\MydataCreate.cshtml" />
+    <Content Include="Views\Mydata\MydataEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

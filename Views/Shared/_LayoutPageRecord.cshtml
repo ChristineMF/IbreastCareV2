@@ -1,8 +1,18 @@
 ﻿<!DOCTYPE html>
-<title>@ViewBag.Title</title>
-<p>
-    @*@Html.ActionLink("Create New", "Create")*@
-</p>
+<@{
+    if (Session["RoleId"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+        return;
+    }
+    string Name = Session["NickName"].ToString();
+    ViewBag.MsgName = Name + "，你好";
+
+
+    //RueiEntities db = new RueiEntities();
+    //List<Workspace> workspace = db.Workspaces.ToList();
+}
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -34,11 +44,11 @@
         <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
         <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
         <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-        
+
         <link href="/img/logo/logo.png" rel="icon">
         <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        
+
         <link href="/css/ruang-admin.min.css" rel="stylesheet">
         <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">*@
     <!-- Vendor CSS Files -->
@@ -637,7 +647,7 @@
     </main>
 </body>
 
-    </html>
+</html>
 
 
 
@@ -717,4 +727,4 @@
             </script>
         }
     *@
-   
+
