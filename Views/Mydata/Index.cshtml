@@ -286,26 +286,26 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        <td> @item.MyId</td>
-                                        <td> @item.OperationDate</td>
-                                        <td>@item.Height</td>
-                                        <td> @item.Menopause</td>
-                                        <td>@item.CellType</td>
-                                        <td> @item.ER</td>
-                                        <td> @item.PR</td>
-                                        <td> @item.Her</td>
-                                        <td>  @item.OperationType</td>
-                                        <td>  @item.TreatPlan</td>
-                                        <td>  @item.Note</td>
-                                        <td>  @item.InputDate</td>
-                                        <td>
+                                <tr>
+                                    <td> @item.MyId</td>
+                                    <td> @item.OperationDate</td>
+                                    <td>@item.Height</td>
+                                    <td> @item.Menopause</td>
+                                    <td>@item.CellType</td>
+                                    <td> @item.ER</td>
+                                    <td> @item.PR</td>
+                                    <td> @item.Her</td>
+                                    <td>  @item.OperationType</td>
+                                    <td>  @item.TreatPlan</td>
+                                    <td>  @item.Note</td>
+                                    <td>  @item.InputDate</td>
+                                    <td>
 
-                                            @Html.ActionLink("編輯", "MydataEdit", new { id = item.MyId }) |
-                                            @Html.ActionLink("詳細", "MydataDetail", new { id = item.MyId }) |
-                                            @Html.ActionLink("刪除", "MydataDelete", new { id = item.MyId })
-                                        </td>
-                                    </tr>
+                                        @Html.ActionLink("編輯", "MydataEdit", new { id = item.MyId }) |
+                                        @Html.ActionLink("明細", "MydataDetails", new { id = item.MyId }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.MyId }, new { onclick = $"return confirm('delete[{"確定刪除這筆資料"}]')" })</td><!--有對話框確認-->
+                                   
+                                </tr>
                                 }
 
                             </tbody>

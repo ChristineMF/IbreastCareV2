@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using AutoMapper;
 using IbreastCare.Models;
 using IbreastCare.ViewModel;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace IbreastCare.Controllers
 {
@@ -80,7 +82,7 @@ namespace IbreastCare.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Personal_Data mydata = Db.Personal_Data.FirstOrDefault(m => m.MyId == id);
 
@@ -92,7 +94,7 @@ namespace IbreastCare.Controllers
 
             MydataViewModel editmodel = Common.MapTo<Personal_Data, MydataViewModel>(mydata);
 
-            //Her的DropdownList
+            //Her的DropdownList,取DB內的值顯示
             List<SelectListItem> HerList = new List<SelectListItem>();
             HerList.Add(new SelectListItem() { Text = "請選擇", Value = "" });
             HerList.Add(new SelectListItem() { Text = "陰性", Value = "陰性" });
@@ -101,7 +103,7 @@ namespace IbreastCare.Controllers
             HerList.Add(new SelectListItem() { Text = "陽性3+", Value = "陽性3+" });
             ViewBag.HerList = new SelectList(HerList, "Value", "Text", editmodel.Her);
 
-            //CellType的DropdownList
+            //CellType的DropdownList,取DB內的值顯示
             List<SelectListItem> CellTypeList = new List<SelectListItem>();
             CellTypeList.Add(new SelectListItem() { Text = "請選擇", Value = "" });
             CellTypeList.Add(new SelectListItem() { Text = "浸潤性腺管癌", Value = "浸潤性腺管癌" });
@@ -111,9 +113,9 @@ namespace IbreastCare.Controllers
             CellTypeList.Add(new SelectListItem() { Text = "其他", Value = "其他" });
             ViewBag.CellTypeList = new SelectList(CellTypeList, "Value", "Text", editmodel.CellType);
 
-
-             List<string> singleTreat= editmodel.TreatPlan.Split(',').ToList();
-            ViewBag.treats = singleTreat;
+            //待改在controller先將字串先切成list
+            // List<string> singleTreat= editmodel.TreatPlan.Split(',').ToList();
+            //ViewBag.treats = singleTreat;
             
             //SelectOpTypes
             //List<SelectListItem> myList = new List<SelectListItem>();
@@ -129,37 +131,58 @@ namespace IbreastCare.Controllers
             return View(editmodel);
 
         }
+
         [HttpPost]
-        public ActionResult MydataEdit(MydataViewModel mydataView)
+        //因為OperationType及TreatPlan接到的是陣列,所以要用string[]去接多選的值
+        public ActionResult MydataEdit(MydataViewModel mydataView ,string[] OperationType, string[] TreatPlan)
         {
-            //1.存資料庫  RegisterViewModel => Personal_Data
-            Personal_Data editmodel = Db.Personal_Data.FirstOrDefault(m => m.MyId == mydataView.MyId);
-
-            //2.取Personal_Data資料庫,Personal_Data => MydataViewModel
-           // MydataViewModel mydataList = Common.MapTo<Personal_Data, MydataViewModel>(editmodel);
-            //List<MydataViewModel> myList = new List<MydataViewModel>();
-            //myList.Add(mydataList);
-            //foreach (var item in myList)
-            //{
-            editmodel.OperationDate = mydataView.OperationDate;
-            editmodel.ER = mydataView.ER;
-            editmodel.PR = mydataView.PR;
-            editmodel.Menopause = mydataView.Menopause;
-            editmodel.Note = mydataView.Note;
-            editmodel.Her = mydataView.Her;
-            editmodel.Height = mydataView.Height;
-            editmodel.InputDate = DateTime.Now;
-            editmodel.OperationType = mydataView.OperationType;
-            editmodel.TreatPlan = mydataView.TreatPlan;
-
-            if (mydataView == null)//若id取回的資料為空，則秀錯誤畫面
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Mydata", new { id = editmodel.UserId }); 
-            }
-           
+                //1.存資料庫  RegisterViewModel => Personal_Data
+                Personal_Data editmodel = Db.Personal_Data.FirstOrDefault(m => m.MyId == mydataView.MyId);
 
-            Db.SaveChanges();
-            return RedirectToAction("Index", "Mydata", new { id = editmodel.UserId });
+                //2.取Personal_Data資料庫,Personal_Data => MydataViewModel
+                // MydataViewModel mydataList = Common.MapTo<Personal_Data, MydataViewModel>(editmodel);
+                //List<MydataViewModel> myList = new List<MydataViewModel>();
+                //myList.Add(mydataList);
+                //foreach (var item in myList)
+                //{
+                editmodel.OperationDate = mydataView.OperationDate;
+                if (mydataView.ER == "on")
+                    editmodel.ER = "陽";
+                else
+                    editmodel.ER = "陰";
+
+                if (mydataView.PR == "on")
+                    editmodel.PR = "陽";
+                else
+                    editmodel.PR = "陰";
+
+                if (mydataView.Menopause == "on")
+                    editmodel.Menopause = "是";
+                else
+                    editmodel.Menopause = "否";
+
+                editmodel.Note = mydataView.Note;
+                editmodel.Her = mydataView.Her;
+                editmodel.Height = mydataView.Height;
+                editmodel.InputDate = DateTime.Now;
+                editmodel.OperationType = String.Join(",", OperationType);
+                editmodel.TreatPlan = String.Join(",", TreatPlan);
+
+                if (mydataView == null)//若id取回的資料為空，則秀錯誤畫面
+                {
+                    return RedirectToAction("Index", "Mydata", new { id = editmodel.UserId });
+                }
+
+
+                Db.SaveChanges();
+                return RedirectToAction("Index", "Mydata", new { id = editmodel.UserId });
+            }
+            else
+            {
+                return View(mydataView);//失敗回到連結畫面
+            }
         }
         private IEnumerable<SelectListItem> AllOpTypes()
         {
@@ -175,12 +198,63 @@ namespace IbreastCare.Controllers
 
         }
 
+        public ActionResult MydataDetails(int? id)
+        {
+            if (id == null)//若id是空,則秀錯誤畫面
+            {
+                return HttpNotFound();
+            }
+            Personal_Data mydata = Db.Personal_Data.FirstOrDefault(p => p.MyId == id);
+            //var y = SLIST.Join(ScoreList, o => o.ID, p => p.StudentID,
+            //        (c, s) => new { c.ID, c.Classroom, c.Name, s.Class, s.score })
+
+            //MydataViewModel detailmodel = Common.MapTo<Personal_Data, MydataViewModel>(mydata);
+            //
+            var config = new MapperConfiguration(cfg =>
+              cfg.CreateMap<Personal_Data, MydataViewModel>()
+              .ForMember(x => x.OperationType, y => y.MapFrom(o => string.Join(",", o.MyOperations.Select(z=>z.OperationType.OpeTypeName.Trim()).ToArray())))
+              .ForMember(x => x.TreatPlan, y => y.MapFrom(o => string.Join(",", o.MyTreats.Select(z => z.TreatPlan.TreatName.Trim()).ToArray()))));
+            var mapper = config.CreateMapper();
 
 
-            
-                
+            //var configTreat = new MapperConfiguration(cfg =>
+            //  cfg.CreateMap<Personal_Data, MydataViewModel>().
+            //  ForMember(x => x.TreatPlan, y => y.MapFrom(o => string.Join(",", o.MyOperations.Select(z => z.OperationType.OpeTypeName.Trim()).ToArray()))));
+            //var mapper = config.CreateMapper();
+
+            //var 變數1=new MpperConfiguration(變數2=>變數2.CreateMap<主資料表(顯示)>
+            MydataViewModel model = mapper.Map<MydataViewModel>(mydata);
+
+            return View(model);
+
+        }
+        //用Details改成Delete
+        //public async Task<ActionResult> Delete(int? id)//回傳的一定會有值，則不加?，若可能會null，才加?
+        //{
+        //    if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+        //    var opera = await context.Operas.FindAsync(id);
+        //    if (opera == null) return HttpNotFound();//404
+
+        //    return View(opera);
+        //}
+        //[HttpPost]
+        //[ActionName("Delete")]
+        //public async Task<ActionResult> DeleteConfirmed(int? id)//有?，不可同名稱,但路徑要一樣，所以設actionName
+        //{
+        //    if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+        //    var opera = await context.Operas.FindAsync(id);//參數一定要叫id，才能在路由接/後面的資料，若叫其他名稱，則會抓不到
+        //    if (opera == null) return HttpNotFound();//404
+
+        //    context.Operas.Remove(opera);
+        //    await context.SaveChangesAsync();
+
+        //    return RedirectToAction("Index");
+        //}
+
+
+
     }
-           
+
 }
         //public ActionResult MydataDetails()
         //{

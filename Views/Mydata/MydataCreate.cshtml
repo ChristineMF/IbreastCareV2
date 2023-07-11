@@ -321,7 +321,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                 </div>
-                                <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="text">
+                                <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="date">
                             </div>
                         </div>
 
@@ -329,7 +329,7 @@
                             <label for="selectOpType">手術型式</label>
                             <select v-model="mydata.OperationType" class="form-control" name="selectOpType" multiple="multiple"
                                     id="selectOpType">
-                                <option value="">請選擇</option>
+                                @*<option value="">請選擇</option>*@
                                 <option value="1">乳房保存手術</option>
                                 <option value="2">單純性乳房全切除</option>
                                 <option value="3">改良式根除性乳房切除</option>
@@ -342,7 +342,7 @@
                             <label for="selectTreatPlan">療程計畫</label>
                             <select v-model="mydata.TreatPlan" class="form-control" name="selectTreatPlan" multiple="multiple"
                                     id="selectTreatPlan">
-                                <option value="">請選擇</option>
+                                @*<option value="">請選擇</option>*@
                                 <option value="1">化學治療</option>
                                 <option value="2">放射線治療</option>
                                 <option value="3">標靶治療</option>
@@ -351,7 +351,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea v-model="mydata.Note" cols="30" style="height: 80px;"></textarea>
+                            <textarea v-model="mydata.Note" cols="30" style="height: 80px;" id="textNote"></textarea>
 
                         </div>
                         <div class="row">
@@ -440,16 +440,7 @@
                                 <input v-model="mydata.TreatPlan" class="form-control" id="txtTreatPlan" type="checkbox" value="">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">其他備註</label>
-                            <div class="col-lg-8">
-                                <input v-model="mydata.Note" class="form-control" id="txtNote" type="checkbox" value="">
-                            </div>
-                        </div>
-                        <input v-model="mydata.InputDate" class="form-control" id="canInputDate" type="hidden" value="">
-                        <input v-model="mydata.UserId" class="form-control" id="txtUserId" type="hidden" value="">
-
-
+                        
                         <div class="row">
                             <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
                                 <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
@@ -487,13 +478,14 @@
                 // Select2 Multiple
                 $('.select2-multiple').select2();
 
+                //因為用datepicker會影響抓取的日期，變成空值
                 // Bootstrap Date Picker
-                $('#simple-date1 .input-group.date').datepicker({
-                    format: 'yyyy-mm-dd',
-                    todayBtn: 'linked',
-                    todayHighlight: true,
-                    autoclose: true,
-                });
+                //$('#simple-date1 .input-group.date').datepicker({
+                //    format: 'yyyy-mm-dd',
+                //    todayBtn: 'linked',
+                //    todayHighlight: true,
+                //    autoclose: true,
+                //});
                 $('#chkMenopause').checkboxpicker({
                     // OPTIONS
                     offLabel: '否',
@@ -580,8 +572,9 @@
             methods: {
                 addData: function () {
                     var self = this;
-                   
 
+                    self.Height = $("#txtHeight").val();
+                    self.Note = $("#textNote").val();
                     /*self.Menopause = $("#chkMenopause")[0].checked;*/
                     if ($("#chkMenopause")[0].checked == true) {
                         self.Menopause = "是";
@@ -617,12 +610,18 @@
 
                     /*var Optypes = String.join(',', selectOpType);*/
                     /*var Optypes = selectOpType.toString();*/
-                    
-                    var sOpType = $("select[name='selectOpType']").val();
-                    self.OperationType = sOpType.toString();
-                    
-                    var selectTreatPlan = $("select[name='selectTreatPlan']").val();
-                    self.TreatPlan = selectTreatPlan.toString();
+                 
+                    //var sOpType = $("select[name='selectOpType']").val();
+
+                    //self.OperationType = sOpType.toString();
+                    if ($("select[name='selectOpType']").text() != '請選擇')
+                        self.OperationType = $("select[name='selectOpType']").val().toString();
+
+                    if ($("select[name='selectOpType']").text() != '請選擇')
+                        self.TreatPlan = $("select[name='selectTreatPlan']").val().toString();
+
+                    //var selectTreatPlan = $("select[name='selectTreatPlan']").val();
+                    //self.TreatPlan = selectTreatPlan.toString();
 
                     self.OperationDate = $("#canOpDate")[0].value;
 
@@ -633,7 +632,7 @@
                         dataType: 'json',
                         contentType: "application/json",
                         success: function (data) {
-                            alert("OK");
+                            alert("資料新增成功");
                             self.mydata = data;//將值存入DB
                             location.href="/Mydata/Index"
                     }

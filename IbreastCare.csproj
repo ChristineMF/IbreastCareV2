@@ -3493,6 +3493,9 @@
     <Content Include="Views\Mydata\MydataCreatenotok.cshtml" />
     <Content Include="Views\Mydata\MydataCreate.cshtml" />
     <Content Include="Views\Mydata\MydataEdit.cshtml" />
+    <Content Include="Views\Mydata\MydataDetails.cshtml" />
+    <Content Include="Views\Mydata\GetMydata.cshtml" />
+    <Content Include="Views\Shared\_MydataDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
