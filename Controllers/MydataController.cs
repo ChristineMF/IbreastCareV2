@@ -116,7 +116,7 @@ namespace IbreastCare.Controllers
             //待改在controller先將字串先切成list
             // List<string> singleTreat= editmodel.TreatPlan.Split(',').ToList();
             //ViewBag.treats = singleTreat;
-            
+
             //SelectOpTypes
             //List<SelectListItem> myList = new List<SelectListItem>();
             //foreach (var item in Db.OperationTypes)
@@ -126,42 +126,35 @@ namespace IbreastCare.Controllers
             //}
             //ViewBag.list = myList;
 
-
-
             return View(editmodel);
 
         }
 
         [HttpPost]
         //因為OperationType及TreatPlan接到的是陣列,所以要用string[]去接多選的值
-        public ActionResult MydataEdit(MydataViewModel mydataView ,string[] OperationType, string[] TreatPlan)
+        public ActionResult MydataEdit(MydataViewModel mydataView, string[] OperationType, string[] TreatPlan)
         {
             if (ModelState.IsValid)
             {
-                //1.存資料庫  RegisterViewModel => Personal_Data
+                //1.從資料庫取得 Personal_Data
                 Personal_Data editmodel = Db.Personal_Data.FirstOrDefault(m => m.MyId == mydataView.MyId);
-
+                if (mydataView == null)//若id取回的資料為空，則秀錯誤畫面
+                {
+                    return RedirectToAction("Index", "Mydata", new { id = editmodel.UserId });
+                }
                 //2.取Personal_Data資料庫,Personal_Data => MydataViewModel
                 // MydataViewModel mydataList = Common.MapTo<Personal_Data, MydataViewModel>(editmodel);
                 //List<MydataViewModel> myList = new List<MydataViewModel>();
                 //myList.Add(mydataList);
                 //foreach (var item in myList)
                 //{
+
+                //2. 更新 Personal_Data 的屬性值
                 editmodel.OperationDate = mydataView.OperationDate;
-                if (mydataView.ER == "on")
-                    editmodel.ER = "陽";
-                else
-                    editmodel.ER = "陰";
 
-                if (mydataView.PR == "on")
-                    editmodel.PR = "陽";
-                else
-                    editmodel.PR = "陰";
-
-                if (mydataView.Menopause == "on")
-                    editmodel.Menopause = "是";
-                else
-                    editmodel.Menopause = "否";
+                editmodel.ER = mydataView.ER == "on" ? "陽" : "陰";
+                editmodel.PR = mydataView.PR == "on" ? "陽" : "陰";
+                editmodel.Menopause = mydataView.Menopause == "on" ? "是" : "否";
 
                 editmodel.Note = mydataView.Note;
                 editmodel.Her = mydataView.Her;
@@ -170,20 +163,64 @@ namespace IbreastCare.Controllers
                 editmodel.OperationType = String.Join(",", OperationType);
                 editmodel.TreatPlan = String.Join(",", TreatPlan);
 
-                if (mydataView == null)//若id取回的資料為空，則秀錯誤畫面
+                //3. 更新或新增 MyOperation 資料
+                List<MyOperation> myop = Db.MyOperations.Where(p => p.MyId == mydataView.MyId).ToList();
+                foreach (var item in myop)
                 {
-                    return RedirectToAction("Index", "Mydata", new { id = editmodel.UserId });
+                    Db.MyOperations.Remove(item);
                 }
+                List<string> Optypes = OperationType.ToList();
+                foreach (var item in Optypes)
+                {
 
+                    if (item != "")
+                    {
+                        var optypeid = new MyOperation
+                        {
 
+                            MyId = mydataView.MyId,
+                            OpeTypeId = Convert.ToInt32(item)
+                        };
+                        Db.MyOperations.Add(optypeid);
+                    }
+
+                }
+                List<MyTreat> mytreat = Db.MyTreats.Where(p => p.MyId == mydataView.MyId).ToList();
+                foreach (var item in mytreat)
+                {
+                    Db.MyTreats.Remove(item);
+                }
+                List<string> Treats = TreatPlan.ToList();
+                foreach (var item in Treats)
+                {
+
+                    if (item != "")
+                    {
+                        var treatid = new MyTreat
+                        {
+
+                            MyId = mydataView.MyId,
+                            TreatId = Convert.ToInt32(item)
+                        };
+                        Db.MyTreats.Add(treatid);
+                    }
+                }
                 Db.SaveChanges();
-                return RedirectToAction("Index", "Mydata", new { id = editmodel.UserId });
+
+                //4. 儲存變更並重新導向
+                // Db.SaveChanges();
+                return RedirectToAction("Index", "Mydata", new { id = mydataView.UserId });
+
             }
             else
-            {
                 return View(mydataView);//失敗回到連結畫面
-            }
         }
+        
+        ////myop = mydataView.OperationType;
+        //List<MydataViewModel> model = Common.MapToList<MyOperation, MydataViewModel>(myop);
+
+
+
         private IEnumerable<SelectListItem> AllOpTypes()
         {
             //集合產生各種清單元素
@@ -212,10 +249,15 @@ namespace IbreastCare.Controllers
             //
             var config = new MapperConfiguration(cfg =>
               cfg.CreateMap<Personal_Data, MydataViewModel>()
-              .ForMember(x => x.OperationType, y => y.MapFrom(o => string.Join(",", o.MyOperations.Select(z=>z.OperationType.OpeTypeName.Trim()).ToArray())))
+              .ForMember(x => x.OperationType, y => y.MapFrom(o => string.Join(",", o.MyOperations.Select(z => z.OperationType.OpeTypeName.Trim()).ToArray())))
               .ForMember(x => x.TreatPlan, y => y.MapFrom(o => string.Join(",", o.MyTreats.Select(z => z.TreatPlan.TreatName.Trim()).ToArray()))));
             var mapper = config.CreateMapper();
 
+            //var config2 = new MapperConfiguration(cfg =>
+            //cfg.CreateMap<MyOperation, MydataViewModel>()
+            //.ForMember(x => x.MyId, y => y.MapFrom(o => o.OperationType.OpeTypeName.Trim())));
+            //  .ForMember(x => x.TreatPlan, y => y.MapFrom(o => string.Join(",", o.MyTreats.Select(z => z.TreatPlan.TreatName.Trim()).ToArray()))));
+            //var mapper2= config2.CreateMapper();
 
             //var configTreat = new MapperConfiguration(cfg =>
             //  cfg.CreateMap<Personal_Data, MydataViewModel>().
@@ -228,67 +270,107 @@ namespace IbreastCare.Controllers
             return View(model);
 
         }
-        //用Details改成Delete
-        //public async Task<ActionResult> Delete(int? id)//回傳的一定會有值，則不加?，若可能會null，才加?
-        //{
-        //    if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-        //    var opera = await context.Operas.FindAsync(id);
-        //    if (opera == null) return HttpNotFound();//404
+        
+        public ActionResult MydataDelete(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
-        //    return View(opera);
-        //}
-        //[HttpPost]
-        //[ActionName("Delete")]
-        //public async Task<ActionResult> DeleteConfirmed(int? id)//有?，不可同名稱,但路徑要一樣，所以設actionName
-        //{
-        //    if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-        //    var opera = await context.Operas.FindAsync(id);//參數一定要叫id，才能在路由接/後面的資料，若叫其他名稱，則會抓不到
-        //    if (opera == null) return HttpNotFound();//404
+            Personal_Data mydata = Db.Personal_Data.FirstOrDefault(p => p.MyId == id);
 
-        //    context.Operas.Remove(opera);
-        //    await context.SaveChangesAsync();
+            if (mydata == null) return HttpNotFound();//404
+            var config = new MapperConfiguration(cfg =>
+              cfg.CreateMap<Personal_Data, MydataViewModel>()
+              .ForMember(x => x.OperationType, y => y.MapFrom(o => string.Join(",", o.MyOperations.Select(z => z.OperationType.OpeTypeName.Trim()).ToArray())))
+              .ForMember(x => x.TreatPlan, y => y.MapFrom(o => string.Join(",", o.MyTreats.Select(z => z.TreatPlan.TreatName.Trim()).ToArray()))));
+            var mapper = config.CreateMapper();
 
-        //    return RedirectToAction("Index");
-        //}
+            MydataViewModel model = mapper.Map<MydataViewModel>(mydata);
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("MydataDelete")]
+        public ActionResult MydataDeleteConfirm(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            Personal_Data mydata = Db.Personal_Data.FirstOrDefault(p => p.MyId == id);
+            if (mydata == null) return HttpNotFound();//404
+            Db.Personal_Data.Remove(mydata);
+            List<MyOperation> myop = Db.MyOperations.Where(p => p.MyId == id).ToList();
+            foreach (var item in myop)
+            {
+                Db.MyOperations.Remove(item);
+            }
 
+            List<MyTreat> mytreat = Db.MyTreats.Where(p => p.MyId == id).ToList();
+            foreach (var item in mytreat)
+            {
+                Db.MyTreats.Remove(item);
+            }
 
-
+            Db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        }
     }
 
-}
-        //public ActionResult MydataDetails()
-        //{
-        //    CarVm carVm = new CarVm();
-        //    carVm.SelectedCars = new string[] { "1", "2" };
-        //    carVm.AllCars = GetAllCars();
-        //    return View(carVm);
-        //}
-        //[HttpPost]
-        //public ActionResult MydataDetails(CarVm carVm)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        return View(carVm);
-        //    }
-        //    return RedirectToAction("Index", carVm);
-        //}
-        //private IEnumerable<SelectListItem> GetAllCars()
-        //{
-        //    List<SelectListItem> allCars = new List<SelectListItem>();
-        //    allCars.Add(new SelectListItem() { Value = "1", Text = "奔驰" });
-        //    allCars.Add(new SelectListItem() { Value = "2", Text = "宝马" });
-        //    allCars.Add(new SelectListItem() { Value = "3", Text = "奇瑞" });
-        //    allCars.Add(new SelectListItem() { Value = "4", Text = "比亚迪" });
-        //    allCars.Add(new SelectListItem() { Value = "5", Text = "起亚" });
-        //    allCars.Add(new SelectListItem() { Value = "6", Text = "大众" });
-        //    allCars.Add(new SelectListItem() { Value = "7", Text = "斯柯达" });
-        //    allCars.Add(new SelectListItem() { Value = "8", Text = "丰田" });
-        //    allCars.Add(new SelectListItem() { Value = "9", Text = "本田" });
+    //用Details改成Delete
+    //public async Task<ActionResult> Delete(int? id)//回傳的一定會有值，則不加?，若可能會null，才加?
+    //{
+    //    if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+    //    var opera = await context.Operas.FindAsync(id);
+    //    if (opera == null) return HttpNotFound();//404
 
-        //    return allCars.AsEnumerable();
-   
-    
-        
-    
+//    return View(opera);
+//}
+//[HttpPost]
+//[ActionName("Delete")]
+//public async Task<ActionResult> DeleteConfirmed(int? id)//有?，不可同名稱,但路徑要一樣，所以設actionName
+//{
+//    if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+//    var opera = await context.Operas.FindAsync(id);//參數一定要叫id，才能在路由接/後面的資料，若叫其他名稱，則會抓不到
+//    if (opera == null) return HttpNotFound();//404
 
-        
+//    context.Operas.Remove(opera);
+//    await context.SaveChangesAsync();
+
+//    return RedirectToAction("Index");
+//}
+
+
+
+//public ActionResult MydataDetails()
+//{
+//    CarVm carVm = new CarVm();
+//    carVm.SelectedCars = new string[] { "1", "2" };
+//    carVm.AllCars = GetAllCars();
+//    return View(carVm);
+//}
+//[HttpPost]
+//public ActionResult MydataDetails(CarVm carVm)
+//{
+//    if (ModelState.IsValid)
+//    {
+//        return View(carVm);
+//    }
+//    return RedirectToAction("Index", carVm);
+//}
+//private IEnumerable<SelectListItem> GetAllCars()
+//{
+//    List<SelectListItem> allCars = new List<SelectListItem>();
+//    allCars.Add(new SelectListItem() { Value = "1", Text = "奔驰" });
+//    allCars.Add(new SelectListItem() { Value = "2", Text = "宝马" });
+//    allCars.Add(new SelectListItem() { Value = "3", Text = "奇瑞" });
+//    allCars.Add(new SelectListItem() { Value = "4", Text = "比亚迪" });
+//    allCars.Add(new SelectListItem() { Value = "5", Text = "起亚" });
+//    allCars.Add(new SelectListItem() { Value = "6", Text = "大众" });
+//    allCars.Add(new SelectListItem() { Value = "7", Text = "斯柯达" });
+//    allCars.Add(new SelectListItem() { Value = "8", Text = "丰田" });
+//    allCars.Add(new SelectListItem() { Value = "9", Text = "本田" });
+
+//    return allCars.AsEnumerable();
+
+
+
+
+
+

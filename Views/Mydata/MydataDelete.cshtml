@@ -1,40 +1,42 @@
-﻿@model IEnumerable<IbreastCare.ViewModel.MydataViewModel>
+﻿@model IbreastCare.ViewModel.MydataViewModel
+@*@model IbreastCare.DAL.Personal_Data*@
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "MydataDetails";
     Layout = "~/Views/Shared/_LayoutPageRecord.cshtml";
-
 }
-
-
+@*@Html.Partial("_MydataDetail",Model)*@
 @section Styles{
-
-    <link href="/img/logo/logo.png" rel="icon">
-    @*<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">*@
-    @*<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">*@
+    @*<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">*@
     <!--非共用Vendor -->
     <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
     <!-- RuangAdmin CSS -->
     <link href="/css/ruang-admin.min.css" rel="stylesheet">
-    <!-- datatables CSS -->
-    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-}
+    <!-- Select2 -->
+    <!--<link href="/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">-->
+    <!-- Bootstrap DatePicker -->
+    <link href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="~/Content/chosen.css" rel="stylesheet" />
 
-            <!-- Sidebar -->
+}
+<!-- TopBar -->
 <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Topbar -->
+    <!-- Container Fluid-->
+    <!--SiteMap-->
     <div id="content">
-        <!-- TopBar -->
-        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" style="background-color: #F3F6F4 ">
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" style="background-color: #F3F6F4">
             <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
                 <i class="fa fa-bars"></i>
             </button>
-            <h1 class="h3 mb-0 text-gray-800">我的資料一覽表</h1>
+            <h1 class="h3 mb-0 text-gray-800">我的</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="./">Home</a></li>
                 <li class="breadcrumb-item">Tables</li>
@@ -230,253 +232,111 @@
                 </ul>*@
         </nav>
     </div>
-    <!-- Topbar -->
-    <!-- Container Fluid-->
-    <!--SiteMap-->
-    <!-- Container Fluid-->
+    <div>
     <div class="container-fluid" id="container-wrapper">
-        <!--<div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">DataTables</h1>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="./">Home</a>
-                <li class="breadcrumb-item">Tables</li>
-                <li class="breadcrumb-item active" aria-current="page">DataTables</li>
-            </ol>
-        </div>-->
-        
-
-        <!-- Row -->
         <div class="row">
-            <!-- Datatables -->
-            <!-- DataTable with Hover -->
-            <div class="col-lg-12">
+            <!--內容開始-->
+            <div class="col-lg-6">
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">@Html.ActionLink("Create New", "MydataCreate")</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
                     </div>
-                    <div class="table-responsive p-3">
-                        <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>@Html.DisplayNameFor(model => model.MyId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.OperationDate)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Height)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Menopause)</th>
-                                    <th>@Html.DisplayNameFor(model => model.CellType)</th>
-                                    <th> @Html.DisplayNameFor(model => model.ER)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PR)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Her)</th>
-                                    <th>@Html.DisplayNameFor(model => model.OperationType)</th>
-                                    <th>@Html.DisplayNameFor(model => model.TreatPlan)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Note)</th>
-                                    <th>@Html.DisplayNameFor(model => model.InputDate)</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            @*<tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot>*@
-                            <tbody>
-                                @foreach (var item in Model)
+                    <div class="card-body">
+                        <p>Select2 is a jQuery based replacement for select boxes</p>
+
+
+                        @Html.AntiForgeryToken()
+
+                        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                       
+                        <div>
+                            <ul>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.OperationDate) :
+                                    @Html.DisplayFor(model => model.OperationDate)
+                                </li>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Height) :
+                                    @Html.DisplayFor(model => model.Height)
+                                </li>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Menopause):
+                                    @Html.DisplayFor(model => model.Menopause)
+                                </li>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.CellType):
+                                    @Html.DisplayFor(model => model.CellType)
+                                </li>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.ER):
+                                    @Html.DisplayFor(model => model.ER)
+                                </li>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.PR):
+                                    @Html.DisplayFor(model => model.PR)
+                                </li>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Her):
+                                    @Html.DisplayFor(model => model.Her)
+                                </li>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.OperationType):
+                                    @Html.DisplayFor(model => model.OperationType)
+                                </li>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.TreatPlan):
+                                    @Html.DisplayFor(model => model.TreatPlan)
+                                </li>
+                                <li>
+                                    @Html.DisplayNameFor(model => model.Note):
+                                    @Html.DisplayFor(model => model.Note)
+                                </li>
+                                
+                                <li>
+                                    @Html.DisplayNameFor(model => model.InputDate):
+                                    @Html.DisplayFor(model => model.InputDate)
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p>
+                                @using (Html.BeginForm())
                                 {
-                                <tr>
-                                    <td> @item.MyId</td>
-                                    <td> @item.OperationDate</td>
-                                    <td>@item.Height</td>
-                                    <td> @item.Menopause</td>
-                                    <td>@item.CellType</td>
-                                    <td> @item.ER</td>
-                                    <td> @item.PR</td>
-                                    <td> @item.Her</td>
-                                    <td>  @item.OperationType</td>
-                                    <td>  @item.TreatPlan</td>
-                                    <td>  @item.Note</td>
-                                    <td>  @item.InputDate</td>
-                                    <td>
-
-                                        @Html.ActionLink("編輯", "MydataEdit", new { id = item.MyId }) |
-                                        @Html.ActionLink("明細", "MydataDetails", new { id = item.MyId }) |
-                                        @Html.ActionLink("Delete", "MydataDelete", new { id = item.MyId }, new { onclick = $"return confirm('delete[{"確定刪除這筆資料"}]')" })</td><!--有對話框確認-->
-                                   
-                                </tr>
+                                    <input type="submit" value="確定刪除" />
                                 }
+                                <!--協助產生超連結-->
+                                <!--ActionLink("超連結顯示的文字","連結的View")-->
+                               
 
-                            </tbody>
-                        </table>
+                                @Html.HiddenFor(model => model.MyId)
+                                @Html.HiddenFor(model => model.UserId)
+                                @Html.ActionLink("編輯", "MydataEdit", new { id = Model.MyId }) |
+                                @Html.ActionLink("回列表", "Index")
+                            </p>
+                        </div>
+                        <p>For documentations Bootstrap Datepicker you can visit <a href="https://github.com/uxsolutions/bootstrap-datepicker" target="_blank">here.</a></p>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--Row-->
-        <!-- Documentation Link -->
-        <div class="row">
-            <div class="col-lg-12">
-                <p>
-                    DataTables is a third party plugin that is used to generate the demo table below. For more information
-                    about DataTables, please visit the official <a href="https://datatables.net/" target="_blank">
-                        DataTables
-                        documentation.
-                    </a>
-                </p>
+
+
+
+               
+              
             </div>
         </div>
-
-        <!-- Modal Logout -->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to logout?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                        <a href="login.html" class="btn btn-primary">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
-    <!---Container Fluid-->
 </div>
-
-                
-            
-
-        <!-- Scroll to top -->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-
-        @section Scripts{
-            <script src="/js/ruang-admin.min.js"></script>
-            <!-- Page level plugins -->
-            <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-            <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-
-            <!-- Page level custom scripts -->
-            <script>
-                $(document).ready(function () {
-                    //$('#dataTable').DataTable(); // ID From dataTable
-                    $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-                });
-            </script>
-            <!--<script>-->
-            @*$(document).ready(function () {
-                    var path = window.location.pathname;
-                    $('#path').text(path);
-                });*@
-            <!--$(document).ready(function() {
-                      var path=window.location.pathname;
-                      var name='' ;
-                      if (path==='/' ) {
-                      name='首頁' ;
-                      } else if (path.match(/\/Mydata\/(.*)/)) {
-                      name='我的' ;
-                      } else if (path.match( /\/MydataCreate\/(.*)/)) {
-                      name='新增資料' ;
-                      } else {
-                      name='其他頁面' ;
-                      }
-                      $('#path').text(name);
-                      } );
-
-
-
-            </script>-->
-        }
- 
-
-
-
-
-
-@*<!-- End Breadcrumbs -->
-    <div class="col-lg-12">
-        <div class="card mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables with Hover</h6>
-            </div>
-            <div class="table-responsive p-3">
-                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>@Html.DisplayNameFor(model => model.UserId)</th>
-                            <th>@Html.DisplayNameFor(model => model.RealName)</th>
-                            <th>@Html.DisplayNameFor(model => model.NickName)</th>
-                            <th>@Html.DisplayNameFor(model => model.UserName)</th>
-                            <th>@Html.DisplayNameFor(model => model.CellPhone)</th>
-                            <th>@Html.DisplayNameFor(model => model.Email)</th>
-                            <th>@Html.DisplayNameFor(model => model.age)</th>
-                            <th>@Html.DisplayNameFor(model => model.InputDate)</th>
-                        </tr>
-                    </thead>
-                    @*<tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                        </tfoot>*@
-@**<tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.UserId</td>
-                                <td>@item.RealName</td>
-                                <td> @item.NickName</td>
-                                <td>@item.UserName</td>
-                                <td> @item.CellPhone</td>
-                                <td> @item.Email</td>
-                                <td> @item.age</td>
-                                <td>  @item.InputDate</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    </main>
     @section Scripts{
+        @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+            <script src="~/Scripts/jquery.validate.min.js"></script>
+            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
+        
+        <script src="/js/ruang-admin.min.js"></script>
+        }
 
-        <script src="~/assets/vendor/jquery/jquery.min.js"></script>
 
-        <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <script src="~/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-        <script src="~/assets/js/ruang-admin.min.js"></script>
-        <!-- Page level plugins -->
-
-        <script src="~/assets/vendor/datatables/jquery.dataTables.js"></script>
-
-        <script src="~/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-        <script>
-            $(document).ready(function () {
-
-                $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-            });
-        </script>
-    }
-*@

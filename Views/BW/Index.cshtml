@@ -1,11 +1,8 @@
-﻿@model IEnumerable<IbreastCare.ViewModel.MydataViewModel>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPageRecord.cshtml";
 
 }
-
 
 @section Styles{
 
@@ -24,9 +21,11 @@
     <link href="/css/ruang-admin.min.css" rel="stylesheet">
     <!-- datatables CSS -->
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Bootstrap DatePicker -->
+    <link href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 }
 
-            <!-- Sidebar -->
+<!-- Sidebar -->
 <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
         <!-- TopBar -->
@@ -34,7 +33,7 @@
             <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
                 <i class="fa fa-bars"></i>
             </button>
-            <h1 class="h3 mb-0 text-gray-800">我的資料一覽表</h1>
+            <h1 class="h3 mb-0 text-gray-800">我的體重</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="./">Home</a></li>
                 <li class="breadcrumb-item">Tables</li>
@@ -243,75 +242,100 @@
                 <li class="breadcrumb-item active" aria-current="page">DataTables</li>
             </ol>
         </div>-->
-        
-
         <!-- Row -->
-        <div class="row">
+        <div class="row" id="app">
             <!-- Datatables -->
             <!-- DataTable with Hover -->
-            <div class="col-lg-12">
+            <div class="col-lg-6">
+                <!-- Select2 -->
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">@Html.ActionLink("Create New", "MydataCreate")</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
                     </div>
-                    <div class="table-responsive p-3">
-                        <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>@Html.DisplayNameFor(model => model.MyId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.OperationDate)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Height)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Menopause)</th>
-                                    <th>@Html.DisplayNameFor(model => model.CellType)</th>
-                                    <th> @Html.DisplayNameFor(model => model.ER)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PR)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Her)</th>
-                                    <th>@Html.DisplayNameFor(model => model.OperationType)</th>
-                                    <th>@Html.DisplayNameFor(model => model.TreatPlan)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Note)</th>
-                                    <th>@Html.DisplayNameFor(model => model.InputDate)</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            @*<tfoot>
+                    <div class="card-body">
+                        <p>Select2 is a jQuery based replacement for select boxes</p>
+                        <input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getdata()" />
+                        <a href="/BW/AddBW" class="btn">新增體重</a>
+                        <div class="table-responsive p-3">
+                            <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                                <thead class="thead-light">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>體重</th>
+                                        <th>BMI</th>
+                                        <th>測量日期</th>
+                                        <th>輸入日期</th>
+                                        <th></th>
                                     </tr>
-                                </tfoot>*@
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                <tr>
-                                    <td> @item.MyId</td>
-                                    <td> @item.OperationDate</td>
-                                    <td>@item.Height</td>
-                                    <td> @item.Menopause</td>
-                                    <td>@item.CellType</td>
-                                    <td> @item.ER</td>
-                                    <td> @item.PR</td>
-                                    <td> @item.Her</td>
-                                    <td>  @item.OperationType</td>
-                                    <td>  @item.TreatPlan</td>
-                                    <td>  @item.Note</td>
-                                    <td>  @item.InputDate</td>
-                                    <td>
+                                </thead>
+                                @*<tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>*@
+                                <tbody>
 
-                                        @Html.ActionLink("編輯", "MydataEdit", new { id = item.MyId }) |
-                                        @Html.ActionLink("明細", "MydataDetails", new { id = item.MyId }) |
-                                        @Html.ActionLink("Delete", "MydataDelete", new { id = item.MyId }, new { onclick = $"return confirm('delete[{"確定刪除這筆資料"}]')" })</td><!--有對話框確認-->
+                                    <tr v-for="item in BW">
+                                        <td> {{item.BW1}}</td>
+                                        <td> {{item.BMI}}</td>
+                                        <td>{{item.MeasureDate}}</td>
+                                        <td> {{item.InputDate}}</td>
+
+                                        <td>
+                                            <a herf="/api/BWEdit/{{item.MyId}}">編輯</a>
+                                            <a herf="/api/BWDelete/{{item.MyId}}">刪除</a>
+                                        </td><!--有對話框確認-->
+                                    </tr>
                                    
-                                </tr>
-                                }
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+
+                       
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">治療</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>記錄我的治療方式</p>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
+                            <div class="col-lg-8">
+                                <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
+                            </div>
+                        </div>
+                        <div class="form-group" id="simple-date1">
+                            <label for="canOpDate">測量日期</label>
+                            <div class="input-group date">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                <input v-model="mydata.OperationDate" class="form-control" id="canOpDate" type="date">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                                <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                @Html.ActionLink("回列表", "Index")
             </div>
         </div>
         <!--Row-->
@@ -354,56 +378,74 @@
     <!---Container Fluid-->
 </div>
 
-                
-            
-
-        <!-- Scroll to top -->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-
-        @section Scripts{
-            <script src="/js/ruang-admin.min.js"></script>
-            <!-- Page level plugins -->
-            <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-            <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-
-            <!-- Page level custom scripts -->
-            <script>
-                $(document).ready(function () {
-                    //$('#dataTable').DataTable(); // ID From dataTable
-                    $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-                });
-            </script>
-            <!--<script>-->
-            @*$(document).ready(function () {
-                    var path = window.location.pathname;
-                    $('#path').text(path);
-                });*@
-            <!--$(document).ready(function() {
-                      var path=window.location.pathname;
-                      var name='' ;
-                      if (path==='/' ) {
-                      name='首頁' ;
-                      } else if (path.match(/\/Mydata\/(.*)/)) {
-                      name='我的' ;
-                      } else if (path.match( /\/MydataCreate\/(.*)/)) {
-                      name='新增資料' ;
-                      } else {
-                      name='其他頁面' ;
-                      }
-                      $('#path').text(name);
-                      } );
 
 
 
-            </script>-->
-        }
- 
+<!-- Scroll to top -->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
 
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
+    <script src="/js/ruang-admin.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Bootstrap Datepicker -->
+    <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script>
+        $(document).ready(function () {
+            //$('#dataTable').DataTable(); // ID From dataTable
+            $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+        });
+    </script>
+    @*<script>
+        Vue.createApp({
+            data() {
+                return {
+                    myBW: {
+                        BWId: '',
+                        BW1: "",
+                        BMI: "",
+                        InpuDate:"",
+                        MyId: "",
+                        MeasureDate: "",
+                    }
+                };
+            },
+            methods: {
+                getData: function () {
+                    var self = this;
+
+                    self.Height = $("#txtHeight").val();
+                   
+
+                    self.MeasureDate = $("#canOpDate")[0].value;
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/BWAPI',
+                        data: JSON.stringify(self),
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data) {
+                            alert("資料新增成功");
+                            self.mydata = data;//將值存入DB
+                            location.href="/BW/Index"
+                    }
+                    })
+                },
+            },
+        }).mount("#app");
+    </script>*@
+    
+}
 
 
 

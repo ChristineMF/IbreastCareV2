@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\學習\微軟轉職培訓\恆毅轉職訓練班\專題\IbreastCareV2\DAL\IbreastCareDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\MF\專題\IbreastCare_git\IbreastCare\DAL\IbreastCareDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

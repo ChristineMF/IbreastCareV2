@@ -34,5 +34,6 @@ namespace IbreastCare.DAL
         public virtual DbSet<RolePermission> RolePermissions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<TreatPlan> TreatPlans { get; set; }
+        public virtual DbSet<BW> BWs { get; set; }
     }
 }

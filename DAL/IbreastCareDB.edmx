@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="IbreastDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BW">
+          <Key>
+            <PropertyRef Name="BWId" />
+          </Key>
+          <Property Name="BWId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BW" Type="float" />
+          <Property Name="BMI" Type="float" />
+          <Property Name="InputDate" Type="datetime" Nullable="false" />
+          <Property Name="MyId" Type="int" Nullable="false" />
+          <Property Name="MeasureDate" Type="date" />
+        </EntityType>
         <EntityType Name="Members">
           <Key>
             <PropertyRef Name="UserId" />
@@ -68,7 +79,7 @@
           <Property Name="OperationType" Type="nvarchar" MaxLength="50" />
           <Property Name="TreatPlan" Type="nvarchar" MaxLength="20" />
           <Property Name="Note" Type="nvarchar(max)" />
-          <Property Name="InputDate" Type="datetime" Nullable="false" />
+          <Property Name="InputDate" Type="datetime" />
           <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="RolePermissions">
@@ -93,6 +104,18 @@
           <Property Name="TreatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TreatName" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <Association Name="FK_BW_Personal_Datas">
+          <End Role="Personal_Datas" Type="Self.Personal_Datas" Multiplicity="1" />
+          <End Role="BW" Type="Self.BW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Datas">
+              <PropertyRef Name="MyId" />
+            </Principal>
+            <Dependent Role="BW">
+              <PropertyRef Name="MyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Members_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Members" Type="Self.Members" Multiplicity="*" />
@@ -190,6 +213,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="IbreastDBModelStoreContainer">
+          <EntitySet Name="BW" EntityType="Self.BW" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MyOperations" EntityType="Self.MyOperations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MyTreats" EntityType="Self.MyTreats" Schema="dbo" store:Type="Tables" />
@@ -199,6 +223,10 @@
           <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TreatPlan" EntityType="Self.TreatPlan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BW_Personal_Datas" Association="Self.FK_BW_Personal_Datas">
+            <End Role="Personal_Datas" EntitySet="Personal_Datas" />
+            <End Role="BW" EntitySet="BW" />
+          </AssociationSet>
           <AssociationSet Name="FK_Members_Roles" Association="Self.FK_Members_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Members" EntitySet="Members" />
@@ -278,6 +306,11 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="RolePermission" EntitySet="RolePermissions" />
           </AssociationSet>
+          <EntitySet Name="BWs" EntityType="IbreastDBModel.BW" />
+          <AssociationSet Name="FK_BW_Personal_Datas" Association="IbreastDBModel.FK_BW_Personal_Datas">
+            <End Role="Personal_Data" EntitySet="Personal_Data" />
+            <End Role="BW" EntitySet="BWs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Member">
           <Key>
@@ -350,11 +383,12 @@
           <Property Name="OperationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TreatPlan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InputDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InputDate" Type="DateTime" Precision="3" />
           <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="Member" Relationship="IbreastDBModel.FK_Personal_Datas_Members" FromRole="Personal_Datas" ToRole="Member" />
           <NavigationProperty Name="MyOperations" Relationship="IbreastDBModel.FK_MyOperations_Personal_Datas" FromRole="Personal_Datas" ToRole="MyOperation" />
           <NavigationProperty Name="MyTreats" Relationship="IbreastDBModel.FK_MyTreats_Personal_Datas" FromRole="Personal_Datas" ToRole="MyTreat" />
+          <NavigationProperty Name="BWs" Relationship="IbreastDBModel.FK_BW_Personal_Datas" FromRole="Personal_Data" ToRole="BW" />
         </EntityType>
         <EntityType Name="RolePermission">
           <Key>
@@ -479,6 +513,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="BW">
+          <Key>
+            <PropertyRef Name="BWId" />
+          </Key>
+          <Property Name="BWId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BW1" Type="Double" />
+          <Property Name="BMI" Type="Double" />
+          <Property Name="InputDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MyId" Type="Int32" Nullable="false" />
+          <Property Name="MeasureDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Personal_Datas" Relationship="IbreastDBModel.FK_BW_Personal_Datas" FromRole="BW" ToRole="Personal_Data" />
+        </EntityType>
+        <Association Name="FK_BW_Personal_Datas">
+          <End Type="IbreastDBModel.Personal_Data" Role="Personal_Data" Multiplicity="1" />
+          <End Type="IbreastDBModel.BW" Role="BW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_Data">
+              <PropertyRef Name="MyId" />
+            </Principal>
+            <Dependent Role="BW">
+              <PropertyRef Name="MyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -579,6 +637,18 @@
               <MappingFragment StoreEntitySet="TreatPlan">
                 <ScalarProperty Name="TreatName" ColumnName="TreatName" />
                 <ScalarProperty Name="TreatId" ColumnName="TreatId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BWs">
+            <EntityTypeMapping TypeName="IbreastDBModel.BW">
+              <MappingFragment StoreEntitySet="BW">
+                <ScalarProperty Name="MeasureDate" ColumnName="MeasureDate" />
+                <ScalarProperty Name="MyId" ColumnName="MyId" />
+                <ScalarProperty Name="InputDate" ColumnName="InputDate" />
+                <ScalarProperty Name="BMI" ColumnName="BMI" />
+                <ScalarProperty Name="BW1" ColumnName="BW" />
+                <ScalarProperty Name="BWId" ColumnName="BWId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

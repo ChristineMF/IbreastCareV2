@@ -19,6 +19,7 @@ namespace IbreastCare.DAL
         {
             this.MyOperations = new HashSet<MyOperation>();
             this.MyTreats = new HashSet<MyTreat>();
+            this.BWs = new HashSet<BW>();
         }
     
         public int MyId { get; set; }
@@ -32,7 +33,7 @@ namespace IbreastCare.DAL
         public string OperationType { get; set; }
         public string TreatPlan { get; set; }
         public string Note { get; set; }
-        public System.DateTime InputDate { get; set; }
+        public Nullable<System.DateTime> InputDate { get; set; }
         public Nullable<int> UserId { get; set; }
     
         public virtual Member Member { get; set; }
@@ -40,5 +41,7 @@ namespace IbreastCare.DAL
         public virtual ICollection<MyOperation> MyOperations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MyTreat> MyTreats { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BW> BWs { get; set; }
     }
 }

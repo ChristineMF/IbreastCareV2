@@ -3151,12 +3151,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BWAPIController.cs" />
+    <Compile Include="Controllers\BWController.cs" />
     <Compile Include="Controllers\CaseManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MydataAPIController.cs" />
     <Compile Include="Controllers\MydataController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\RecordController.cs" />
+    <Compile Include="DAL\BW.cs">
+      <DependentUpon>IbreastCareDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\IbreastCareDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3204,6 +3209,7 @@
     </Compile>
     <Compile Include="Models\Common.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\BodyWeightViewModel.cs" />
     <Compile Include="ViewModel\LoginRegisterViewModel.cs" />
     <Compile Include="ViewModel\MydataViewModel.cs" />
     <Compile Include="ViewModel\PatientViewModel.cs" />
@@ -3496,6 +3502,9 @@
     <Content Include="Views\Mydata\MydataDetails.cshtml" />
     <Content Include="Views\Mydata\GetMydata.cshtml" />
     <Content Include="Views\Shared\_MydataDetail.cshtml" />
+    <Content Include="Views\Mydata\MydataDelete.cshtml" />
+    <Content Include="Views\BW\Index.cshtml" />
+    <Content Include="Views\BW\AddBW.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
