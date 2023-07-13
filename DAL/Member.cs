@@ -18,6 +18,7 @@ namespace IbreastCare.DAL
         public Member()
         {
             this.Personal_Datas = new HashSet<Personal_Data>();
+            this.BWs = new HashSet<BW>();
         }
     
         public int UserId { get; set; }
@@ -37,5 +38,7 @@ namespace IbreastCare.DAL
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Personal_Data> Personal_Datas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BW> BWs { get; set; }
     }
 }

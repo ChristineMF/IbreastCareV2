@@ -18,9 +18,9 @@ namespace IbreastCare.DAL
         public Nullable<double> BW1 { get; set; }
         public Nullable<double> BMI { get; set; }
         public System.DateTime InputDate { get; set; }
-        public int MyId { get; set; }
+        public int UserId { get; set; }
         public Nullable<System.DateTime> MeasureDate { get; set; }
     
-        public virtual Personal_Data Personal_Datas { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

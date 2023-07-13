@@ -26,8 +26,17 @@ namespace IbreastCare.ViewModel
         public string Her { get; set; }
         [DisplayName("手術")]
         public string OperationType { get; set; }
+        [DisplayName("手術ID")]
+        public int OpeTypeId { get; set; }
+
+        [DisplayName("手術名")]
+        public string OpeTypeName { get; set; }
         [DisplayName("療程")]
         public string TreatPlan { get; set; }
+
+        [DisplayName("療程名")]
+        public string TreatName { get; set; }
+
         [DisplayName("備註")]
         public string Note { get; set; }
         [DisplayName("建立日期")]

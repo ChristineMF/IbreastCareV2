@@ -337,6 +337,9 @@
                                 <option value="5">腋窩淋巴清除</option>
                                 <option value="6">重建手術</option>
                             </select>
+                            <p>
+                                <strong>你選了：</strong>{{mydata.OperationType}}
+                            </p>
                         </div>
                         <div class="form-group">
                             <label for="selectTreatPlan">療程計畫</label>
@@ -561,7 +564,8 @@
                         ER: "",
                         PR: "",
                         Her: "",
-                        OperationType:"",
+                        OperationType: "",
+
                         TreatPlan: "",
                         Note: "",
                         InputDate: "",
@@ -570,6 +574,11 @@
                 };
             },
             methods: {
+                selectedOption() {
+                    // 根據選擇的文字返回相應的選項物件
+                    return this.options.find(option => option.text === this.selectedText) || {};
+                },
+
                 addData: function () {
                     var self = this;
 

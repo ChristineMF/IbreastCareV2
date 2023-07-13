@@ -15,6 +15,7 @@ namespace IbreastCare.Controllers
         }
         public ActionResult AddBW()
         {
+            ViewBag.userid = (int)Session["UserId"];
             return View();
         }
     }

@@ -32,7 +32,41 @@ namespace IbreastCare.Controllers
 
             List<Personal_Data> mydata = Db.Personal_Data.Where(p => p.UserId == myuserid).OrderByDescending(p => p.InputDate).ToList();
 
-            List<MydataViewModel> model = Common.MapToList<Personal_Data, MydataViewModel>(mydata);
+            //lambda語法,//將join完的新集合再做一次join,每次join都組成新物件做比對
+            var y = Db.MyOperations.
+                Join(Db.OperationTypes, p => p.OpeTypeId, o => o.OpeTypeId, (mo, po) => new { mo.MyId, mo.MyOpeId, po.OpeTypeName })
+                .Join(Db.MyTreats,t=>t.MyId,mt=>mt.MyId,(tm,tp)=>new { tm.MyId,tm.MyOpeId,tm.OpeTypeName,tp.TreatId})
+                .Join(Db.TreatPlans,mop=>mop.TreatId,mtp=>mtp.TreatId,(motp,mpt)=>new { motp.MyId,motp.MyOpeId,motp.OpeTypeName,motp.TreatId, mpt.TreatName})
+                .Join(Db.Personal_Data, o => new { o.MyId }, p => new { p.MyId }, (o, p) => new { p.UserId,p.MyId, o.OpeTypeName,o.TreatName, p.CellType, p.ER, p.Height, p.Her, p.Menopause, p.InputDate, p.Note, p.OperationDate, p.PR })
+                .OrderByDescending(o => o.MyId).ToList();
+           
+
+            List<MydataViewModel> model = y.GroupBy(a => a.MyId).Select(g => new MydataViewModel
+            {
+                MyId = g.Key,
+                Height = g.First().Height,
+                ER = g.First().ER,
+                PR = g.First().PR,
+                Her = g.First().Her,
+                CellType = g.First().CellType,
+                Menopause = g.First().Menopause,
+                OperationDate = g.First().OperationDate,
+                Note = g.First().Note,
+                InputDate = (DateTime)g.First().InputDate,
+
+                OpeTypeName = string.Join(",", g.Select(a => a.OpeTypeName).Distinct()).Trim(),
+                TreatName= string.Join(",", g.Select(a => a.TreatName).Distinct()).Trim(),
+                UserId = g.First().UserId
+
+            }).ToList();
+            
+
+            //var 變數1=new MpperConfiguration(變數2=>變數2.CreateMap<主資料表(顯示)>
+
+            //將List<Personal_Data>轉成List<MydataViewModel>
+
+            //List<MydataViewModel> model = Common.MapToList<Personal_Data, MydataViewModel>(y);
+            //MydataViewModel model = mapper.Map<MydataViewModel>(mydata);
             //List<MydataViewModel> dataList = new List<MydataViewModel>();
             //foreach (var item in model)
             //{

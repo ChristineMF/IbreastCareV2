@@ -256,15 +256,17 @@
                         <a href="/BW/Index"><input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getdata()" /></a>
                         <a href="/BW/AddBW" class="btn">新增體重</a>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label">請輸入體重</label>
+                            <label class="col-lg-2 control-label" for="weight">請輸入體重(Kg)</label>
                             <div class="col-lg-8">
-                                <input v-model="myBW.BW" class="form-control" id="txt1" type="text" value="">
+
+                                <input v-model="myBW.weight" class="form-control" id="weight" name="weight" type="number"/>
+                                <p>{{msg}}</p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-4 control-label" for="Name">我的身高</label>
+                            <label class="col-lg-4 control-label" for="height">我的身高(cm)</label>
                             <div class="col-lg-8">
-                                <p class="form-control" v-model id="myHeight">>{{item.Height}}</p>
+                                <input v-model="myBW.height" class="form-control"  id="height" name="height" type="number"/>
 
                             </div>
                         </div>
@@ -280,7 +282,10 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">身體質量指數(BMI)</label>
                             <div class="col-lg-8">
-                                <input v-model="myBW.BMI" class="form-control" id="txt1" type="text" value="{{item.BMI}}">
+                                @*<br>
+                                <button v-on:click="calculateBMI()">計算 BMI</button>
+                                <br>*@
+                                <p class="form-control" id="bmi">{{BMI}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -387,51 +392,101 @@
     <script>
         $(document).ready(function () {
             //$('#dataTable').DataTable(); // ID From dataTable
-            $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+           // $('#dataTableHover').DataTable(); // ID From dataTable with Hover
         });
     </script>
     <script>
         Vue.createApp({
+            
             data() {
                 return {
                     myBW: {
                         BWId: '',
-                        BW: "",
+                        weight: 0,
+                        height: 0,
+                        databaseHeight: 0,
                         BMI: "",
                         InpuDate:"",
-                        MyId: "",
+                        UserId: "",
                         MeasureDate: "",
-                    }
+
+                    },
+                    msg:""
                 };
             },
-            methods: {
-                addData: function () {
-                    var self = this;
+            mounted() {
+                // 加入載入後的程式
+                // 計算 BMI 
+                this.fetchDbHeight();
+               /* this.calculateBMI();*/
 
-                    self.Height = $("#txtHeight").val();
-
-
-                    self.MeasureDate = $("#canOpDate")[0].value;
-
-                    bmi(){
-                        return this.myBW.BW / Height / this.Height
+            },
+            created() {
+                // 從資料庫獲取資料庫中的身高值
+                this.fetchDbHeight();
+            },
+           
+            computed: {
+                //計算BMI,將身高公分轉成公尺,取小數2位數
+                BMI() {
+                    const heightInMeter = this.myBW.height / 100;
+                    return (this.myBW.weight / (heightInMeter * heightInMeter)).toFixed(2);
+                }
+            },
+            watch: {
+                weight(value) {
+                    if (this.IsInRange(value)) {
+                        this.msg = "ok";
                     }
 
+                    else {
+                        this.msg = "請輸入正確體重";
+                    }
+                        
+                },
+            },
+            methods: {
+                
+                IsInRange(number) {
+                    return number > 30 && number <= 100;
+                },
+                fetchDbHeight() {
+                    const xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = () => {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            this.myBW.databaseHeight = JSON.parse(xhr.responseText);
+                        }
+                    };
+                    xhr.open('GET', '/api/BWAPI/GetHeight/{id}');
+                    xhr.send();
+                },
+                //calculateBMI() {
+                //    console.log(`BMI: ${this.BMI}`);
+                //},
+
+                addData: function () {
+                    var self = this;
+                    self.myBW.BMI = $("#bmi").val();
+                    self.myBW.weight = $("#weight").val();
+                    self.myBW.height = $("#height").val();
+                    self.myBW.MeasureDate = $("#canOpDate")[0].value;
+                    self.myBW.UserId =@ViewBag.userid;
                     $.ajax({
                         type: 'POST',
                         url: '/api/BWAPI',
-                        data: JSON.stringify(self),
+                        data: JSON.stringify(self.myBW),
                         dataType: 'json',
                         contentType: "application/json",
                         success: function (data) {
                             alert("資料新增成功");
-                            self.mydata = data;//將值存入DB
+                            self.myBW = data;//將值存入DB
                             location.href="/BW/Index"
                     }
                     })
                 },
             },
         }).mount("#app");
+       
     </script>
 
 }

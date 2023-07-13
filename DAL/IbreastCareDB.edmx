@@ -13,7 +13,7 @@
           <Property Name="BW" Type="float" />
           <Property Name="BMI" Type="float" />
           <Property Name="InputDate" Type="datetime" Nullable="false" />
-          <Property Name="MyId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="MeasureDate" Type="date" />
         </EntityType>
         <EntityType Name="Members">
@@ -104,15 +104,15 @@
           <Property Name="TreatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TreatName" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <Association Name="FK_BW_Personal_Datas">
-          <End Role="Personal_Datas" Type="Self.Personal_Datas" Multiplicity="1" />
+        <Association Name="FK_BW_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
           <End Role="BW" Type="Self.BW" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Personal_Datas">
-              <PropertyRef Name="MyId" />
+            <Principal Role="Members">
+              <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="BW">
-              <PropertyRef Name="MyId" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -223,8 +223,8 @@
           <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TreatPlan" EntityType="Self.TreatPlan" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_BW_Personal_Datas" Association="Self.FK_BW_Personal_Datas">
-            <End Role="Personal_Datas" EntitySet="Personal_Datas" />
+          <AssociationSet Name="FK_BW_Members" Association="Self.FK_BW_Members">
+            <End Role="Members" EntitySet="Members" />
             <End Role="BW" EntitySet="BW" />
           </AssociationSet>
           <AssociationSet Name="FK_Members_Roles" Association="Self.FK_Members_Roles">
@@ -307,8 +307,8 @@
             <End Role="RolePermission" EntitySet="RolePermissions" />
           </AssociationSet>
           <EntitySet Name="BWs" EntityType="IbreastDBModel.BW" />
-          <AssociationSet Name="FK_BW_Personal_Datas" Association="IbreastDBModel.FK_BW_Personal_Datas">
-            <End Role="Personal_Data" EntitySet="Personal_Data" />
+          <AssociationSet Name="FK_BW_Members" Association="IbreastDBModel.FK_BW_Members">
+            <End Role="Member" EntitySet="Members" />
             <End Role="BW" EntitySet="BWs" />
           </AssociationSet>
         </EntityContainer>
@@ -331,6 +331,7 @@
           <Property Name="SettingDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Role" Relationship="IbreastDBModel.FK_Members_Roles" FromRole="Member" ToRole="Role" />
           <NavigationProperty Name="Personal_Datas" Relationship="IbreastDBModel.FK_Personal_Datas_Members" FromRole="Member" ToRole="Personal_Datas" />
+          <NavigationProperty Name="BWs" Relationship="IbreastDBModel.FK_BW_Members" FromRole="Member" ToRole="BW" />
         </EntityType>
         <EntityType Name="MyOperation">
           <Key>
@@ -388,7 +389,6 @@
           <NavigationProperty Name="Member" Relationship="IbreastDBModel.FK_Personal_Datas_Members" FromRole="Personal_Datas" ToRole="Member" />
           <NavigationProperty Name="MyOperations" Relationship="IbreastDBModel.FK_MyOperations_Personal_Datas" FromRole="Personal_Datas" ToRole="MyOperation" />
           <NavigationProperty Name="MyTreats" Relationship="IbreastDBModel.FK_MyTreats_Personal_Datas" FromRole="Personal_Datas" ToRole="MyTreat" />
-          <NavigationProperty Name="BWs" Relationship="IbreastDBModel.FK_BW_Personal_Datas" FromRole="Personal_Data" ToRole="BW" />
         </EntityType>
         <EntityType Name="RolePermission">
           <Key>
@@ -521,19 +521,19 @@
           <Property Name="BW1" Type="Double" />
           <Property Name="BMI" Type="Double" />
           <Property Name="InputDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="MyId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="MeasureDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Personal_Datas" Relationship="IbreastDBModel.FK_BW_Personal_Datas" FromRole="BW" ToRole="Personal_Data" />
+          <NavigationProperty Name="Member" Relationship="IbreastDBModel.FK_BW_Members" FromRole="BW" ToRole="Member" />
         </EntityType>
-        <Association Name="FK_BW_Personal_Datas">
-          <End Type="IbreastDBModel.Personal_Data" Role="Personal_Data" Multiplicity="1" />
+        <Association Name="FK_BW_Members">
+          <End Type="IbreastDBModel.Member" Role="Member" Multiplicity="1" />
           <End Type="IbreastDBModel.BW" Role="BW" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Personal_Data">
-              <PropertyRef Name="MyId" />
+            <Principal Role="Member">
+              <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="BW">
-              <PropertyRef Name="MyId" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -644,7 +644,7 @@
             <EntityTypeMapping TypeName="IbreastDBModel.BW">
               <MappingFragment StoreEntitySet="BW">
                 <ScalarProperty Name="MeasureDate" ColumnName="MeasureDate" />
-                <ScalarProperty Name="MyId" ColumnName="MyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="InputDate" ColumnName="InputDate" />
                 <ScalarProperty Name="BMI" ColumnName="BMI" />
                 <ScalarProperty Name="BW1" ColumnName="BW" />
