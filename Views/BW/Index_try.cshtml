@@ -302,7 +302,7 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="col-lg-4">
+            <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">治療</h6>
@@ -315,7 +315,18 @@
                                 <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
                             </div>
                         </div>
-                        
+                        <div style="width: 75%;">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        <div id="myToolTip" style="position: absolute">
+                            <p></p>
+                        </div>
+                        <!--line -->
+                        <input type="hidden" id="HiddenField1" value="@Model.DataMeasure" />
+                        <input type="hidden" id="HiddenField2" value="@Model.DataBW" />
+                        <input type="hidden" id="HiddenField3" value="@Model.DataBMI" />
+                        <!--</form>-->
+                    </div>
 
 
 
@@ -326,9 +337,9 @@
                         </div>
                     </div>*@
 
-                @*</div>
+                </div>
 
-                </div>-->*@
+                </div>
             @Html.ActionLink("回列表", "Index")
         </div>
     </div>
@@ -390,7 +401,7 @@
     <script src="~/Scripts/Chart.js"></script>
     <script src="~/Scripts/utils.js"></script>
 
-    @*<script>
+    <script>
         var ctx = document.getElementById("myChart");
         var myChart = new Chart(ctx, {
             type: 'line',
@@ -425,7 +436,7 @@
             //    }
             //}
         });
-    </script>*@
+    </script>
 
     <!-- Page level custom scripts -->
     <script>

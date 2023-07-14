@@ -30,7 +30,7 @@ namespace IbreastCare.Controllers
             //    return HttpNotFound();
             //}
 
-            List<Personal_Data> mydata = Db.Personal_Data.Where(p => p.UserId == myuserid).OrderByDescending(p => p.InputDate).ToList();
+            List<Personal_Data> mydata = Db.Personal_Data.Where(p => p.UserId == myuserid).OrderByDescending(p => p.MyId).ToList();
 
             //lambda語法,//將join完的新集合再做一次join,每次join都組成新物件做比對
             var y = Db.MyOperations.
@@ -38,7 +38,7 @@ namespace IbreastCare.Controllers
                 .Join(Db.MyTreats,t=>t.MyId,mt=>mt.MyId,(tm,tp)=>new { tm.MyId,tm.MyOpeId,tm.OpeTypeName,tp.TreatId})
                 .Join(Db.TreatPlans,mop=>mop.TreatId,mtp=>mtp.TreatId,(motp,mpt)=>new { motp.MyId,motp.MyOpeId,motp.OpeTypeName,motp.TreatId, mpt.TreatName})
                 .Join(Db.Personal_Data, o => new { o.MyId }, p => new { p.MyId }, (o, p) => new { p.UserId,p.MyId, o.OpeTypeName,o.TreatName, p.CellType, p.ER, p.Height, p.Her, p.Menopause, p.InputDate, p.Note, p.OperationDate, p.PR })
-                .OrderByDescending(o => o.MyId).ToList();
+                .Where(p=>p.UserId==myuserid).OrderByDescending(o => o.MyId).ToList();
            
 
             List<MydataViewModel> model = y.GroupBy(a => a.MyId).Select(g => new MydataViewModel

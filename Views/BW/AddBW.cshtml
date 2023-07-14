@@ -253,25 +253,26 @@
                     </div>
                     <div class="card-body">
                         <p>Select2 is a jQuery based replacement for select boxes</p>
-                        <a href="/BW/Index"><input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getdata()" /></a>
-                        <a href="/BW/AddBW" class="btn">新增體重</a>
+                        <a href="/BW/Index/@ViewBag.userid"><input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getData()" /></a>
+                        <a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>
+                        <a href="/BW/AddBW/@ViewBag.userid" class="btn">新增體重</a>
                         <div class="form-group">
                             <label class="col-lg-2 control-label" for="weight">請輸入體重(Kg)</label>
                             <div class="col-lg-8">
 
-                                <input v-model="myBW.weight" class="form-control" id="weight" name="weight" type="number"/>
+                                <input v-model="myBW.BW1" class="form-control" id="weight" name="weight" type="number"/>
                                 <p>{{msg}}</p>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label" for="height">我的身高(cm)</label>
                             <div class="col-lg-8">
-                                <input v-model="myBW.height" class="form-control"  id="height" name="height" type="number"/>
+                                <input v-model="myBW.Height" class="form-control"  id="height" name="height" type="number" disabled="disabled"/>
 
                             </div>
                         </div>
                         <div class="form-group" id="simple-date1">
-                            <label for="canOpDate">測量日期</label>
+                            <label for="canMeasureDate">測量日期</label>
                             <div class="input-group date">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-calendar"></i></span>
@@ -397,26 +398,26 @@
     </script>
     <script>
         Vue.createApp({
-            
+
             data() {
                 return {
                     myBW: {
                         BWId: '',
-                        weight: 0,
-                        height: 0,
+                        BW1: 0,
+                        Height: @ViewBag.myHeight,
                         databaseHeight: 0,
                         BMI: "",
-                        InpuDate:"",
-                        UserId: "",
+                        InpuDate: "",
+                        UserId: @ViewBag.userid,
                         MeasureDate: "",
 
                     },
-                    msg:""
+                    msg: "",
                 };
             },
             mounted() {
                 // 加入載入後的程式
-                // 計算 BMI 
+                // 計算 BMI
                 this.fetchDbHeight();
                /* this.calculateBMI();*/
 
@@ -425,28 +426,27 @@
                 // 從資料庫獲取資料庫中的身高值
                 this.fetchDbHeight();
             },
-           
+
             computed: {
                 //計算BMI,將身高公分轉成公尺,取小數2位數
                 BMI() {
-                    const heightInMeter = this.myBW.height / 100;
-                    return (this.myBW.weight / (heightInMeter * heightInMeter)).toFixed(2);
+                    const heightInMeter = this.myBW.Height / 100;
+                    return (this.myBW.BW1 / (heightInMeter * heightInMeter)).toFixed(2);
                 }
             },
             watch: {
-                weight(value) {
+                BW1(value) {
                     if (this.IsInRange(value)) {
                         this.msg = "ok";
                     }
-
                     else {
                         this.msg = "請輸入正確體重";
                     }
-                        
-                },
+
+                }
             },
             methods: {
-                
+
                 IsInRange(number) {
                     return number > 30 && number <= 100;
                 },
@@ -457,7 +457,7 @@
                             this.myBW.databaseHeight = JSON.parse(xhr.responseText);
                         }
                     };
-                    xhr.open('GET', '/api/BWAPI/GetHeight/{id}');
+                    xhr.open('GET', '/api/BWAPI/GetHeight/@ViewBag.userid');
                     xhr.send();
                 },
                 //calculateBMI() {
@@ -466,14 +466,14 @@
 
                 addData: function () {
                     var self = this;
-                    self.myBW.BMI = $("#bmi").val();
-                    self.myBW.weight = $("#weight").val();
-                    self.myBW.height = $("#height").val();
-                    self.myBW.MeasureDate = $("#canOpDate")[0].value;
+                    self.myBW.BMI = $("#bmi").text();
+                    self.myBW.BW1 = $("#weight").val();
+                    self.myBW.Height = $("#height").val();
+                    self.myBW.MeasureDate = $("#canMeasureDate")[0].value;
                     self.myBW.UserId =@ViewBag.userid;
                     $.ajax({
                         type: 'POST',
-                        url: '/api/BWAPI',
+                        url: '/api/BWAPI/{id}',
                         data: JSON.stringify(self.myBW),
                         dataType: 'json',
                         contentType: "application/json",
@@ -486,7 +486,7 @@
                 },
             },
         }).mount("#app");
-       
+
     </script>
 
 }
