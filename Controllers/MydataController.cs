@@ -30,7 +30,7 @@ namespace IbreastCare.Controllers
             //    return HttpNotFound();
             //}
 
-            List<Personal_Data> mydata = Db.Personal_Data.Where(p => p.UserId == myuserid).OrderByDescending(p => p.MyId).ToList();
+            //List<Personal_Data> mydata = Db.Personal_Data.Where(p => p.UserId == myuserid).OrderByDescending(p => p.MyId).ToList();
 
             //lambda語法,//將join完的新集合再做一次join,每次join都組成新物件做比對
             var y = Db.MyOperations.

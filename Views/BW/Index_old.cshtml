@@ -1,5 +1,4 @@
-﻿@model IEnumerable<IbreastCare.ViewModel.BodyWeightViewModel>
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPageRecord.cshtml";
 
@@ -247,19 +246,18 @@
         <div class="row" id="app">
             <!-- Datatables -->
             <!-- DataTable with Hover -->
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <!-- Select2 -->
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">體重</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
                     </div>
                     <div class="card-body">
-                        @*<p>Select2 is a jQuery based replacement for select boxes</p>*@
-                        <input type="button" id="myBtn" href="/BW/Index/@ViewBag.userid" value="我的體重" class="btn" />
-                        @*<a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>*@
+                        <p>Select2 is a jQuery based replacement for select boxes</p>
+                        <input type="button" id="myBtn" href="/BW/Index/@ViewBag.userid" value="我的體重" class="btn" v-on:click="getdata()" />
+                        <a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>
                         <a href="/BW/AddBW/@ViewBag.userid" class="btn">新增體重</a>
-                       
-                        <div id="result" class="table-responsive p-3">
+                        <div class="table-responsive p-3">
                             <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                                 <thead class="thead-light">
                                     <tr>
@@ -271,36 +269,29 @@
                                     </tr>
                                 </thead>
                                 @*<tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>*@
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>*@
                                 <tbody>
 
+                                    <tr v-for="item in BW">
+                                        <td hidden>{{item.BWId}}</td>
+                                        <td> {{item.BW1}}</td>
+                                        <td> {{item.BMI}}</td>
+                                        <td>{{item.MeasureDate}}</td>
+                                        <td> {{item.InputDate}}</td>
 
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>@item.BW1</td>
-                                            <td>@item.BMI</td>
-                                            <td> @item.MeasureDate</td>
-                                            <td>@item.InputDate</td>
-
-
-                                            <td>
-                                                @*<a herf="/api/BWEdit/">編輯</a>
-                                                    <a herf="/api/BWDelete/">刪除</a>*@
-                                                @Html.ActionLink("編輯", "EditBW", new { id = item.BWId })
-                                                @Html.ActionLink("刪除", "Delete", new { id = item.BWId })
-                                            </td>
-                                        </tr>
-                                        <!--</td>--><!--有對話框確認-->
-                                    }
+                                        <td>
+                                            @*<a herf="/api/BWEdit/{{}}">編輯</a>
+                            <a herf="/api/BWDelete/{{}}">刪除</a>*@
+                                        </td><!--有對話框確認-->
+                                    </tr>
 
 
                                 </tbody>
@@ -311,42 +302,34 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="card mb-6">
+            <!--<div class="col-lg-4">
+                <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">體重BMI歷史圖</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">治療</h6>
                     </div>
                     <div class="card-body">
-                        @*<p>記錄我的治療方式</p>*@
+                        <p>記錄我的治療方式</p>
                         <div class="form-group">
-                            @*<label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
-                                <div class="col-lg-8">
-                                    <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
-                                </div>*@
+                            <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
+                            <div class="col-lg-8">
+                                <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
+                            </div>
                         </div>
-                        <div style="width: 95%;">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                        <div id="myToolTip" style="position: absolute">
-                            <p></p>
-                        </div>
-                        <!--line -->
-                        @*<input type="hidden" id="HiddenField1" value="" @ViewBag.dataMeasure "  />
-                        <input type="hidden" id="HiddenField2" value="@ViewBag.dataBW" />
-                        <input type="hidden" id="HiddenField3" value="@ViewBag.dataBMI" />*@
-                        <!--</form>-->
-                    </div>
+                        
+
+
+
 
                     @*<div class="row">
-                            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
-                                <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
-                            </div>
-                        </div>*@
+                        <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                            <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+                        </div>
+                    </div>*@
 
-                </div>
+                @*</div>
 
-            </div>
-            @Html.ActionLink("回列表", "Index" )
+                </div>-->*@
+            @Html.ActionLink("回列表", "Index")
         </div>
     </div>
     <!--Row-->
@@ -395,9 +378,7 @@
 
 @section Scripts{
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
     <script src="/js/ruang-admin.min.js"></script>
     <!-- Page level plugins -->
@@ -409,64 +390,42 @@
     <script src="~/Scripts/Chart.js"></script>
     <script src="~/Scripts/utils.js"></script>
 
-    <script>
-        //如果 dataMeasure 是以逗號分隔的日期字符串，例如 '2023-07-01', '2023-07-02', '2023-07-03'，則需要將其轉換為數組格式。
-        @*var dataMeasure = [@ViewBag.dataMeasure];*@
-        @*var dataMeasure = '@ViewBag.dataMeasure';*@ // 修改這一行
-        //如果 dataMeasure 是以逗號分隔的日期字符串，但沒有引號，例如 2023-07-01,2023-07-02,2023-07-03，則需要在轉換為數組之前添加引號。
-        @*var dataMeasure = ['@ViewBag.dataMeasure'];*@//在每個日期周圍添加引號
-        //依然只出現一組數值的點, 但每個日期X軸標籤都出現 &#39
-        //將 dataMeasure 進行 HTML 字元編碼,並加[]變陣列
-        var dataMeasure = [@Html.Raw(ViewBag.dataMeasure)];
-        var dataBW = [@ViewBag.dataBW];
-        @*var dataBW = [@ViewBag.dataBW].map(Number);*@
-        var dataBMI = [@ViewBag.dataBMI];
-        @*var dataBMI = [@ViewBag.dataBMI].map(Number);*@
-        var ctx = document.getElementById("myChart").getContext('2d');
-
+    @*<script>
+        var ctx = document.getElementById("myChart");
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: dataMeasure,
+                labels: document.getElementById("HiddenField1").value.split(","),
                 datasets: [
                     {
-                        borderColor: chartColors.red,
-                        backgroundColor: chartColors.red,
-                        label: '體重',
-                        data: dataBW,
-                        borderWidth: 1,
-                        fill: false,
+                    borderColor: chartColors.red,
+                    backgroundColor: chartColors.red,
+                    label: '體重',
+                    data: document.getElementById("HiddenField2").value.split(","),
+                    borderWidth: 1,
+                    fill: false,
                     },
                     {
                         borderColor: chartColors.green,
                         backgroundColor: chartColors.green,
                         label: 'BMI',
-                        data: dataBMI,
+                        data: document.getElementById("HiddenField3").value.split(","),
                         borderWidth: 1,
                         fill: false,
                     }
                 ]
             },
-            options: {
-                scales: {
-                    x: {
-                        display: true,
-                        title: {
-                            display: true,
-                            text: 'Measure Date'
-                        }
-                    },
-                    y: {
-                        display: true,
-                        title: {
-                            display: true,
-                            text: 'Value'
-                        }
-                    }
-                }
-            }
+            //options: {
+            //    scales: {
+            //        yAxes: [{
+            //            ticks: {
+            //                beginAtZero: true
+            //            }
+            //        }]
+            //    }
+            //}
         });
-    </script>
+    </script>*@
 
     <!-- Page level custom scripts -->
     <script>
@@ -476,7 +435,7 @@
         });
     </script>
     <script>
-        @*Vue.createApp({
+        Vue.createApp({
             data() {
                 return {
                     BW: {
@@ -489,7 +448,7 @@
                         MeasureDate: "",
 
                     },
-
+                    
 
                 };
             },
@@ -513,7 +472,7 @@
                     })
                 },
             },
-        }).mount("#app");*@
+        }).mount("#app");
     </script>
 
 }

@@ -16,6 +16,6 @@ namespace IbreastCare.ViewModel
         public string InputDate { get; set; }
         public int MyId { get; set; }
         [DisplayName("測量日期")]
-        public Nullable<System.DateTime> MeasureDate { get; set; }
+        public DateTime MeasureDate { get; set; }
     }
 }

@@ -1,8 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "AddBW";
+    ViewBag.Title = "EditBW";
     Layout = "~/Views/Shared/_LayoutPageRecord.cshtml";
 }
+
 @section Styles{
 
     <link href="/img/logo/logo.png" rel="icon">
@@ -32,15 +33,17 @@
         li {
             list-style-type: none;
         }
+
         .row .tdee-item {
             border: 1px solid green;
             margin-bottom: 20px;
             border-radius: 10px;
-            padding:10px;
+            padding: 10px;
         }
-        .tdee span{
+
+        .tdee span {
             font: 1.5rem bold red;
-            color:red;
+            color: red;
         }
     </style>
 }
@@ -285,7 +288,7 @@
                                     <label class="col-lg-8 control-label" for="weight">請輸入體重(Kg)</label>
                                     <div class="col-lg-12">
 
-                                        <input v-model="myBW.BW1" class="form-control" id="weight" name="weight" type="number" />
+                                        <input v-model="myBW.BW1" class="form-control" id="weight" name="weight" type="number"  />
                                         <p>{{msg}}</p>
                                     </div>
                                 </div>
@@ -448,7 +451,7 @@
                             @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
                         </div>
                     </div>
-                   
+
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="tdee-item">
                             <div class="pi-img-wrapper">
@@ -570,14 +573,14 @@
             data() {
                 return {
                     myBW: {
-                        BWId: '',
-                        BW1: 0,
+                        BWId: '@ViewBag.myBWId',
+                        BW1: @ViewBag.myWeight ,
                         Height: @ViewBag.myHeight,
                         databaseHeight: 0,
-                        BMI: "",
+                        BMI: "@ViewBag.myBMI",
                         InpuDate: "",
                         UserId: @ViewBag.userid,
-                        MeasureDate: "",
+                        MeasureDate: "@ViewBag.myMeasure",
                         BMR: "",
                         Age: "@ViewBag.myAge",
                         Lv1: "",
@@ -612,7 +615,7 @@
                     return this.bmrCalculation;
                 },
                 Lv1() {
-                    return (this.bmrCalculation * 1.2).toFixed(2);
+                    return (this.bmrCalculatViewBagon * 1.2).toFixed(2);
                 },
                 Lv2() {
                     return (this.bmrCalculation * 1.375).toFixed(2);
@@ -666,7 +669,7 @@
                     self.myBW.MeasureDate = $("#canMeasureDate")[0].value;
                     self.myBW.UserId =@ViewBag.userid;
                     $.ajax({
-                        type: 'POST',
+                        type: 'PUT',
                         url: '/api/BWAPI/{id}',
                         data: JSON.stringify(self.myBW),
                         dataType: 'json',
@@ -709,18 +712,4 @@
         }).mount("#app");
 
     </script>
-    <script>
-                    //$(document).ready(function () {
-                    //    // 獲取 #bmi 的內容
-                    //    var bmiValue = parseFloat($("#bmi").val());
 
-                    //    // 比較 bmiValue 與 18.5
-                    //    if (bmiValue < 18.5) {
-                    //        // 如果 bmiValue 小於 18.5，將 #bmi1 的 div 樣式變紅色
-                    //        $("#bmi1 div").css("border", "1px solid red")
-                    //    }
-                    //});
-
-    </script>
-
-}

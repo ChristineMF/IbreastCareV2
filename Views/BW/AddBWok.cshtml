@@ -22,27 +22,6 @@
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <!-- Bootstrap DatePicker -->
     <link href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
-    <style>
-        .row .bmi-grade div {
-            border: 1px solid green;
-            margin: 10px;
-            border-radius: 10px;
-        }
-
-        li {
-            list-style-type: none;
-        }
-        .row .tdee-item {
-            border: 1px solid green;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            padding:10px;
-        }
-        .tdee span{
-            font: 1.5rem bold red;
-            color:red;
-        }
-    </style>
 }
 
 <!-- Sidebar -->
@@ -268,270 +247,126 @@
             <!-- DataTable with Hover -->
             <div class="col-lg-6">
                 <!-- Select2 -->
-                <div class="card lg-2">
+                <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">體重</h6>
-                    </div>
-                    <div class="form-group">
-                        <a href="/BW/Index/@ViewBag.userid"><input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getData()" /></a>
-                        @*<a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>*@
-                        <a href="/BW/AddBW/@ViewBag.userid" class="btn">新增體重</a>
+                        <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
                     </div>
                     <div class="card-body">
-                        @*<p>Select2 is a jQuery based replacement for select boxes</p>*@
+                        <p>Select2 is a jQuery based replacement for select boxes</p>
+                        <a href="/BW/Index/@ViewBag.userid"><input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getData()" /></a>
+                        <a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>
+                        <a href="/BW/AddBW/@ViewBag.userid" class="btn">新增體重</a>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="weight">請輸入體重(Kg)</label>
+                            <div class="col-lg-8">
+
+                                <input v-model="myBW.BW1" class="form-control" id="weight" name="weight" type="number" />
+                                <p>{{msg}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label" for="height">我的身高(cm)</label>
+                            <div class="col-lg-8">
+                                <input v-model="myBW.Height" class="form-control" id="height" name="height" type="number" disabled="disabled" />
+
+                            </div>
+                        </div>
+                        <div class="form-group" id="simple-date1">
+                            <label for="canMeasureDate">測量日期</label>
+                            <div class="input-group date">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                <input v-model="myBW.MeasureDate" class="form-control" id="canMeasureDate" type="date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">身體質量指數(BMI)</label>
+                            <div class="col-lg-8">
+                                @*<br>
+                                    <button v-on:click="calculateBMI()">計算 BMI</button>
+                                    <br>*@
+                                <p class="form-control" id="bmi">{{BMI}}</p>
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label class="col-lg-8 control-label" for="weight">請輸入體重(Kg)</label>
-                                    <div class="col-lg-12">
-
-                                        <input v-model="myBW.BW1" class="form-control" id="weight" name="weight" type="number" />
-                                        <p>{{msg}}</p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label" for="height">我的身高(cm)</label>
-                                    <div class="col-lg-12">
-                                        <input v-model="myBW.Height" class="form-control" id="height" name="height" type="number" disabled="disabled" />
-
-                                    </div>
-                                </div>
-                                <div class="form-group" id="simple-date1">
-                                    <label for="canMeasureDate">測量日期</label>
-                                    <div class="col-lg-12 input-group date">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                        </div>
-                                        <input v-model="myBW.MeasureDate" class="form-control" id="canMeasureDate" type="date">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-8 control-label">身體質量指數(BMI)</label>
-                                    <div class="col-lg-12">
-                                        @*<br>
-                                            <button v-on:click="calculateBMI()">計算 BMI</button>
-                                            <br>*@
-                                        <p class="form-control" id="bmi">{{BMI}}</p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-8 control-label">年齡</label>
-                                    <div class="col-lg-12">
-                                        @*<br>
-                                            <button v-on:click="calculateBMI()">計算 BMI</button>
-                                            <br>*@<input v-model="myBW.Age" class="form-control" id="age" name="age" type="number" disabled="disabled" />
-
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-8 control-label">基礎代謝率(BMR)</label>
-                                    <div class="col-lg-12">
-                                        @*<br>
-                                            <button v-on:click="calculateBMI()">計算 BMI</button>
-                                            <br>*@
-                                        <p class="form-control" id="bmr">{{BMR}}</p>
-                                        BMR 指人體在休息狀態下，維持新陳代謝所需的熱量，例如：呼吸、器官運作、體溫維持等，即使整天躺著不動也會消耗的最低熱量。BMR 會隨著年紀增加或體重減輕而降低，會隨著肌肉量增加而上升。
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
-                                        <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit" style="margin:10px">新增</button>
-
-                                        <a href="/BW/AddBW/@ViewBag.userid" class="btn btn-primary" type="submit" style="p">再記一筆</a>
-                                    </div>
-                                    <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
-
-                                    </div>
-                                </div>
+                            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                                <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
                             </div>
-
-
-                            <div class="col-6 col-md-6">
-                                <p style="text-align: center;margin-top: 0px;font-size: 18px;">我是18歲 (含) 以上的成人，我的體重正常嗎？</p>
-                                <ul class="container mt-20">
-                                    <div class="row bmi-grade">
-                                        <div class="col-12" id="bmi1">
-                                    <li>
-                                        <b>
-                                            BMI &lt;
-                                            <span class="number-style">18.5</span>
-                                        </b>
-                                        <span class="grade-content"><br>「體重過輕」</span>，需要多運動，均衡飲食，以增加體能，維持健康！
-                                    </li>
-                            </div>
-
-                            <div class="col-12" id="bmi2">
-                                <li>
-                                    <b>
-                                        <span class="number-style">18.5</span> ≤ BMI &lt; <span class="number-style">24</span>
-                                    </b> <br>恭喜！<span class="grade-content">「健康體重」</span>，要繼續保持！
-                                </li>
-                            </div>
-                            <div class="col-12" id="bmi3">
-                                <li>
-                                    <b>
-                                        <span class="number-style">24</span> ≤ BMI &lt; <span class="number-style">27</span>
-                                    </b> <span class="grade-content"><br>「體重過重」</span>了，要小心囉，趕快力行「健康體重管理」！
-                                </li>
-                            </div>
-                            <div class="col-12" id="bmi4">
-                                <li>
-                                    <b>BMI ≥ <span class="number-style">27</span></b> <br> 啊～<span class="grade-content">「肥胖」</span>，需要立刻力行「健康體重管理」囉！
-                                </li>
-                            </div>
-
-
-
-
-                            @*<div class="col-12">
-                                    <div class="bmr-link">
-                                        <p style="line-height: 32px;">
-                                            想知道自己的每日總消耗熱量嗎？ <a href="https://tools.heho.com.tw/bmr/"
-                                                               target="_blank" class="btn btn-info">基礎代謝率 (BMR) 計算機 ＞</a>
-                                        </p>
-                                    </div>
-                                </div>*@
                         </div>
-                        <div style="line-height: 24px;font-size: 12px;color: #808080;padding-left: 15px;">
-                            資料來源：衛生福利部國民健康署
-                        </div>
-                        </ul>
+
 
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="card mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">每日總熱量消耗 (TDEE)</h6>
-                <p>TDEE 是身體一整天下來，包括基礎代謝、活動量、吃東西所消耗的熱量。不同的生活型態需要的熱量也不一樣，當每天攝取的熱量和 TDEE 相等，便達到「熱量平衡」。</p>
-            </div>
-            <div class="card-body">
-                <div class="row tdee-list">
-                    <!-- PRODUCT ITEM START -->
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">治療</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>記錄我的治療方式</p>
+                        @*<div class="form-group">
+                                <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
+                                <div class="col-lg-8">
+                                    <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
+                                </div>
+                            </div>*@
 
-                    <div class="col-md-4 col-sm-6 col-xs-12" style="margin-bottom:30px">
-                        <div class="tdee-item">
-                            <div class="pi-img-wrapper">
-                                <img src="~/img/tdee/lv1_2.png" class="img-responsive" alt="Berry Lace Dress">
-                            </div>
-                            <h3>@*<a href="/Product/ShopItem/@item.Id">@item.Name</a>*@</h3>
-                            <h4>身體活動趨於靜態</h4>
-                            <p>(幾乎不運動)</p>
-                            <div class="tdee">BMR x 1.2 = <span id="Lv1">{{Lv1}}</span></div>
-                            @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="tdee-item">
-                            <div class="pi-img-wrapper">
-                                <img src="~/img/tdee/lv2_2.png" class="img-responsive" alt="Berry Lace Dress">
-                            </div>
-                            <h3>@*<a href="/Product/ShopItem/@item.Id">@item.Name</a>*@</h3>
-                            <h4>身體活動程度較低</h4>
-                            <p>(每週運動 1-3 天)</p>
-                            <div class="tdee">BMR x 1.3.75 = <span id="Lv2">{{Lv2}}</span></div>
-                            @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="tdee-item">
-                            <div class="pi-img-wrapper">
-                                <img src="~/img/tdee/lv3_2.png" class="img-responsive" alt="Berry Lace Dress">
-                            </div>
-                            <h3>@*<a href="/Product/ShopItem/@item.Id">@item.Name</a>*@</h3>
-                            <h4>身體活動程度正常</h4>
-                            <p>(每週運動 3-5 天)</p>
-                            <div class="tdee">BMR x 1.55 = <span id="Lv3">{{Lv3}}</span></div>
-                            @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
-                        </div>
-                    </div>
-                   
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="tdee-item">
-                            <div class="pi-img-wrapper">
-                                <img src="~/img/tdee/lv4_2.png" class="img-responsive" alt="Berry Lace Dress">
-                            </div>
-                            <h3>@*<a href="/Product/ShopItem/@item.Id">@item.Name</a>*@</h3>
-                            <h4>身體活動程度較高</h4>
-                            <p>(每週運動 6-7 天)</p>
-                            <div class="tdee">BMR x 1.72 = <span id="Lv4">{{Lv4}}</span></div>
-                            @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="tdee-item">
-                            <div class="pi-img-wrapper">
-                                <img src="~/img/tdee/lv5_2.png" class="img-responsive" alt="Berry Lace Dress">
-                            </div>
-                            <h3>@*<a href="/Product/ShopItem/@item.Id">@item.Name</a>*@</h3>
-                            <h4>身體活動程度激烈 </h4>
-                            <p>(長時間運動或體力勞動工作)</p>
-                            <div class="tdee">BMR x 1.9 = <span id="Lv5">{{Lv5}}</span></div>
-                            @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
-                        </div>
-                    </div>
 
-                    <!-- PRODUCT ITEM END -->
+
+
+
+                        <div class="row">
+                            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                                <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
-
+                @Html.ActionLink("回列表", "Index")
             </div>
         </div>
-    </div>
-
-    @*<div class="row">
-            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
-                <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+        <!--Row-->
+        <!-- Documentation Link -->
+        <div class="row">
+            <div class="col-lg-12">
+                <p>
+                    DataTables is a third party plugin that is used to generate the demo table below. For more information
+                    about DataTables, please visit the official <a href="https://datatables.net/" target="_blank">
+                        DataTables
+                        documentation.
+                    </a>
+                </p>
             </div>
-        </div>*@
+        </div>
 
-</div>
-
+        <!-- Modal Logout -->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                        <a href="login.html" class="btn btn-primary">Logout</a>
+                    </div>
                 </div>
-@Html.ActionLink("回列表", "Index")
             </div>
         </div>
-<!--Row-->
-<!-- Documentation Link -->
-<div class="row">
-    <div class="col-lg-12">
-        <p>
-            DataTables is a third party plugin that is used to generate the demo table below. For more information
-            about DataTables, please visit the official <a href="https://datatables.net/" target="_blank">
-                DataTables
-                documentation.
-            </a>
-        </p>
-    </div>
-</div>
-
-<!-- Modal Logout -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to logout?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                <a href="login.html" class="btn btn-primary">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
     </div>
-<!---Container Fluid-->
+    <!---Container Fluid-->
 </div>
 
 
@@ -558,11 +393,10 @@
 
     <!-- Page level custom scripts -->
     <script>
-        //$(document).ready(function () {
-
-        //    //$('#dataTable').DataTable(); // ID From dataTable
-        //    // $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-        //});
+        $(document).ready(function () {
+            //$('#dataTable').DataTable(); // ID From dataTable
+            // $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+        });
     </script>
     <script>
         Vue.createApp({
@@ -578,9 +412,6 @@
                         InpuDate: "",
                         UserId: @ViewBag.userid,
                         MeasureDate: "",
-                        BMR: "",
-                        Age: "@ViewBag.myAge",
-                        Lv1: "",
 
                     },
                     msg: "",
@@ -590,7 +421,7 @@
                 // 加入載入後的程式
                 // 計算 BMI
                 this.fetchDbHeight();
-                /* this.calculateBMI();*/
+               /* this.calculateBMI();*/
 
             },
             created() {
@@ -599,34 +430,11 @@
             },
 
             computed: {
-                // 公用變數用來儲存計算結果
-                bmrCalculation: function () {
-                    return 9.99 * this.myBW.BW1 + 6.25 * this.myBW.Height - 4.92 * this.myBW.Age + (166 * 0 - 161);
-                },
                 //計算BMI,將身高公分轉成公尺,取小數2位數
                 BMI() {
                     const heightInMeter = this.myBW.Height / 100;
                     return (this.myBW.BW1 / (heightInMeter * heightInMeter)).toFixed(2);
-                },
-                BMR() {
-                    return this.bmrCalculation;
-                },
-                Lv1() {
-                    return (this.bmrCalculation * 1.2).toFixed(2);
-                },
-                Lv2() {
-                    return (this.bmrCalculation * 1.375).toFixed(2);
-                },
-                Lv3() {
-                    return (this.bmrCalculation * 1.55).toFixed(2);
-                },
-                Lv4() {
-                     return (this.bmrCalculation * 1.72).toFixed(2);
-                },
-                Lv5() {
-                    return (this.bmrCalculation * 1.9 ).toFixed(2);
                 }
-
             },
             watch: {
                 BW1(value) {
@@ -672,54 +480,14 @@
                         dataType: 'json',
                         contentType: "application/json",
                         success: function (data) {
-
-
-                            //location.href="/BW/Index/@ViewBag.userid"
-                            var bmiValue = parseFloat($("#bmi").text());
                             alert("資料新增成功");
-                            // 比較 bmiValue 與 18.5
-                            //if ($("#bmi").text() < 18.5)
-                            //    // 如果 bmiValue 小於 18.5，將 #bmi1 的 div 樣式變紅色
-                            //    $("#bmi1").css("border", "1px solid red")
-
-                            switch (true) {
-                                case bmiValue < 18.5 :
-                                    $("#bmi1").css("border", "2px solid red");
-                                    break;
-                                case bmiValue >= 18.5 && bmiValue < 24:
-                                    $("#bmi2").css("border", "2px solid blue");
-                                    break;
-                                case bmiValue >= 24 && bmiValue < 27:
-                                    $("#bmi3").css("border", "2px solid orange");
-                                    break;
-                                case bmiValue >= 27 :
-                                    $("#bmi4").css("border", "2px solid red");
-                                    break;
-
-                            }
-                            //var tv1Value = parseFloat($("#bmr").text());
-                            //$("#Lv1").text() = tv1Value * 1.2
-
-                            self.myBW = data//將值存入DB
-                            //location.href="/BW/AddBW/@ViewBag.userid"
+                            self.myBW = data;//將值存入DB
+                            location.href="/BW/Index"
                     }
                     })
                 },
             },
         }).mount("#app");
-
-    </script>
-    <script>
-                    //$(document).ready(function () {
-                    //    // 獲取 #bmi 的內容
-                    //    var bmiValue = parseFloat($("#bmi").val());
-
-                    //    // 比較 bmiValue 與 18.5
-                    //    if (bmiValue < 18.5) {
-                    //        // 如果 bmiValue 小於 18.5，將 #bmi1 的 div 樣式變紅色
-                    //        $("#bmi1 div").css("border", "1px solid red")
-                    //    }
-                    //});
 
     </script>
 

@@ -1,0 +1,174 @@
+﻿
+<!--<div class="card mb-4">
+                   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                       <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
+                   </div>
+                   <div class="card-body">
+                       <p>Select2 is a jQuery based replacement for select boxes</p>
+                       <a href="/BW/Index/@@ViewBag.userid"><input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getData()" /></a>
+                       <a href="/BW/ShowLine/@@ViewBag.userid" class="btn">體重圖</a>
+                       <a href="/BW/AddBW/@@ViewBag.userid" class="btn">新增體重</a>-->
+<div class="form-group">
+    <label class="col-lg-2 control-label" for="weight">請輸入體重(Kg)</label>
+    <div class="col-lg-8">
+
+        <input v-model="myBW.BW1" class="form-control" id="weight" name="weight" type="number" />
+        <p>{{msg}}</p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-lg-4 control-label" for="height">我的身高(cm)</label>
+    <div class="col-lg-8">
+        <input v-model="myBW.Height" class="form-control" id="height" name="height" type="number" disabled="disabled" />
+
+    </div>
+</div>
+<div class="form-group" id="simple-date1">
+    <label for="canMeasureDate">測量日期</label>
+    <div class="input-group date">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+        </div>
+        <input v-model="myBW.MeasureDate" class="form-control" id="canMeasureDate" type="date">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-lg-2 control-label">身體質量指數(BMI)</label>
+    <div class="col-lg-8">
+        @*<br>
+            <button v-on:click="calculateBMI()">計算 BMI</button>
+            <br>*@
+        <p class="form-control" id="bmi">{{BMI}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+        <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+    </div>
+</div>
+
+
+
+<div class="col-lg-4">
+    <div class="card mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">治療</h6>
+        </div>
+        <div class="card-body">
+            <p>記錄我的治療方式</p>
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
+                <div class="col-lg-8">
+                    <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                    <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    @Html.ActionLink("回列表", "Index")
+</div>
+        </div>
+@section Scripts{
+   
+    <script>
+        Vue.createApp({
+
+            data() {
+                return {
+                    myBW: {
+                        BWId: '',
+                        BW1: 0,
+                        Height: @ViewBag.myHeight,
+                        databaseHeight: 0,
+                        BMI: "",
+                        InpuDate: "",
+                        UserId: @ViewBag.userid,
+                        MeasureDate: "",
+
+                    },
+                    msg: "",
+                };
+            },
+            mounted() {
+                // 加入載入後的程式
+                // 計算 BMI
+                this.fetchDbHeight();
+               /* this.calculateBMI();*/
+
+            },
+            created() {
+                // 從資料庫獲取資料庫中的身高值
+                this.fetchDbHeight();
+            },
+
+            computed: {
+                //計算BMI,將身高公分轉成公尺,取小數2位數
+                BMI() {
+                    const heightInMeter = this.myBW.Height / 100;
+                    return (this.myBW.BW1 / (heightInMeter * heightInMeter)).toFixed(2);
+                }
+            },
+            watch: {
+                BW1(value) {
+                    if (this.IsInRange(value)) {
+                        this.msg = "ok";
+                    }
+                    else {
+                        this.msg = "請輸入正確體重";
+                    }
+
+                }
+            },
+            methods: {
+
+                IsInRange(number) {
+                    return number > 30 && number <= 100;
+                },
+                fetchDbHeight() {
+                    const xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = () => {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            this.myBW.databaseHeight = JSON.parse(xhr.responseText);
+                        }
+                    };
+                    xhr.open('GET', '/api/BWAPI/GetHeight/@ViewBag.userid');
+                    xhr.send();
+                },
+                //calculateBMI() {
+                //    console.log(`BMI: ${this.BMI}`);
+                //},
+
+                addData: function () {
+                    var self = this;
+                    self.myBW.BMI = $("#bmi").text();
+                    self.myBW.BW1 = $("#weight").val();
+                    self.myBW.Height = $("#height").val();
+                    self.myBW.MeasureDate = $("#canMeasureDate")[0].value;
+                    self.myBW.UserId =@ViewBag.userid;
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/BWAPI/{id}',
+                        data: JSON.stringify(self.myBW),
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data) {
+                            alert("資料新增成功");
+                            self.myBW = data;//將值存入DB
+                            location.href="/BW/Index"
+                    }
+                    })
+                },
+            },
+        }).mount("#app");
+
+    </script>
+
+}

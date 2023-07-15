@@ -247,7 +247,7 @@
         <div class="row" id="app">
             <!-- Datatables -->
             <!-- DataTable with Hover -->
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <!-- Select2 -->
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -258,8 +258,7 @@
                         <input type="button" id="myBtn" href="/BW/Index/@ViewBag.userid" value="我的體重" class="btn" />
                         @*<a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>*@
                         <a href="/BW/AddBW/@ViewBag.userid" class="btn">新增體重</a>
-                       
-                        <div id="result" class="table-responsive p-3">
+                        <div class="table-responsive p-3">
                             <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                                 <thead class="thead-light">
                                     <tr>
@@ -280,202 +279,178 @@
                                             <th>Salary</th>
                                         </tr>
                                     </tfoot>*@
-                                <tbody>
+                            <tbody>
 
 
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>@item.BW1</td>
-                                            <td>@item.BMI</td>
-                                            <td> @item.MeasureDate</td>
-                                            <td>@item.InputDate</td>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>@item.BW1</td>
+                                    <td>@item.BMI</td>
+                                    <td> @item.MeasureDate</td>
+                                    <td>@item.InputDate</td>
 
 
-                                            <td>
-                                                @*<a herf="/api/BWEdit/">編輯</a>
-                                                    <a herf="/api/BWDelete/">刪除</a>*@
-                                                @Html.ActionLink("編輯", "EditBW", new { id = item.BWId })
-                                                @Html.ActionLink("刪除", "Delete", new { id = item.BWId })
-                                            </td>
-                                        </tr>
-                                        <!--</td>--><!--有對話框確認-->
-                                    }
+                                    <td>
+                                        @*<a herf="/api/BWEdit/">編輯</a>
+            <a herf="/api/BWDelete/">刪除</a>*@
+                                        @Html.ActionLink("編輯", "Edit", new { id = item.BWId })
+                                        @Html.ActionLink("刪除", "Delete", new { id = item.BWId })
+                                    </td>
+                                </tr>
+                                    <!--</td>--><!--有對話框確認-->
+                                }
 
 
-                                </tbody>
-                            </table>
+                            </tbody>
+                                </table>
+                            </div>
+
+
                         </div>
-
-
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card mb-6">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">體重BMI歷史圖</h6>
-                    </div>
-                    <div class="card-body">
-                        @*<p>記錄我的治療方式</p>*@
-                        <div class="form-group">
-                            @*<label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
+                <div class="col-lg-12">
+                    <div class="card mb-6">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">治療</h6>
+                        </div>
+                        <div class="card-body">
+                            <p>記錄我的治療方式</p>
+                            <div class="form-group">
+                                @*<label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
                                 <div class="col-lg-8">
                                     <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
                                 </div>*@
+                            </div>
+                            <div style="width: 75%;">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                            <div id="myToolTip" style="position: absolute">
+                                <p></p>
+                            </div>
+                            <!--line -->
+                            <input type="hidden" id="HiddenField1" value=""@ViewBag.dataMeasure" />
+                            <input type="hidden" id="HiddenField2" value="@ViewBag.dataBW" />
+                            <input type="hidden" id="HiddenField3" value="@ViewBag.dataBMI" />
+                            <!--</form>-->
                         </div>
-                        <div style="width: 95%;">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                        <div id="myToolTip" style="position: absolute">
-                            <p></p>
-                        </div>
-                        <!--line -->
-                        @*<input type="hidden" id="HiddenField1" value="" @ViewBag.dataMeasure "  />
-                        <input type="hidden" id="HiddenField2" value="@ViewBag.dataBW" />
-                        <input type="hidden" id="HiddenField3" value="@ViewBag.dataBMI" />*@
-                        <!--</form>-->
+
+                        @*<div class="row">
+                                <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                                    <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+                                </div>
+                            </div>*@
+
                     </div>
 
-                    @*<div class="row">
-                            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
-                                <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
-                            </div>
-                        </div>*@
-
                 </div>
-
+                @Html.ActionLink("回列表", "Index")
             </div>
-            @Html.ActionLink("回列表", "Index" )
         </div>
-    </div>
-    <!--Row-->
-    <!-- Documentation Link -->
-    <div class="row">
-        <div class="col-lg-12">
-            <p>
-                DataTables is a third party plugin that is used to generate the demo table below. For more information
-                about DataTables, please visit the official <a href="https://datatables.net/" target="_blank">
-                    DataTables
-                    documentation.
-                </a>
-            </p>
+        <!--Row-->
+        <!-- Documentation Link -->
+        <div class="row">
+            <div class="col-lg-12">
+                <p>
+                    DataTables is a third party plugin that is used to generate the demo table below. For more information
+                    about DataTables, please visit the official <a href="https://datatables.net/" target="_blank">
+                        DataTables
+                        documentation.
+                    </a>
+                </p>
+            </div>
         </div>
-    </div>
 
-    <!-- Modal Logout -->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                    <a href="login.html" class="btn btn-primary">Logout</a>
+        <!-- Modal Logout -->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                        <a href="login.html" class="btn btn-primary">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
-
-</div>
-<!---Container Fluid-->
-<!-- Scroll to top -->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    <!---Container Fluid-->
+    <!-- Scroll to top -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
 
-@section Scripts{
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
-    <script src="/js/ruang-admin.min.js"></script>
-    <!-- Page level plugins -->
-    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <!-- Bootstrap Datepicker -->
-    <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-    <!--Charts-->
-    <script src="~/Scripts/Chart.js"></script>
-    <script src="~/Scripts/utils.js"></script>
+    @section Scripts{
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
+        <script src="/js/ruang-admin.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Bootstrap Datepicker -->
+        <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        <!--Charts-->
+        <script src="~/Scripts/Chart.js"></script>
+        <script src="~/Scripts/utils.js"></script>
 
-    <script>
-        //如果 dataMeasure 是以逗號分隔的日期字符串，例如 '2023-07-01', '2023-07-02', '2023-07-03'，則需要將其轉換為數組格式。
-        @*var dataMeasure = [@ViewBag.dataMeasure];*@
-        @*var dataMeasure = '@ViewBag.dataMeasure';*@ // 修改這一行
-        //如果 dataMeasure 是以逗號分隔的日期字符串，但沒有引號，例如 2023-07-01,2023-07-02,2023-07-03，則需要在轉換為數組之前添加引號。
-        @*var dataMeasure = ['@ViewBag.dataMeasure'];*@//在每個日期周圍添加引號
-        //依然只出現一組數值的點, 但每個日期X軸標籤都出現 &#39
-        //將 dataMeasure 進行 HTML 字元編碼,並加[]變陣列
-        var dataMeasure = [@Html.Raw(ViewBag.dataMeasure)];
-        var dataBW = [@ViewBag.dataBW];
-        @*var dataBW = [@ViewBag.dataBW].map(Number);*@
-        var dataBMI = [@ViewBag.dataBMI];
-        @*var dataBMI = [@ViewBag.dataBMI].map(Number);*@
-        var ctx = document.getElementById("myChart").getContext('2d');
-
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: dataMeasure,
-                datasets: [
-                    {
-                        borderColor: chartColors.red,
-                        backgroundColor: chartColors.red,
-                        label: '體重',
-                        data: dataBW,
-                        borderWidth: 1,
-                        fill: false,
-                    },
-                    {
-                        borderColor: chartColors.green,
-                        backgroundColor: chartColors.green,
-                        label: 'BMI',
-                        data: dataBMI,
-                        borderWidth: 1,
-                        fill: false,
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    x: {
-                        display: true,
-                        title: {
-                            display: true,
-                            text: 'Measure Date'
+        <script>
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: document.getElementById("HiddenField1").value.split(","),
+                    datasets: [
+                        {
+                            borderColor: chartColors.red,
+                            backgroundColor: chartColors.red,
+                            label: '體重',
+                            data: document.getElementById("HiddenField2").value.split(","),
+                            borderWidth: 1,
+                            fill: false,
+                        },
+                        {
+                            borderColor: chartColors.green,
+                            backgroundColor: chartColors.green,
+                            label: 'BMI',
+                            data: document.getElementById("HiddenField3").value.split(","),
+                            borderWidth: 1,
+                            fill: false,
                         }
-                    },
-                    y: {
-                        display: true,
-                        title: {
-                            display: true,
-                            text: 'Value'
-                        }
-                    }
-                }
-            }
-        });
-    </script>
+                    ]
+                },
+                //options: {
+                //    scales: {
+                //        yAxes: [{
+                //            ticks: {
+                //                beginAtZero: true
+                //            }
+                //        }]
+                //    }
+                //}
+            });
+        </script>
 
-    <!-- Page level custom scripts -->
-    <script>
-        $(document).ready(function () {
-            //$('#dataTable').DataTable(); // ID From dataTable
-            $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-        });
-    </script>
-    <script>
+        <!-- Page level custom scripts -->
+        <script>
+            $(document).ready(function () {
+                //$('#dataTable').DataTable(); // ID From dataTable
+                $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+            });
+        </script>
+        <script>
         @*Vue.createApp({
             data() {
                 return {
@@ -514,82 +489,82 @@
                 },
             },
         }).mount("#app");*@
-    </script>
+        </script>
 
-}
+    }
 
 
 
-@*<!-- End Breadcrumbs -->
-    <div class="col-lg-12">
-        <div class="card mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables with Hover</h6>
-            </div>
-            <div class="table-responsive p-3">
-                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>@Html.DisplayNameFor(model => model.UserId)</th>
-                            <th>@Html.DisplayNameFor(model => model.RealName)</th>
-                            <th>@Html.DisplayNameFor(model => model.NickName)</th>
-                            <th>@Html.DisplayNameFor(model => model.UserName)</th>
-                            <th>@Html.DisplayNameFor(model => model.CellPhone)</th>
-                            <th>@Html.DisplayNameFor(model => model.Email)</th>
-                            <th>@Html.DisplayNameFor(model => model.age)</th>
-                            <th>@Html.DisplayNameFor(model => model.InputDate)</th>
-                        </tr>
-                    </thead>
-                    @*<tfoot>
+    @*<!-- End Breadcrumbs -->
+        <div class="col-lg-12">
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">DataTables with Hover</h6>
+                </div>
+                <div class="table-responsive p-3">
+                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                        <thead class="thead-light">
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>@Html.DisplayNameFor(model => model.UserId)</th>
+                                <th>@Html.DisplayNameFor(model => model.RealName)</th>
+                                <th>@Html.DisplayNameFor(model => model.NickName)</th>
+                                <th>@Html.DisplayNameFor(model => model.UserName)</th>
+                                <th>@Html.DisplayNameFor(model => model.CellPhone)</th>
+                                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                                <th>@Html.DisplayNameFor(model => model.age)</th>
+                                <th>@Html.DisplayNameFor(model => model.InputDate)</th>
                             </tr>
-                        </tfoot>*@
-@**<tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.UserId</td>
-                                <td>@item.RealName</td>
-                                <td> @item.NickName</td>
-                                <td>@item.UserName</td>
-                                <td> @item.CellPhone</td>
-                                <td> @item.Email</td>
-                                <td> @item.age</td>
-                                <td>  @item.InputDate</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        @*<tfoot>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr>
+                            </tfoot>*@
+    @**<tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.UserId</td>
+                                    <td>@item.RealName</td>
+                                    <td> @item.NickName</td>
+                                    <td>@item.UserName</td>
+                                    <td> @item.CellPhone</td>
+                                    <td> @item.Email</td>
+                                    <td> @item.age</td>
+                                    <td>  @item.InputDate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 
-    </main>
-    @section Scripts{
+        </main>
+        @section Scripts{
 
-        <script src="~/assets/vendor/jquery/jquery.min.js"></script>
+            <script src="~/assets/vendor/jquery/jquery.min.js"></script>
 
-        <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="~/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+            <script src="~/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <script src="~/assets/js/ruang-admin.min.js"></script>
-        <!-- Page level plugins -->
+            <script src="~/assets/js/ruang-admin.min.js"></script>
+            <!-- Page level plugins -->
 
-        <script src="~/assets/vendor/datatables/jquery.dataTables.js"></script>
+            <script src="~/assets/vendor/datatables/jquery.dataTables.js"></script>
 
-        <script src="~/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-        <script>
-            $(document).ready(function () {
+            <script src="~/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+            <script>
+                $(document).ready(function () {
 
-                $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-            });
-        </script>
-    }
-*@
+                    $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+                });
+            </script>
+        }
+    *@

@@ -255,7 +255,7 @@
                     </div>
                     <div class="card-body">
                         <p>Select2 is a jQuery based replacement for select boxes</p>
-                        <input type="button" id="myBtn" href="/BW/Index/@ViewBag.userid" value="我的體重" class="btn" v-on:click="getdata()" />
+                        <input type="button" id="myBtn" href="/BW/Index/@ViewBag.userid" value="我的體重" class="btn" />
                         <a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>
                         <a href="/BW/AddBW/@ViewBag.userid" class="btn">新增體重</a>
                         <div class="table-responsive p-3">
@@ -279,26 +279,30 @@
                                             <th>Salary</th>
                                         </tr>
                                     </tfoot>*@
-                                <tbody>
-
-                                  
-                                        @foreach (var item in Model)
-                                        {
-                                        <tr>
-                                            <td>@item.BW1</td>
-                                            <td>@item.BMI</td>
-                                            <td> @item.MeasureDate</td>
-                                            <td>@item.InputDate</td>
-                                        </tr>
-                                    }
-
-                                        @*<a herf="/api/BWEdit/{{}}">編輯</a>
-                                            <a herf="/api/BWDelete/{{}}">刪除</a>*@
-                                        <!--</td>--><!--有對話框確認-->
-                                       
+                            <tbody>
 
 
-                                    </tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>@item.BW1</td>
+                                    <td>@item.BMI</td>
+                                    <td> @item.MeasureDate</td>
+                                    <td>@item.InputDate</td>
+
+
+                                    <td>
+                                        @*<a herf="/api/BWEdit/">編輯</a>
+            <a herf="/api/BWDelete/">刪除</a>*@
+                                        @Html.ActionLink("編輯", "Edit", new { id = item.BWId })
+                                        @Html.ActionLink("刪除", "Delete", new { id = item.BWId })
+                                    </td>
+                                </tr>
+                                    <!--</td>--><!--有對話框確認-->
+                                }
+
+
+                            </tbody>
                                 </table>
                             </div>
 
@@ -306,18 +310,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="card mb-4">
+                <div class="col-lg-6">
+                    <div class="card mb-6">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">治療</h6>
                         </div>
                         <div class="card-body">
                             <p>記錄我的治療方式</p>
                             <div class="form-group">
-                                <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
+                                @*<label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
                                 <div class="col-lg-8">
                                     <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
-                                </div>
+                                </div>*@
                             </div>
                             <div style="width: 75%;">
                                 <canvas id="myChart"></canvas>
@@ -326,14 +330,11 @@
                                 <p></p>
                             </div>
                             <!--line -->
-                            <input type="hidden" id="HiddenField1" value="@ViewBag.dataMeasure" />
+                            <input type="hidden" id="HiddenField1" value=""@ViewBag.dataMeasure" />
                             <input type="hidden" id="HiddenField2" value="@ViewBag.dataBW" />
                             <input type="hidden" id="HiddenField3" value="@ViewBag.dataBMI" />
                             <!--</form>-->
                         </div>
-
-
-
 
                         @*<div class="row">
                                 <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">

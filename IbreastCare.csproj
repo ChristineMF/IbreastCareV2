@@ -842,6 +842,12 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="img\tdee\bmi.png" />
+    <Content Include="img\tdee\lv1.png" />
+    <Content Include="img\tdee\lv2.png" />
+    <Content Include="img\tdee\lv3.png" />
+    <Content Include="img\tdee\lv4.png" />
+    <Content Include="img\tdee\lv5.png" />
     <Content Include="packages\AutoMapper.10.1.1\.signature.p7s" />
     <Content Include="packages\AutoMapper.10.1.1\AutoMapper.10.1.1.nupkg" />
     <Content Include="packages\EntityFramework.6.2.0\Content\net40\App.config.transform" />
@@ -960,6 +966,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -1171,6 +1179,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jsgrid.js" />
@@ -3212,6 +3222,7 @@
     </Compile>
     <Compile Include="Models\BWDataResult.cs" />
     <Compile Include="Models\BWDTO.cs" />
+    <Compile Include="Models\CalculateAge.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BodyWeightViewModel.cs" />
@@ -3512,6 +3523,7 @@
     <Content Include="Views\BW\AddBW.cshtml" />
     <Content Include="Views\BW\Index.cshtml" />
     <Content Include="Views\BW\ShowLine.cshtml" />
+    <Content Include="Views\BW\EditBW.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

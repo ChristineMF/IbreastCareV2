@@ -14,7 +14,7 @@
           <Property Name="BMI" Type="float" />
           <Property Name="InputDate" Type="datetime" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="MeasureDate" Type="date" />
+          <Property Name="MeasureDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Members">
           <Key>
@@ -522,7 +522,7 @@
           <Property Name="BMI" Type="Double" />
           <Property Name="InputDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="MeasureDate" Type="DateTime" Precision="0" />
+          <Property Name="MeasureDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Member" Relationship="IbreastDBModel.FK_BW_Members" FromRole="BW" ToRole="Member" />
         </EntityType>
         <Association Name="FK_BW_Members">

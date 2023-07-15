@@ -22,7 +22,7 @@
         <AssociationConnector Association="IbreastDBModel.FK_MyTreats_TreatPlan" />
         <AssociationConnector Association="IbreastDBModel.FK_RolePermissions_Permissions" />
         <AssociationConnector Association="IbreastDBModel.FK_RolePermissions_Roles" />
-        <EntityTypeShape EntityType="IbreastDBModel.BW" Width="1.5" PointX="1.875" PointY="10.875" />
+        <EntityTypeShape EntityType="IbreastDBModel.BW" Width="1.5" PointX="4.125" PointY="11.375" />
         <AssociationConnector Association="IbreastDBModel.FK_BW_Members" />
       </Diagram>
     </edmx:Diagrams>

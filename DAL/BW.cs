@@ -19,7 +19,7 @@ namespace IbreastCare.DAL
         public Nullable<double> BMI { get; set; }
         public System.DateTime InputDate { get; set; }
         public int UserId { get; set; }
-        public Nullable<System.DateTime> MeasureDate { get; set; }
+        public System.DateTime MeasureDate { get; set; }
     
         public virtual Member Member { get; set; }
     }

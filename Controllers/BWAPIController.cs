@@ -39,7 +39,7 @@ namespace IbreastCare.Controllers
                 BMI = p.BMI,
                 InputDate = p.InputDate.Date,
                 MeasureDate = p.MeasureDate
-            });
+            }).OrderByDescending(p => p.BWId);
 
             //return this.Db.BWs.ToList();
         }
@@ -123,7 +123,7 @@ namespace IbreastCare.Controllers
         public void Post(BW myBW)
         {
             myBW.InputDate = DateTime.Now;
-            if (myBW.MeasureDate == null)
+            if (myBW.MeasureDate.Year == 0001)
                 myBW.MeasureDate = DateTime.Now;
 
             Db.BWs.Add(myBW);
@@ -132,8 +132,13 @@ namespace IbreastCare.Controllers
         }
 
         // PUT: api/BWAPI/5
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] BW myBW)
         {
+            //var item = Db.BWs.Find(  == myBW.BWId);
+            //if (item != null)
+            //{
+            //    item.Name = course.Name;
+            //}
         }
 
         // DELETE: api/BWAPI/5
