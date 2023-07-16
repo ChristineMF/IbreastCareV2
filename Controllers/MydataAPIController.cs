@@ -37,39 +37,49 @@ namespace IbreastCare.ViewModel
 
             mydata.InputDate = DateTime.Now;
 
-            List<string> Optypes = mydata.OperationType.Split(',').ToList();
-            List<string> Treats = mydata.TreatPlan.Split(',').ToList();
+            if(mydata.OperationType!=null)
+            {
+                List<string> Optypes = mydata.OperationType.Split(',').ToList();
+                foreach (var item in Optypes)
+                {
 
+                    if (item != "")
+                    {
+                        var optypeid = new MyOperation
+                        {
+
+                            MyId = mydata.MyId,
+                            OpeTypeId = Convert.ToInt32(item)
+                        };
+                        Db.MyOperations.Add(optypeid);
+                    }
+
+                }
+            }
+
+
+            if (mydata.TreatPlan != null)
+            {
+                List<string> Treats = mydata.TreatPlan.Split(',').ToList();
+                foreach (var item in Treats)
+                {
+                    if (item != "")
+                    {
+                        var treatid = new MyTreat //開一新的Mytreat物件
+                        {
+                            MyId = mydata.MyId,
+                            TreatId = Convert.ToInt32(item)
+                        };
+                        Db.MyTreats.Add(treatid);
+                    }
+
+                }
+            }
+            
             //using (var myOp = new MyOperation())
             //{
-            foreach (var item in Optypes)
-            {
-
-                if (item !="")
-                {
-                    var optypeid = new MyOperation
-                    {
-
-                        MyId = mydata.MyId,
-                        OpeTypeId = Convert.ToInt32(item)
-                    };
-                    Db.MyOperations.Add(optypeid);
-                }
-             
-            }
-            foreach (var item in Treats)
-            {
-                if (item !="")
-                {
-                    var treatid = new MyTreat //開一新的Mytreat物件
-                    {
-                        MyId = mydata.MyId,
-                        TreatId = Convert.ToInt32(item)
-                    };
-                    Db.MyTreats.Add(treatid);
-                }
-               
-            }
+           
+           
             Db.Personal_Data.Add(mydata);
 
             Db.SaveChanges();

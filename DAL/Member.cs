@@ -19,6 +19,9 @@ namespace IbreastCare.DAL
         {
             this.Personal_Datas = new HashSet<Personal_Data>();
             this.BWs = new HashSet<BW>();
+            this.SeverityLevels = new HashSet<SeverityLevel>();
+            this.SymptomDetails = new HashSet<SymptomDetail>();
+            this.Symptoms = new HashSet<Symptom>();
         }
     
         public int UserId { get; set; }
@@ -40,5 +43,11 @@ namespace IbreastCare.DAL
         public virtual ICollection<Personal_Data> Personal_Datas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BW> BWs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SeverityLevel> SeverityLevels { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SymptomDetail> SymptomDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Symptom> Symptoms { get; set; }
     }
 }

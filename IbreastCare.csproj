@@ -3172,6 +3172,7 @@
     <Compile Include="Controllers\MydataController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\RecordController.cs" />
+    <Compile Include="Controllers\SymptomController.cs" />
     <Compile Include="DAL\BW.cs">
       <DependentUpon>IbreastCareDB.tt</DependentUpon>
     </Compile>
@@ -3214,6 +3215,15 @@
     <Compile Include="DAL\RolePermission.cs">
       <DependentUpon>IbreastCareDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\SeverityLevel.cs">
+      <DependentUpon>IbreastCareDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Symptom.cs">
+      <DependentUpon>IbreastCareDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SymptomDetail.cs">
+      <DependentUpon>IbreastCareDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\TreatPlan.cs">
       <DependentUpon>IbreastCareDB.tt</DependentUpon>
     </Compile>
@@ -3231,6 +3241,9 @@
     <Compile Include="ViewModel\PatientViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\SeverityLevelViewModel.cs" />
+    <Compile Include="ViewModel\SymptomDetailViewModel.cs" />
+    <Compile Include="ViewModel\SymptomViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -3524,6 +3537,12 @@
     <Content Include="Views\BW\Index.cshtml" />
     <Content Include="Views\BW\ShowLine.cshtml" />
     <Content Include="Views\BW\EditBW.cshtml" />
+    <Content Include="Views\BW\DeleteBW.cshtml" />
+    <Content Include="Views\BW\EditBW_2.cshtml" />
+    <Content Include="Views\BW\AddBWok.cshtml" />
+    <Content Include="Views\BW\Indexok.cshtml" />
+    <Content Include="Views\BW\Index_old.cshtml" />
+    <Content Include="Views\Symptom\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

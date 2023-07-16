@@ -97,6 +97,34 @@
           <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="SeverityLevels">
+          <Key>
+            <PropertyRef Name="SeverityLevelID" />
+          </Key>
+          <Property Name="SeverityLevelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SeverityLevel" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="SymptomDetails">
+          <Key>
+            <PropertyRef Name="SymptomDetailID" />
+          </Key>
+          <Property Name="SymptomDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SymptomID" Type="int" Nullable="false" />
+          <Property Name="SeverityLevelID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="Symptoms">
+          <Key>
+            <PropertyRef Name="SymptomID" />
+          </Key>
+          <Property Name="SymptomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SymptomName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
         <EntityType Name="TreatPlan">
           <Key>
             <PropertyRef Name="TreatId" />
@@ -212,6 +240,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SeverityLevels_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="SeverityLevels" Type="Self.SeverityLevels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SeverityLevels">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SymptomDetails_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="SymptomDetails" Type="Self.SymptomDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SymptomDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SymptomDetails_SeverityLevels">
+          <End Role="SeverityLevels" Type="Self.SeverityLevels" Multiplicity="1" />
+          <End Role="SymptomDetails" Type="Self.SymptomDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeverityLevels">
+              <PropertyRef Name="SeverityLevelID" />
+            </Principal>
+            <Dependent Role="SymptomDetails">
+              <PropertyRef Name="SeverityLevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SymptomDetails_Symptoms">
+          <End Role="Symptoms" Type="Self.Symptoms" Multiplicity="1" />
+          <End Role="SymptomDetails" Type="Self.SymptomDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Symptoms">
+              <PropertyRef Name="SymptomID" />
+            </Principal>
+            <Dependent Role="SymptomDetails">
+              <PropertyRef Name="SymptomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Symptoms_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="Symptoms" Type="Self.Symptoms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Symptoms">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="IbreastDBModelStoreContainer">
           <EntitySet Name="BW" EntityType="Self.BW" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
@@ -222,6 +310,9 @@
           <EntitySet Name="Personal_Datas" EntityType="Self.Personal_Datas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeverityLevels" EntityType="Self.SeverityLevels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SymptomDetails" EntityType="Self.SymptomDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Symptoms" EntityType="Self.Symptoms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TreatPlan" EntityType="Self.TreatPlan" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BW_Members" Association="Self.FK_BW_Members">
             <End Role="Members" EntitySet="Members" />
@@ -258,6 +349,26 @@
           <AssociationSet Name="FK_RolePermissions_Roles" Association="Self.FK_RolePermissions_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="RolePermissions" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeverityLevels_Members" Association="Self.FK_SeverityLevels_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="SeverityLevels" EntitySet="SeverityLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SymptomDetails_Members" Association="Self.FK_SymptomDetails_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="SymptomDetails" EntitySet="SymptomDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SymptomDetails_SeverityLevels" Association="Self.FK_SymptomDetails_SeverityLevels">
+            <End Role="SeverityLevels" EntitySet="SeverityLevels" />
+            <End Role="SymptomDetails" EntitySet="SymptomDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SymptomDetails_Symptoms" Association="Self.FK_SymptomDetails_Symptoms">
+            <End Role="Symptoms" EntitySet="Symptoms" />
+            <End Role="SymptomDetails" EntitySet="SymptomDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Symptoms_Members" Association="Self.FK_Symptoms_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Symptoms" EntitySet="Symptoms" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -311,7 +422,30 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="BW" EntitySet="BWs" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="SeverityLevels" EntityType="IbreastDBModel.SeverityLevel" />
+          <EntitySet Name="SymptomDetails" EntityType="IbreastDBModel.SymptomDetail" />
+          <EntitySet Name="Symptoms" EntityType="IbreastDBModel.Symptom" />
+          <AssociationSet Name="FK_SeverityLevels_Members" Association="IbreastDBModel.FK_SeverityLevels_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="SeverityLevel" EntitySet="SeverityLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SymptomDetails_Members" Association="IbreastDBModel.FK_SymptomDetails_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="SymptomDetail" EntitySet="SymptomDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Symptoms_Members" Association="IbreastDBModel.FK_Symptoms_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Symptom" EntitySet="Symptoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SymptomDetails_SeverityLevels" Association="IbreastDBModel.FK_SymptomDetails_SeverityLevels">
+            <End Role="SeverityLevel" EntitySet="SeverityLevels" />
+            <End Role="SymptomDetail" EntitySet="SymptomDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SymptomDetails_Symptoms" Association="IbreastDBModel.FK_SymptomDetails_Symptoms">
+            <End Role="Symptom" EntitySet="Symptoms" />
+            <End Role="SymptomDetail" EntitySet="SymptomDetails" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="UserId" />
@@ -332,7 +466,10 @@
           <NavigationProperty Name="Role" Relationship="IbreastDBModel.FK_Members_Roles" FromRole="Member" ToRole="Role" />
           <NavigationProperty Name="Personal_Datas" Relationship="IbreastDBModel.FK_Personal_Datas_Members" FromRole="Member" ToRole="Personal_Datas" />
           <NavigationProperty Name="BWs" Relationship="IbreastDBModel.FK_BW_Members" FromRole="Member" ToRole="BW" />
-        </EntityType>
+          <NavigationProperty Name="SeverityLevels" Relationship="IbreastDBModel.FK_SeverityLevels_Members" FromRole="Member" ToRole="SeverityLevel" />
+          <NavigationProperty Name="SymptomDetails" Relationship="IbreastDBModel.FK_SymptomDetails_Members" FromRole="Member" ToRole="SymptomDetail" />
+          <NavigationProperty Name="Symptoms" Relationship="IbreastDBModel.FK_Symptoms_Members" FromRole="Member" ToRole="Symptom" />
+          </EntityType>
         <EntityType Name="MyOperation">
           <Key>
             <PropertyRef Name="MyOpeId" />
@@ -537,6 +674,101 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SeverityLevel">
+          <Key>
+            <PropertyRef Name="SeverityLevelID" />
+          </Key>
+          <Property Name="SeverityLevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SeverityLevel1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="IbreastDBModel.FK_SeverityLevels_Members" FromRole="SeverityLevel" ToRole="Member" />
+          <NavigationProperty Name="SymptomDetails" Relationship="IbreastDBModel.FK_SymptomDetails_SeverityLevels" FromRole="SeverityLevel" ToRole="SymptomDetail" />
+        </EntityType>
+        <EntityType Name="SymptomDetail">
+          <Key>
+            <PropertyRef Name="SymptomDetailID" />
+          </Key>
+          <Property Name="SymptomDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SymptomID" Type="Int32" Nullable="false" />
+          <Property Name="SeverityLevelID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="IbreastDBModel.FK_SymptomDetails_Members" FromRole="SymptomDetail" ToRole="Member" />
+          <NavigationProperty Name="SeverityLevel" Relationship="IbreastDBModel.FK_SymptomDetails_SeverityLevels" FromRole="SymptomDetail" ToRole="SeverityLevel" />
+          <NavigationProperty Name="Symptom" Relationship="IbreastDBModel.FK_SymptomDetails_Symptoms" FromRole="SymptomDetail" ToRole="Symptom" />
+        </EntityType>
+        <EntityType Name="Symptom">
+          <Key>
+            <PropertyRef Name="SymptomID" />
+          </Key>
+          <Property Name="SymptomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SymptomName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="IbreastDBModel.FK_Symptoms_Members" FromRole="Symptom" ToRole="Member" />
+          <NavigationProperty Name="SymptomDetails" Relationship="IbreastDBModel.FK_SymptomDetails_Symptoms" FromRole="Symptom" ToRole="SymptomDetail" />
+        </EntityType>
+        <Association Name="FK_SeverityLevels_Members">
+          <End Type="IbreastDBModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="IbreastDBModel.SeverityLevel" Role="SeverityLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SeverityLevel">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SymptomDetails_Members">
+          <End Type="IbreastDBModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="IbreastDBModel.SymptomDetail" Role="SymptomDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SymptomDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Symptoms_Members">
+          <End Type="IbreastDBModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="IbreastDBModel.Symptom" Role="Symptom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Symptom">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SymptomDetails_SeverityLevels">
+          <End Type="IbreastDBModel.SeverityLevel" Role="SeverityLevel" Multiplicity="1" />
+          <End Type="IbreastDBModel.SymptomDetail" Role="SymptomDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeverityLevel">
+              <PropertyRef Name="SeverityLevelID" />
+            </Principal>
+            <Dependent Role="SymptomDetail">
+              <PropertyRef Name="SeverityLevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SymptomDetails_Symptoms">
+          <End Type="IbreastDBModel.Symptom" Role="Symptom" Multiplicity="1" />
+          <End Type="IbreastDBModel.SymptomDetail" Role="SymptomDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Symptom">
+              <PropertyRef Name="SymptomID" />
+            </Principal>
+            <Dependent Role="SymptomDetail">
+              <PropertyRef Name="SymptomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -652,7 +884,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="SeverityLevels">
+            <EntityTypeMapping TypeName="IbreastDBModel.SeverityLevel">
+              <MappingFragment StoreEntitySet="SeverityLevels">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SeverityLevel1" ColumnName="SeverityLevel" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="SeverityLevelID" ColumnName="SeverityLevelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SymptomDetails">
+            <EntityTypeMapping TypeName="IbreastDBModel.SymptomDetail">
+              <MappingFragment StoreEntitySet="SymptomDetails">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SeverityLevelID" ColumnName="SeverityLevelID" />
+                <ScalarProperty Name="SymptomID" ColumnName="SymptomID" />
+                <ScalarProperty Name="SymptomDetailID" ColumnName="SymptomDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Symptoms">
+            <EntityTypeMapping TypeName="IbreastDBModel.Symptom">
+              <MappingFragment StoreEntitySet="Symptoms">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SymptomName" ColumnName="SymptomName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="SymptomID" ColumnName="SymptomID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

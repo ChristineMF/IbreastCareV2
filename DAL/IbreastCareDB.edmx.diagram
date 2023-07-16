@@ -24,7 +24,15 @@
         <AssociationConnector Association="IbreastDBModel.FK_RolePermissions_Roles" />
         <EntityTypeShape EntityType="IbreastDBModel.BW" Width="1.5" PointX="4.125" PointY="11.375" />
         <AssociationConnector Association="IbreastDBModel.FK_BW_Members" />
-      </Diagram>
+        <EntityTypeShape EntityType="IbreastDBModel.SeverityLevel" Width="1.5" PointX="4.125" PointY="16.625" />
+        <EntityTypeShape EntityType="IbreastDBModel.SymptomDetail" Width="1.5" PointX="7.375" PointY="11.5" />
+        <EntityTypeShape EntityType="IbreastDBModel.Symptom" Width="1.5" PointX="4.125" PointY="0.75" />
+        <AssociationConnector Association="IbreastDBModel.FK_SeverityLevels_Members" />
+        <AssociationConnector Association="IbreastDBModel.FK_SymptomDetails_Members" />
+        <AssociationConnector Association="IbreastDBModel.FK_Symptoms_Members" />
+        <AssociationConnector Association="IbreastDBModel.FK_SymptomDetails_SeverityLevels" />
+        <AssociationConnector Association="IbreastDBModel.FK_SymptomDetails_Symptoms" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -294,9 +294,10 @@
 
                                             <td>
                                                 @*<a herf="/api/BWEdit/">編輯</a>
-                                                    <a herf="/api/BWDelete/">刪除</a>*@
+        <a herf="/api/BWDelete/">刪除</a>*@
                                                 @Html.ActionLink("編輯", "EditBW", new { id = item.BWId })
-                                                @Html.ActionLink("刪除", "Delete", new { id = item.BWId })
+                                                @Html.ActionLink("刪除", "DeleteBW", new { id = item.BWId }, new { onclick = $"return confirm('[{"確定刪除這筆資料"}]')" })
+                                           
                                             </td>
                                         </tr>
                                         <!--</td>--><!--有對話框確認-->

@@ -1,0 +1,74 @@
+﻿@model IbreastCare.ViewModel.BodyWeightViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DeleteBW</title>
+</head>
+<body>
+    <div>
+        <h4>BodyWeightViewModel</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.BWId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BWId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BW1)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BW1)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BMI)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BMI)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.InputDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.InputDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.MyId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MyId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.MeasureDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MeasureDate)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

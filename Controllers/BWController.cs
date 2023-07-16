@@ -115,18 +115,40 @@ namespace IbreastCare.Controllers
         public ActionResult EditBW(int? id)
         {
             ViewBag.userid = (int)Session["UserId"];
-            var myBH = Db.Personal_Data.Where(p => p.UserId == id).OrderByDescending(p => p.MyId).FirstOrDefault();
+            var myBH = Db.BWs.Join(Db.Personal_Data, b => b.UserId, p => p.UserId, (bh, ph) => new { bh.UserId, bh.BWId, ph.MyId, ph.Height })
+                .Where(e => e.BWId == id).FirstOrDefault();
+              
             ViewBag.myHeight = myBH.Height;
-            var myAge = Db.Members.Where(p => p.UserId == id).FirstOrDefault();
+            var myAge = Db.Members.Where(p => p.UserId == myBH.UserId).FirstOrDefault();
             var age = new CalculateAge().CalculateAgeCorrect(myAge.BirthDate.Value.Date, DateTime.Now);
             ViewBag.myAge = age;
             var myBW= Db.BWs.Where(p => p.BWId == id).FirstOrDefault();
+            //// 取得 myBW.MeasureDate 的日期字串 (yyyy-MM-dd)
+            //const measureDateStr = new Date(myBW.MeasureDate).toLocaleDateString("en-CA");
+
+            //// 將 measureDateStr 設定給 item.MeasureDate
+            //item.MeasureDate = measureDateStr;
+
             ViewBag.myWeight = myBW.BW1;
             ViewBag.myBMI = myBW.BMI;
-            ViewBag.myMeasure = myBW.MeasureDate;
+            ViewBag.myMeasure = myBW.MeasureDate.Date;
             ViewBag.myBWId = myBW.BWId;
             return View();
         }
+        //[HttpPost]
+        public ActionResult DeleteBW(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+           BW mybw = Db.BWs.FirstOrDefault(p => p.BWId == id);
+            int myuserid = mybw.UserId;
+            if (mybw == null) return HttpNotFound();//404
+            Db.BWs.Remove(mybw);
+            Db.SaveChanges();
+            return RedirectToAction("Index", "BW", new {id = myuserid });
+        }
+        
+        
         public ActionResult ShowLine(int? id)
         {
             //var myuserid = (int)Session["UserId"];

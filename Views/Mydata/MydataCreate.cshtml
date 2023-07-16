@@ -345,7 +345,7 @@
                             <label for="selectTreatPlan">療程計畫</label>
                             <select v-model="mydata.TreatPlan" class="form-control" name="selectTreatPlan" multiple="multiple"
                                     id="selectTreatPlan">
-                                @*<option value="">請選擇</option>*@
+                                @*<option value="">請選擇</option>*@g
                                 <option value="1">化學治療</option>
                                 <option value="2">放射線治療</option>
                                 <option value="3">標靶治療</option>
@@ -564,9 +564,9 @@
                         ER: "",
                         PR: "",
                         Her: "",
-                        OperationType: "",
+                        OperationType: [],
 
-                        TreatPlan: "",
+                        TreatPlan: [],
                         Note: "",
                         InputDate: "",
                         UserId: ''
@@ -623,11 +623,32 @@
                     //var sOpType = $("select[name='selectOpType']").val();
 
                     //self.OperationType = sOpType.toString();
-                    if ($("select[name='selectOpType']").text() != '請選擇')
-                        self.OperationType = $("select[name='selectOpType']").val().toString();
+                    //if ($("select[name='selectOpType']").val()!=null)
+                    //    self.OperationType = $("select[name='selectOpType']").val().toString();
+                    if (this.mydata.OperationType && this.mydata.OperationType.length > 0) {
+                        // 在這裡進行儲存操作，可以將選擇的值送到後端保存
+                        console.log('你選了：', this.mydata.OperationType);
+                        var operationTypeString = this.mydata.OperationType.join(',');
+                        self.OperationType = operationTypeString;
+                    } else {
+                        console.log('沒有選取任何值');
+                    }
 
-                    if ($("select[name='selectOpType']").text() != '請選擇')
-                        self.TreatPlan = $("select[name='selectTreatPlan']").val().toString();
+                    if (this.mydata.TreatPlan && this.mydata.TreatPlan.length > 0) {
+                        // 在這裡進行儲存操作，可以將選擇的值送到後端保存
+                        console.log('你選了：', this.mydata.TreatPlan);
+                        var treatTypeString = this.mydata.TreatPlan.join(',');
+                        self.TreatPlan = treatTypeString;
+                    } else {
+                        console.log('沒有選取任何值');
+                    }
+                    //if (this.OperationType != null)
+                    //    self.OperationType = this.OperationType.val();
+                    //if (this.TreatPlan != null)
+                    //    self.TreatPlan = this.TreatPlan.val();
+
+                    //if ($("select[name='selectTreatPlan']").val()!=null)
+                    //    self.TreatPlan = $("select[name='selectTreatPlan']").val().toString();
 
                     //var selectTreatPlan = $("select[name='selectTreatPlan']").val();
                     //self.TreatPlan = selectTreatPlan.toString();

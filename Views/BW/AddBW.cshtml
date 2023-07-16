@@ -32,15 +32,17 @@
         li {
             list-style-type: none;
         }
+
         .row .tdee-item {
             border: 1px solid green;
             margin-bottom: 20px;
             border-radius: 10px;
-            padding:10px;
+            padding: 10px;
         }
-        .tdee span{
+
+        .tdee span {
             font: 1.5rem bold red;
-            color:red;
+            color: red;
         }
     </style>
 }
@@ -448,7 +450,7 @@
                             @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
                         </div>
                     </div>
-                   
+
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="tdee-item">
                             <div class="pi-img-wrapper">
@@ -491,7 +493,7 @@
 </div>
 
                 </div>
-@Html.ActionLink("回列表", "Index")
+@Html.ActionLink("回列表", "Index", "BW", new { id = @ViewBag.userid }, null)
             </div>
         </div>
 <!--Row-->
@@ -609,7 +611,7 @@
                     return (this.myBW.BW1 / (heightInMeter * heightInMeter)).toFixed(2);
                 },
                 BMR() {
-                    return this.bmrCalculation;
+                    return this.bmrCalculation.toFixed(2);
                 },
                 Lv1() {
                     return (this.bmrCalculation * 1.2).toFixed(2);
@@ -710,16 +712,16 @@
 
     </script>
     <script>
-                    //$(document).ready(function () {
-                    //    // 獲取 #bmi 的內容
-                    //    var bmiValue = parseFloat($("#bmi").val());
+                        //$(document).ready(function () {
+                        //    // 獲取 #bmi 的內容
+                        //    var bmiValue = parseFloat($("#bmi").val());
 
-                    //    // 比較 bmiValue 與 18.5
-                    //    if (bmiValue < 18.5) {
-                    //        // 如果 bmiValue 小於 18.5，將 #bmi1 的 div 樣式變紅色
-                    //        $("#bmi1 div").css("border", "1px solid red")
-                    //    }
-                    //});
+                        //    // 比較 bmiValue 與 18.5
+                        //    if (bmiValue < 18.5) {
+                        //        // 如果 bmiValue 小於 18.5，將 #bmi1 的 div 樣式變紅色
+                        //        $("#bmi1 div").css("border", "1px solid red")
+                        //    }
+                        //});
 
     </script>
 

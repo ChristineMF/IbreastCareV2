@@ -132,13 +132,24 @@ namespace IbreastCare.Controllers
         }
 
         // PUT: api/BWAPI/5
-        public void Put(int id, [FromBody] BW myBW)
+        public void Put( [FromBody] BW myBW)
         {
-            //var item = Db.BWs.Find(  == myBW.BWId);
-            //if (item != null)
-            //{
-            //    item.Name = course.Name;
-            //}
+            var item = Db.BWs.Find( myBW.BWId);
+            if (item != null)
+            {
+                item.InputDate = DateTime.Now;
+                if (myBW.MeasureDate.Year == 0001)
+                    item.MeasureDate = DateTime.Now;
+                else
+                    item.MeasureDate = myBW.MeasureDate;
+                item.BMI = myBW.BMI;
+                item.BW1 = myBW.BW1;
+                item.BWId = myBW.BWId;
+                item.UserId = myBW.UserId;
+            }
+            
+
+            Db.SaveChanges();
         }
 
         // DELETE: api/BWAPI/5
