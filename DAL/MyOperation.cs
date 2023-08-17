@@ -19,6 +19,6 @@ namespace IbreastCare.DAL
         public Nullable<int> OpeTypeId { get; set; }
     
         public virtual OperationType OperationType { get; set; }
-        public virtual Personal_Data Personal_Datas { get; set; }
+        public virtual Personal_Datas Personal_Datas { get; set; }
     }
 }

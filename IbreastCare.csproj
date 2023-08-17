@@ -749,6 +749,7 @@
     <Content Include="assets\vendor\jquery\jquery.min.map" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.map" />
     <Content Include="font\Nunito-Regular.ttf" />
+    <Content Include="home-02.html" />
     <Content Include="img\logo\logo.ai" />
     <Content Include="assets\lib\owlcarousel\LICENSE" />
     <Content Include="assets\corporate\img\icons\Thumbs.db" />
@@ -842,6 +843,12 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="shop-item.html" />
+    <Content Include="upload\activity\198-0-1.jpg" />
+    <Content Include="upload\activity\200-0-1.jpg" />
+    <Content Include="upload\activity\201-0-1.jpg" />
+    <Content Include="upload\activity\202-0-1.jpg" />
+    <Content Include="upload\activity\203-0-1.jpg" />
     <Content Include="img\tdee\bmi.png" />
     <Content Include="img\tdee\lv1.png" />
     <Content Include="img\tdee\lv2.png" />
@@ -1258,6 +1265,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\utils.js" />
     <Content Include="shop-product-list.html" />
+    <Content Include="upload\activity\203-0-1_2.jpg" />
     <Content Include="vendor\bootstrap-datepicker\css\bootstrap-datepicker.css" />
     <Content Include="vendor\bootstrap-datepicker\css\bootstrap-datepicker.min.css" />
     <Content Include="vendor\bootstrap-datepicker\css\bootstrap-datepicker.standalone.css" />
@@ -3164,6 +3172,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountManageController.cs" />
+    <Compile Include="Controllers\ActiveController.cs" />
     <Compile Include="Controllers\BWAPIController.cs" />
     <Compile Include="Controllers\BWController.cs" />
     <Compile Include="Controllers\CaseManagerController.cs" />
@@ -3197,6 +3207,9 @@
     <Compile Include="DAL\MyOperation.cs">
       <DependentUpon>IbreastCareDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\MySymptom.cs">
+      <DependentUpon>IbreastCareDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\MyTreat.cs">
       <DependentUpon>IbreastCareDB.tt</DependentUpon>
     </Compile>
@@ -3206,7 +3219,7 @@
     <Compile Include="DAL\Permission.cs">
       <DependentUpon>IbreastCareDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\Personal_Data.cs">
+    <Compile Include="DAL\Personal_Datas.cs">
       <DependentUpon>IbreastCareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Role.cs">
@@ -3235,6 +3248,7 @@
     <Compile Include="Models\CalculateAge.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\BodyWeightViewModel.cs" />
     <Compile Include="ViewModel\LoginRegisterViewModel.cs" />
     <Compile Include="ViewModel\MydataViewModel.cs" />
@@ -3243,6 +3257,8 @@
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\SeverityLevelViewModel.cs" />
     <Compile Include="ViewModel\SymptomDetailViewModel.cs" />
+    <Compile Include="ViewModel\MySymptomViewModel.cs" />
+    <Compile Include="ViewModel\SymptomCategoryViewModel.cs" />
     <Compile Include="ViewModel\SymptomViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3302,11 +3318,11 @@
     <Content Include="Views\Home\Indextest.cshtml" />
     <Content Include="Views\Home\Index_normal.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
-    <Content Include="Views\Account\Edit.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Edit2.cshtml" />
+    <Content Include="Views\Account\Index_3.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\Details2.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Create - Copy.cshtml" />
     <Content Include="Views\Patient\Index2.cshtml" />
@@ -3542,7 +3558,19 @@
     <Content Include="Views\BW\AddBWok.cshtml" />
     <Content Include="Views\BW\Indexok.cshtml" />
     <Content Include="Views\BW\Index_old.cshtml" />
+    <Content Include="Views\Symptom\Index_old.cshtml" />
     <Content Include="Views\Symptom\Index.cshtml" />
+    <Content Include="Views\Symptom\SymptomCreate.cshtml" />
+    <Content Include="Views\Shared\_ShowDetails.cshtml" />
+    <Content Include="Views\Shared\_RadioButtonList2.cshtml" />
+    <Content Include="Views\AccountManage\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutHome.cshtml" />
+    <Content Include="Views\Account\Logout.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Active\Index_old.cshtml" />
+    <Content Include="Views\Active\Index_old2.cshtml" />
+    <Content Include="Views\Active\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3552,6 +3580,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="img\news\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

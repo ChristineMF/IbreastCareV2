@@ -4,16 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="20ded7f7bb274027b08b01d6cd0f8d0d" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="IbreastDBModel.Member" Width="1.5" PointX="1.875" PointY="5.5" />
-        <EntityTypeShape EntityType="IbreastDBModel.MyOperation" Width="1.5" PointX="7.75" PointY="6.75" />
-        <EntityTypeShape EntityType="IbreastDBModel.MyTreat" Width="1.5" PointX="7.875" PointY="4.5" />
-        <EntityTypeShape EntityType="IbreastDBModel.OperationType" Width="1.5" PointX="11" PointY="6.75" />
-        <EntityTypeShape EntityType="IbreastDBModel.Permission" Width="1.5" PointX="7.375" PointY="2.625" />
-        <EntityTypeShape EntityType="IbreastDBModel.Personal_Data" Width="1.5" PointX="4.375" PointY="5.875" />
-        <EntityTypeShape EntityType="IbreastDBModel.RolePermission" Width="1.5" PointX="4.75" PointY="2.5" />
-        <EntityTypeShape EntityType="IbreastDBModel.Role" Width="1.5" PointX="2.25" PointY="2.5" />
-        <EntityTypeShape EntityType="IbreastDBModel.TreatPlan" Width="1.5" PointX="11" PointY="4.5" />
+      <Diagram DiagramId="20ded7f7bb274027b08b01d6cd0f8d0d" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="IbreastDBModel.BW" Width="1.5" PointX="13.75" PointY="5.25" />
+        <EntityTypeShape EntityType="IbreastDBModel.Member" Width="1.5" PointX="4" PointY="11.75" />
+        <EntityTypeShape EntityType="IbreastDBModel.MyOperation" Width="1.5" PointX="13.75" PointY="12.125" />
+        <EntityTypeShape EntityType="IbreastDBModel.MyTreat" Width="1.5" PointX="13.75" PointY="14.75" />
+        <EntityTypeShape EntityType="IbreastDBModel.OperationType" Width="1.5" PointX="19.25" PointY="12.375" />
+        <EntityTypeShape EntityType="IbreastDBModel.Permission" Width="1.5" PointX="3.875" PointY="23.5" />
+        <EntityTypeShape EntityType="IbreastDBModel.Personal_Datas" Width="1.5" PointX="8.375" PointY="12.25" />
+        <EntityTypeShape EntityType="IbreastDBModel.RolePermission" Width="1.5" PointX="3.75" PointY="20.625" />
+        <EntityTypeShape EntityType="IbreastDBModel.Role" Width="1.5" PointX="3.875" PointY="17.625" />
+        <EntityTypeShape EntityType="IbreastDBModel.SymptomDetail" Width="1.5" PointX="19" PointY="8.125" />
+        <EntityTypeShape EntityType="IbreastDBModel.Symptom" Width="1.5" PointX="23.5" PointY="7.125" />
+        <EntityTypeShape EntityType="IbreastDBModel.TreatPlan" Width="1.5" PointX="19.375" PointY="15" />
+        <AssociationConnector Association="IbreastDBModel.FK_BW_Members" />
         <AssociationConnector Association="IbreastDBModel.FK_Members_Roles" />
         <AssociationConnector Association="IbreastDBModel.FK_Personal_Datas_Members" />
         <AssociationConnector Association="IbreastDBModel.FK_MyOperations_OperationType" />
@@ -22,17 +26,13 @@
         <AssociationConnector Association="IbreastDBModel.FK_MyTreats_TreatPlan" />
         <AssociationConnector Association="IbreastDBModel.FK_RolePermissions_Permissions" />
         <AssociationConnector Association="IbreastDBModel.FK_RolePermissions_Roles" />
-        <EntityTypeShape EntityType="IbreastDBModel.BW" Width="1.5" PointX="4.125" PointY="11.375" />
-        <AssociationConnector Association="IbreastDBModel.FK_BW_Members" />
-        <EntityTypeShape EntityType="IbreastDBModel.SeverityLevel" Width="1.5" PointX="4.125" PointY="16.625" />
-        <EntityTypeShape EntityType="IbreastDBModel.SymptomDetail" Width="1.5" PointX="7.375" PointY="11.5" />
-        <EntityTypeShape EntityType="IbreastDBModel.Symptom" Width="1.5" PointX="4.125" PointY="0.75" />
-        <AssociationConnector Association="IbreastDBModel.FK_SeverityLevels_Members" />
-        <AssociationConnector Association="IbreastDBModel.FK_SymptomDetails_Members" />
-        <AssociationConnector Association="IbreastDBModel.FK_Symptoms_Members" />
-        <AssociationConnector Association="IbreastDBModel.FK_SymptomDetails_SeverityLevels" />
         <AssociationConnector Association="IbreastDBModel.FK_SymptomDetails_Symptoms" />
-        </Diagram>
+        <EntityTypeShape EntityType="IbreastDBModel.SeverityLevel" Width="2.125" PointX="22.875" PointY="9.75" />
+        <AssociationConnector Association="IbreastDBModel.FK_SymptomDetails_SeverityLevels" />
+        <EntityTypeShape EntityType="IbreastDBModel.MySymptom" Width="1.5" PointX="13.625" PointY="8.5" />
+        <AssociationConnector Association="IbreastDBModel.FK_MySymptoms_Members" />
+        <AssociationConnector Association="IbreastDBModel.FK_MySymptoms_SymptomDetails" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

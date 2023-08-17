@@ -1,0 +1,7 @@
+﻿@model (string name,List<SelectListItem>List)/*Tuple,臨時性集合資料寫法,將每項的name加入*/
+
+@foreach (SelectListItem item in Model.List)
+{
+    <input type="radio" name=@Model.name value="@item.Value" id="rdo_@item.Value" />/*name="name"改成,name=@Model.name*/
+    <label for="rdo_@item.Value">@item.Text</label>
+}

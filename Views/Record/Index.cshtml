@@ -4,12 +4,29 @@
 }
 @section Styles{
     @*<link rel="stylesheet" href="/assets/css/bootstrap.min.css">*@
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/templatemo.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     @*<link rel="stylesheet" href="/assets/css/fontawesome.min.css">*@
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/css/news/style.css" rel="stylesheet">
     <link href="~/assets/css/fontawesome.css" rel="stylesheet" />
+    <style>
+        .breadcrumbs h2 {
+            font-size: 32px;
+            font-weight: 500;
+            color: white;
+        }
+    </style>
 
 }
 <!-- Start Categories of The Month -->
@@ -43,14 +60,14 @@
                     <p class="text-center"><a class="btn btn-success" href="~/Mydata/Index/@ViewBag.myuserid">我的</a></p>
                 </div>
                 <div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="#"><img src="~/assets/img/record/record2.png" class="rounded-circle img-fluid border"></a>
+                    <a href="~/Symptom/Index/@ViewBag.myuserid"><img src="~/assets/img/record/record2.png" class="rounded-circle img-fluid border"></a>
                     @*<h2 class="h5 text-center mt-3 mb-3">Shoes</h2>*@<br />
-                    <p class="text-center"><a class="btn btn-success">治療</a></p>
+                    <p class="text-center"><a class="btn btn-success" href="~/Symptom/Index/@ViewBag.myuserid">症狀</a></p>
                 </div>
                 <div class="col-12 col-md-4 p-5 mt-3">
                     <a href="~/BW/Index/@ViewBag.myuserid"><img src="~/assets/img/record/record3.jpg" class="rounded-circle img-fluid border"></a>
                     @*<h2 class="h5 text-center mt-3 mb-3">Accessories</h2>*@<br />
-                    <p class="text-center"><a class="btn btn-success" href="~/BW/Index/@ViewBag.myuserid">身體</a></p>
+                    <p class="text-center"><a class="btn btn-success" href="~/BW/Index/@ViewBag.myuserid">體重</a></p>
                 </div>
                 @*<div class="col-12 col-md-4 p-5 mt-3">
                         <a href="#"><img src="./assets/img/category_img_03.jpg" class="rounded-circle img-fluid border"></a>

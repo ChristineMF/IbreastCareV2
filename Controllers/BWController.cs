@@ -18,7 +18,7 @@ namespace IbreastCare.Controllers
         public ActionResult Index(int? id)
         {
             //var myuserid = (int)Session["UserId"];
-            ViewBag.userid = (int)Session["UserId"];
+            ViewBag.myuserid = (int)Session["UserId"];
 
             List<BW>myBW=Db.BWs.Where(p => p.UserId == id).OrderByDescending(p => p.MeasureDate).ToList();
             //List<string> dateStrings = BWList
@@ -77,7 +77,7 @@ namespace IbreastCare.Controllers
         }
         public ActionResult Index_old(int? id)
         {
-            ViewBag.userid = (int)Session["UserId"];
+            ViewBag.myuserid = (int)Session["UserId"];
             var myBW =
                 Db.BWs.Where(p => p.UserId == id)
                 .Select(p => new BWDTO
@@ -103,8 +103,8 @@ namespace IbreastCare.Controllers
         }
         public ActionResult AddBW(int? id)
         {
-            ViewBag.userid = (int)Session["UserId"];
-            var myBH = Db.Personal_Data.Where(p => p.UserId == id).OrderByDescending(p => p.MyId).FirstOrDefault();
+            ViewBag.myuserid = (int)Session["UserId"];
+            var myBH = Db.Personal_Datas.Where(p => p.UserId == id).OrderByDescending(p => p.MyId).FirstOrDefault();
             ViewBag.myHeight = myBH.Height;
             var myAge = Db.Members.Where(p => p.UserId == id).FirstOrDefault();
             
@@ -114,8 +114,8 @@ namespace IbreastCare.Controllers
         }
         public ActionResult EditBW(int? id)
         {
-            ViewBag.userid = (int)Session["UserId"];
-            var myBH = Db.BWs.Join(Db.Personal_Data, b => b.UserId, p => p.UserId, (bh, ph) => new { bh.UserId, bh.BWId, ph.MyId, ph.Height })
+            ViewBag.myuserid = (int)Session["UserId"];
+            var myBH = Db.BWs.Join(Db.Personal_Datas, b => b.UserId, p => p.UserId, (bh, ph) => new { bh.UserId, bh.BWId, ph.MyId, ph.Height })
                 .Where(e => e.BWId == id).FirstOrDefault();
               
             ViewBag.myHeight = myBH.Height;

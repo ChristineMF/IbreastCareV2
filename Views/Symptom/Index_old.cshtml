@@ -1,0 +1,17 @@
+﻿@model IEnumerableIbreastCare.ViewModel.SymptomViewModel>
+
+@{
+    ViewBag.Title = "症狀列表";
+    //Layout = "~/Views/Shared/_LayoutPageRecord.cshtml";
+    Layout = null;
+}
+
+<h2>症狀列表</h2>
+<ul>
+    @foreach (var symptom in Model)
+    {
+        <li>
+            @Html.ActionLink(symptom.SymptomName, "ShowDetails", new { symptomID = symptom.SymptomID })
+        </li>
+    }
+</ul>

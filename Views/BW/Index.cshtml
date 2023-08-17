@@ -35,13 +35,13 @@
                 <i class="fa fa-bars"></i>
             </button>
             <h1 class="h3 mb-0 text-gray-800">我的體重</h1>
-            <ol class="breadcrumb">
+            @*<ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="./">Home</a></li>
                 <li class="breadcrumb-item">Tables</li>
                 <li class="breadcrumb-item" aria-current="page">DataTables</li>
             </ol>
             @Html.MvcSiteMap().Menu()
-            @Html.MvcSiteMap().SiteMapPath()
+            @Html.MvcSiteMap().SiteMapPath()*@
             @*<ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
@@ -247,7 +247,7 @@
         <div class="row" id="app">
             <!-- Datatables -->
             <!-- DataTable with Hover -->
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <!-- Select2 -->
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -255,9 +255,9 @@
                     </div>
                     <div class="card-body">
                         @*<p>Select2 is a jQuery based replacement for select boxes</p>*@
-                        <input type="button" id="myBtn" href="/BW/Index/@ViewBag.userid" value="我的體重" class="btn" />
+                        <input type="button" id="myBtn" href="/BW/Index/@ViewBag.myuserid" value="我的體重" class="btn" />
                         @*<a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>*@
-                        <a href="/BW/AddBW/@ViewBag.userid" class="btn">新增體重</a>
+                        <a href="/BW/AddBW/@ViewBag.myuserid" class="btn">新增體重</a>
                        
                         <div id="result" class="table-responsive p-3">
                             <table class="table align-items-center table-flush table-hover" id="dataTableHover">
@@ -288,7 +288,7 @@
                                         <tr>
                                             <td>@item.BW1</td>
                                             <td>@item.BMI</td>
-                                            <td> @item.MeasureDate</td>
+                                            <td> @item.MeasureDate.ToString("yyyy/MM/dd")</td>
                                             <td>@item.InputDate</td>
 
 
@@ -312,7 +312,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <div class="card mb-6">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">體重BMI歷史圖</h6>
@@ -355,10 +355,10 @@
     <div class="row">
         <div class="col-lg-12">
             <p>
-                DataTables is a third party plugin that is used to generate the demo table below. For more information
+                @*DataTables is a third party plugin that is used to generate the demo table below. For more information
                 about DataTables, please visit the official <a href="https://datatables.net/" target="_blank">
                     DataTables
-                    documentation.
+                    documentation.*@
                 </a>
             </p>
         </div>

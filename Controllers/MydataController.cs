@@ -24,20 +24,20 @@ namespace IbreastCare.Controllers
             //{
             //    return HttpNotFound();
             //}
-            //Personal_Data mydataList = Db.Personal_Data.FirstOrDefault(m => m.UserId == id);
+            //Personal_Datas mydataList = Db.Personal_Datas.FirstOrDefault(m => m.UserId == id);
             //if (mydataList == null)
             //{
             //    return HttpNotFound();
             //}
 
-            //List<Personal_Data> mydata = Db.Personal_Data.Where(p => p.UserId == myuserid).OrderByDescending(p => p.MyId).ToList();
+            //List<Personal_Datas> mydata = Db.Personal_Datas.Where(p => p.UserId == myuserid).OrderByDescending(p => p.MyId).ToList();
 
             //lambda語法,//將join完的新集合再做一次join,每次join都組成新物件做比對
             var y = Db.MyOperations.
                 Join(Db.OperationTypes, p => p.OpeTypeId, o => o.OpeTypeId, (mo, po) => new { mo.MyId, mo.MyOpeId, po.OpeTypeName })
                 .Join(Db.MyTreats,t=>t.MyId,mt=>mt.MyId,(tm,tp)=>new { tm.MyId,tm.MyOpeId,tm.OpeTypeName,tp.TreatId})
                 .Join(Db.TreatPlans,mop=>mop.TreatId,mtp=>mtp.TreatId,(motp,mpt)=>new { motp.MyId,motp.MyOpeId,motp.OpeTypeName,motp.TreatId, mpt.TreatName})
-                .Join(Db.Personal_Data, o => new { o.MyId }, p => new { p.MyId }, (o, p) => new { p.UserId,p.MyId, o.OpeTypeName,o.TreatName, p.CellType, p.ER, p.Height, p.Her, p.Menopause, p.InputDate, p.Note, p.OperationDate, p.PR })
+                .Join(Db.Personal_Datas, o => new { o.MyId }, p => new { p.MyId }, (o, p) => new { p.UserId,p.MyId, o.OpeTypeName,o.TreatName, p.CellType, p.ER, p.Height, p.Her, p.Menopause, p.InputDate, p.Note, p.OperationDate, p.PR })
                 .Where(p=>p.UserId==myuserid).OrderByDescending(o => o.MyId).ToList();
            
 
@@ -63,9 +63,9 @@ namespace IbreastCare.Controllers
 
             //var 變數1=new MpperConfiguration(變數2=>變數2.CreateMap<主資料表(顯示)>
 
-            //將List<Personal_Data>轉成List<MydataViewModel>
+            //將List<Personal_Datas>轉成List<MydataViewModel>
 
-            //List<MydataViewModel> model = Common.MapToList<Personal_Data, MydataViewModel>(y);
+            //List<MydataViewModel> model = Common.MapToList<Personal_Datas, MydataViewModel>(y);
             //MydataViewModel model = mapper.Map<MydataViewModel>(mydata);
             //List<MydataViewModel> dataList = new List<MydataViewModel>();
             //foreach (var item in model)
@@ -84,7 +84,7 @@ namespace IbreastCare.Controllers
 
         public ActionResult MydataCreate()
         {
-            ViewBag.userid = (int)Session["UserId"];
+            ViewBag.myuserid = (int)Session["UserId"];
             //ViewBag.inputdate = Session["InputDate"];
             return View();
         }
@@ -98,9 +98,9 @@ namespace IbreastCare.Controllers
                 mydata.InputDate = DateTime.Now;
                 mydata.UserId = id;
 
-                Personal_Data model = Common.MapTo<MydataViewModel, Personal_Data>(mydata);
+                Personal_Datas model = Common.MapTo<MydataViewModel, Personal_Datas>(mydata);
 
-                Db.Personal_Data.Add(model);
+                Db.Personal_Datas.Add(model);
 
                 Db.SaveChanges();
                 return RedirectToAction("Index", "Mydata");
@@ -118,7 +118,7 @@ namespace IbreastCare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Personal_Data mydata = Db.Personal_Data.FirstOrDefault(m => m.MyId == id);
+            Personal_Datas mydata = Db.Personal_Datas.FirstOrDefault(m => m.MyId == id);
 
             if (mydata == null)
             {
@@ -126,7 +126,7 @@ namespace IbreastCare.Controllers
             }
             List<OperationType> opType = Db.OperationTypes.ToList();
 
-            MydataViewModel editmodel = Common.MapTo<Personal_Data, MydataViewModel>(mydata);
+            MydataViewModel editmodel = Common.MapTo<Personal_Datas, MydataViewModel>(mydata);
 
             //Her的DropdownList,取DB內的值顯示
             List<SelectListItem> HerList = new List<SelectListItem>();
@@ -170,20 +170,20 @@ namespace IbreastCare.Controllers
         {
             if (ModelState.IsValid)
             {
-                //1.從資料庫取得 Personal_Data
-                Personal_Data editmodel = Db.Personal_Data.FirstOrDefault(m => m.MyId == mydataView.MyId);
+                //1.從資料庫取得 Personal_Datas
+                Personal_Datas editmodel = Db.Personal_Datas.FirstOrDefault(m => m.MyId == mydataView.MyId);
                 if (mydataView == null)//若id取回的資料為空，則秀錯誤畫面
                 {
                     return RedirectToAction("Index", "Mydata", new { id = editmodel.UserId });
                 }
-                //2.取Personal_Data資料庫,Personal_Data => MydataViewModel
-                // MydataViewModel mydataList = Common.MapTo<Personal_Data, MydataViewModel>(editmodel);
+                //2.取Personal_Datas資料庫,Personal_Datas => MydataViewModel
+                // MydataViewModel mydataList = Common.MapTo<Personal_Datas, MydataViewModel>(editmodel);
                 //List<MydataViewModel> myList = new List<MydataViewModel>();
                 //myList.Add(mydataList);
                 //foreach (var item in myList)
                 //{
 
-                //2. 更新 Personal_Data 的屬性值
+                //2. 更新 Personal_Datas 的屬性值
                 editmodel.OperationDate = mydataView.OperationDate;
 
                 editmodel.ER = mydataView.ER == "on" ? "陽" : "陰";
@@ -275,14 +275,14 @@ namespace IbreastCare.Controllers
             {
                 return HttpNotFound();
             }
-            Personal_Data mydata = Db.Personal_Data.FirstOrDefault(p => p.MyId == id);
+            Personal_Datas mydata = Db.Personal_Datas.FirstOrDefault(p => p.MyId == id);
             //var y = SLIST.Join(ScoreList, o => o.ID, p => p.StudentID,
             //        (c, s) => new { c.ID, c.Classroom, c.Name, s.Class, s.score })
 
-            //MydataViewModel detailmodel = Common.MapTo<Personal_Data, MydataViewModel>(mydata);
+            //MydataViewModel detailmodel = Common.MapTo<Personal_Datas, MydataViewModel>(mydata);
             //
             var config = new MapperConfiguration(cfg =>
-              cfg.CreateMap<Personal_Data, MydataViewModel>()
+              cfg.CreateMap<Personal_Datas, MydataViewModel>()
               .ForMember(x => x.OperationType, y => y.MapFrom(o => string.Join(",", o.MyOperations.Select(z => z.OperationType.OpeTypeName.Trim()).ToArray())))
               .ForMember(x => x.TreatPlan, y => y.MapFrom(o => string.Join(",", o.MyTreats.Select(z => z.TreatPlan.TreatName.Trim()).ToArray()))));
             var mapper = config.CreateMapper();
@@ -294,7 +294,7 @@ namespace IbreastCare.Controllers
             //var mapper2= config2.CreateMapper();
 
             //var configTreat = new MapperConfiguration(cfg =>
-            //  cfg.CreateMap<Personal_Data, MydataViewModel>().
+            //  cfg.CreateMap<Personal_Datas, MydataViewModel>().
             //  ForMember(x => x.TreatPlan, y => y.MapFrom(o => string.Join(",", o.MyOperations.Select(z => z.OperationType.OpeTypeName.Trim()).ToArray()))));
             //var mapper = config.CreateMapper();
 
@@ -309,11 +309,11 @@ namespace IbreastCare.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
-            Personal_Data mydata = Db.Personal_Data.FirstOrDefault(p => p.MyId == id);
+            Personal_Datas mydata = Db.Personal_Datas.FirstOrDefault(p => p.MyId == id);
 
             if (mydata == null) return HttpNotFound();//404
             var config = new MapperConfiguration(cfg =>
-              cfg.CreateMap<Personal_Data, MydataViewModel>()
+              cfg.CreateMap<Personal_Datas, MydataViewModel>()
               .ForMember(x => x.OperationType, y => y.MapFrom(o => string.Join(",", o.MyOperations.Select(z => z.OperationType.OpeTypeName.Trim()).ToArray())))
               .ForMember(x => x.TreatPlan, y => y.MapFrom(o => string.Join(",", o.MyTreats.Select(z => z.TreatPlan.TreatName.Trim()).ToArray()))));
             var mapper = config.CreateMapper();
@@ -326,9 +326,9 @@ namespace IbreastCare.Controllers
         public ActionResult MydataDeleteConfirm(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            Personal_Data mydata = Db.Personal_Data.FirstOrDefault(p => p.MyId == id);
+            Personal_Datas mydata = Db.Personal_Datas.FirstOrDefault(p => p.MyId == id);
             if (mydata == null) return HttpNotFound();//404
-            Db.Personal_Data.Remove(mydata);
+            Db.Personal_Datas.Remove(mydata);
             List<MyOperation> myop = Db.MyOperations.Where(p => p.MyId == id).ToList();
             foreach (var item in myop)
             {

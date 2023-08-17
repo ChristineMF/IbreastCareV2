@@ -36,14 +36,7 @@
             <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
                 <i class="fa fa-bars"></i>
             </button>
-            <h1 class="h3 mb-0 text-gray-800">我的</h1>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="./">Home</a></li>
-                <li class="breadcrumb-item">Tables</li>
-                <li class="breadcrumb-item" aria-current="page">DataTables</li>
-            </ol>
-            @Html.MvcSiteMap().Menu()
-            @Html.MvcSiteMap().SiteMapPath()
+           
             @*<ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
@@ -242,9 +235,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
                     </div>
                     <div class="card-body">
-                        <p>Select2 is a jQuery based replacement for select boxes</p>
-
-
+                        @*<p>Select2 is a jQuery based replacement for select boxes</p>*@
                         @Html.AntiForgeryToken()
 
                         @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
@@ -315,7 +306,7 @@
                                 @Html.ActionLink("回列表", "Index")
                             </p>
                         </div>
-                        <p>For documentations Bootstrap Datepicker you can visit <a href="https://github.com/uxsolutions/bootstrap-datepicker" target="_blank">here.</a></p>
+                        <p>@*For documentations Bootstrap Datepicker you can visit <a href="https://github.com/uxsolutions/bootstrap-datepicker" target="_blank">here.*@</a></p>
                     </div>
                 </div>
             </div>

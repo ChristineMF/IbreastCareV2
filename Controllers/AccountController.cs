@@ -20,7 +20,7 @@ namespace IbreastCare.Controllers
         public ActionResult Index()
         {
             List<Member> members = Db.Members.ToList();
-            
+
             List<PatientViewModel> model = Common.MapToList<Member, PatientViewModel>(members);
 
             //計算年齡
@@ -28,10 +28,10 @@ namespace IbreastCare.Controllers
             {
                 item.age = CalculateAgeCorrect(item.BirthDate, DateTime.Now);
             }
-            
+
             return View(model);
         }
-       //年齡計算公式
+        //年齡計算公式
         int CalculateAgeCorrect(DateTime birthDate, DateTime now)
         {
             int age = now.Year - birthDate.Year;
@@ -44,19 +44,19 @@ namespace IbreastCare.Controllers
 
             return View();
         }
-        public ActionResult Login( )
+        public ActionResult Login()
         {
-           
+
             return View("Combine");
         }
         [HttpPost]
         public ActionResult Login([Bind(Prefix = "Login")] LoginViewModel loginmodel)
         {
-            
+
             if (ModelState.IsValid)
             {
-               
-                Member member = Db.Members.FirstOrDefault(m => m.UserName== loginmodel.UserName && m.Password==loginmodel.Password);
+
+                Member member = Db.Members.FirstOrDefault(m => m.UserName == loginmodel.UserName && m.Password == loginmodel.Password);
                 if (member == null)
                 {
                     ViewBag.Msg = "帳號或密碼錯誤";
@@ -76,14 +76,21 @@ namespace IbreastCare.Controllers
                 {
                     if (member.RoleId == 3 && member.Status == "on")
                         //return RedirectToAction("Index", " CaseManager", new { id = member.UserId });
-                    return RedirectToAction("Index", "CaseManager");
+                        return RedirectToAction("Index", "CaseManager");
                     else
                     {
-                        ViewBag.Msg = "權限未開啟";
-                        return View("Combine");
+                        if (member.RoleId == 4 && member.Status == "on")
+                            //return RedirectToAction("Index", " CaseManager", new { id = member.UserId });
+                            return RedirectToAction("Index", "AccountManage", new { id = member.UserId });
+                        else
+                        {
+                            ViewBag.Msg = "權限未開啟";
+                            return View("Combine");
+                        }
+
                     }
                 }
-               
+
             }
             else
             {
@@ -91,7 +98,16 @@ namespace IbreastCare.Controllers
             }
 
         }
-
+        //登出
+       
+        public ActionResult Logout()
+        {
+            Session["RoleId"] = null;
+            Session["NickName"] = null;
+            Session["UserId"] = null;
+           
+            return RedirectToAction("Index", "Home");
+        }
         //Guest註冊
         public ActionResult Create()
         {
@@ -147,8 +163,8 @@ namespace IbreastCare.Controllers
                 mydata.InputDate = DateTime.Now;
 
                 //4.存資料庫 Personal_Data=>MydataViewModel
-                Personal_Data mydataAll = Common.MapTo<MydataViewModel, Personal_Data>(mydata);
-                Db.Personal_Data.Add(mydataAll);
+                Personal_Datas mydataAll = Common.MapTo<MydataViewModel, Personal_Datas>(mydata);
+                Db.Personal_Datas.Add(mydataAll);
 
                 Db.SaveChanges();
                 return RedirectToAction("Index", "Home");
@@ -161,9 +177,11 @@ namespace IbreastCare.Controllers
         }
 
 //Patient修改
-public ActionResult Edit(int? id)
+    public ActionResult Edit(int? id)
         {
-            if (id==null)
+            ViewBag.myuserid = (int)Session["UserId"];
+
+            if (id == null)
             {
                 return HttpNotFound();
             }

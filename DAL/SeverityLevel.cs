@@ -22,10 +22,8 @@ namespace IbreastCare.DAL
     
         public int SeverityLevelID { get; set; }
         public string Category { get; set; }
-        public string SeverityLevel1 { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public string SeverityLevelName { get; set; }
     
-        public virtual Member Member { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SymptomDetail> SymptomDetails { get; set; }
     }

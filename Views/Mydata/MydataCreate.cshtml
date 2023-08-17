@@ -1,19 +1,17 @@
 ﻿
-
 @{
     ViewBag.Title = "MydataCreate";
     Layout = "~/Views/Shared/_LayoutPageRecord.cshtml";
 
 }
-
 @section Styles{
     @*<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">*@
+    
     <!--非共用Vendor -->
     <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
@@ -38,13 +36,13 @@
                 <i class="fa fa-bars"></i>
             </button>
             <h1 class="h3 mb-0 text-gray-800">我的</h1>
-            <ol class="breadcrumb">
+            @*<ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="./">Home</a></li>
                 <li class="breadcrumb-item">Tables</li>
                 <li class="breadcrumb-item" aria-current="page">DataTables</li>
-            </ol>
-            @Html.MvcSiteMap().Menu()
-            @Html.MvcSiteMap().SiteMapPath()
+            </ol>*@
+            @*@Html.MvcSiteMap().Menu()/
+            @Html.MvcSiteMap().SiteMapPath()/*@
             @*<ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
@@ -256,17 +254,14 @@
                         <h6 class="m-0 font-weight-bold text-primary">生理/病理</h6>
                     </div>
                     <div class="card-body">
-                        <p>Select2 is a jQuery based replacement for select boxes</p>
-
-
                         <div class="form-group">
-                            <label class="col-lg-2 control-label" for="txtHeight">我的身高</label>
+                            <label class="col-lg-4 control-label" for="txtHeight">我的身高</label>
                             <div class="col-lg-8">
                                 <input v-model="mydata.Height" class="form-control" id="txtHeight" type="number">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label" for="selectCellType">細胞類型</label>
+                            <label class="col-lg-4 control-label" for="selectCellType">細胞類型</label>
                             <select v-model="mydata.CellType" class="select2-single form-control" name="selectCellType" id="selectCellType">
                                 <option value="">請選擇</option>
                                 <option value="浸潤性腺管癌">浸潤性腺管癌</option>
@@ -277,7 +272,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="selectHer">HER-2/neu基因表現</label>
+                            <label class="col-lg-4 control-label"for="selectHer">HER-2/neu基因表現</label>
                             <select v-model="mydata.Her" class="select2-single form-control" name="selectHer" id="selectHer">
                                 <option value="">請選擇</option>
                                 <option value="陰性">陰性</option>
@@ -287,20 +282,20 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label" for="chkMenopause">是否停經</label>
+                            <label class="col-lg-4 control-label" for="chkMenopause">是否停經</label>
                             <div class="col-lg-8">
                                 <input v-model="mydata.Menopause" class="form-control" id="chkMenopause" type="checkbox" value="">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-lg-2 control-label" for="chkER">ER</label>
+                            <label class="col-lg-4 control-label" for="chkER">ER</label>
                             <div class="col-lg-8">
                                 <input v-model="mydata.ER" class="form-control" id="chkER" type="checkbox" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label" for="chkPR">PR</label>
+                            <label class="col-lg-4 control-label" for="chkPR">PR</label>
                             <div class="col-lg-8">
                                 <input v-model="mydata.PR" class="form-control" id="chkPR" type="checkbox" value="">
                             </div>
@@ -338,7 +333,7 @@
                                 <option value="6">重建手術</option>
                             </select>
                             <p>
-                                <strong>你選了：</strong>{{mydata.OperationType}}
+                                @*<strong>你選了：</strong>{{mydata.OperationType}}*@
                             </p>
                         </div>
                         <div class="form-group">
@@ -353,8 +348,9 @@
                                 <option value="5">免疫治療</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <textarea v-model="mydata.Note" cols="30" style="height: 80px;" id="textNote"></textarea>
+                        <div class="col-lg-4 control-label">
+                            <label for="textNote">備註</label>
+                            <textarea v-model="mydata.Note" cols="30" style="height: 80px;" id="textNote" class="form-control"></textarea>
 
                         </div>
                         <div class="row">
@@ -615,7 +611,7 @@
                     else
                         self.PR = "陰";
 
-                    self.UserId=@ViewBag.userid;
+                    self.UserId=@ViewBag.myuserid;
 
                     /*var Optypes = String.join(',', selectOpType);*/
                     /*var Optypes = selectOpType.toString();*/

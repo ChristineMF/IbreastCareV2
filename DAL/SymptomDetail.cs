@@ -14,14 +14,20 @@ namespace IbreastCare.DAL
     
     public partial class SymptomDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SymptomDetail()
+        {
+            this.MySymptoms = new HashSet<MySymptom>();
+        }
+    
         public int SymptomDetailID { get; set; }
         public int SymptomID { get; set; }
         public int SeverityLevelID { get; set; }
         public string Description { get; set; }
-        public Nullable<int> UserId { get; set; }
     
-        public virtual Member Member { get; set; }
-        public virtual SeverityLevel SeverityLevel { get; set; }
         public virtual Symptom Symptom { get; set; }
+        public virtual SeverityLevel SeverityLevel { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MySymptom> MySymptoms { get; set; }
     }
 }

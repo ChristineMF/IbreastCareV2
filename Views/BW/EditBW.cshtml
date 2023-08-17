@@ -57,13 +57,13 @@
                 <i class="fa fa-bars"></i>
             </button>
             <h1 class="h3 mb-0 text-gray-800">我的體重</h1>
-            <ol class="breadcrumb">
+            @*<ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="./">Home</a></li>
                 <li class="breadcrumb-item">Tables</li>
                 <li class="breadcrumb-item" aria-current="page">DataTables</li>
             </ol>
             @Html.MvcSiteMap().Menu()
-            @Html.MvcSiteMap().SiteMapPath()
+            @Html.MvcSiteMap().SiteMapPath()*@
             @*<ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
@@ -276,9 +276,9 @@
                         <h6 class="m-0 font-weight-bold text-primary">體重</h6>
                     </div>
                     <div class="form-group">
-                        <a href="/BW/Index/@ViewBag.userid"><input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getData()" /></a>
+                        <a href="/BW/Index/@ViewBag.myuserid"><input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getData()" /></a>
                         @*<a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>*@
-                        <a href="/BW/AddBW/@ViewBag.userid" class="btn">新增體重</a>
+                        <a href="/BW/AddBW/@ViewBag.myuserid" class="btn">新增體重</a>
                     </div>
                     <div class="card-body">
                         @*<p>Select2 is a jQuery based replacement for select boxes</p>*@
@@ -340,7 +340,7 @@
                                     <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
                                         <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit" style="margin:10px">修改</button>
 
-                                        <a href="/BW/AddBW/@ViewBag.userid" class="btn btn-primary" type="submit" style="p">再記一筆</a>
+                                        <a href="/BW/AddBW/@ViewBag.myuserid" class="btn btn-primary" type="submit" style="p">再記一筆</a>
                                     </div>
                                     <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
 
@@ -494,7 +494,7 @@
 </div>
 
                 </div>
-@Html.ActionLink("回列表", "Index", "BW", new { id = @ViewBag.userid }, null)
+@Html.ActionLink("回列表", "Index", "BW", new { id = @ViewBag.myuserid }, null)
             </div>
         </div>
 <!--Row-->
@@ -502,10 +502,10 @@
 <div class="row">
     <div class="col-lg-12">
         <p>
-            DataTables is a third party plugin that is used to generate the demo table below. For more information
+            @*DataTables is a third party plugin that is used to generate the demo table below. For more information
             about DataTables, please visit the official <a href="https://datatables.net/" target="_blank">
                 DataTables
-                documentation.
+                documentation.*@
             </a>
         </p>
     </div>
@@ -579,8 +579,8 @@
                         //databaseHeight: 0,
                         BMI: "@ViewBag.myBMI",
                         InpuDate: "",
-                        UserId: @ViewBag.userid,
-                        MeasureDate:' @ViewBag.myMeasure',
+                        UserId: @ViewBag.myuserid,
+                        MeasureDate:'@ViewBag.myMeasure.ToString("yyyy-MM-dd")',
                         BMR: "",
                         Age: "@ViewBag.myAge"
 
@@ -596,14 +596,14 @@
                 /* this.calculateBMI();*/
                 // $("#canMeasureDate")[0].value = "@@ViewBag.myMeasure";
                 // 將 @@ViewBag.myMeasure 的值設定給 myBW.MeasureDate
-                this.myBW.MeasureDate = "@ViewBag.myMeasure";
+                @*this.myBW.MeasureDate = "@ViewBag.myMeasure";
 
                 // 使用 Date 物件將日期格式轉換成 "yyyy-MM-dd"
                 const measureDate = new Date(this.myBW.MeasureDate);
                 const year = measureDate.getFullYear();
                 const month = String(measureDate.getMonth() + 1).padStart(2, '0');
                 const day = String(measureDate.getDate()).padStart(2, '0');
-                this.myBW.MeasureDate = `${year}-${month}-${day}`;
+                this.myBW.MeasureDate = `${year}-${month}-${day}`;*@
 
             },
             created() {
@@ -622,7 +622,7 @@
                     return (this.myBW.BW1 / (heightInMeter * heightInMeter)).toFixed(2);
                 },
                 BMR() {
-                    return this.bmrCalculation;
+                    return (this.bmrCalculation).toFixed(2);
                 },
                 Lv1() {
                     return (this.bmrCalculation * 1.2).toFixed(2);
@@ -677,7 +677,7 @@
                     self.myBW.BW1 = $("#weight").val();
                     self.myBW.Height = $("#height").val();
                     self.myBW.MeasureDate = $("#canMeasureDate")[0].value;
-                    self.myBW.UserId =@ViewBag.userid;
+                    self.myBW.UserId =@ViewBag.myuserid;
                     $.ajax({
                         type: 'PUT',
                         url: '/api/BWAPI/@ViewBag.myBWId',
@@ -687,7 +687,7 @@
                         success: function (data) {
 
 
-                            //location.href="/BW/Index/@ViewBag.userid"
+                            //location.href="/BW/Index/@ViewBag.myuserid"
                             var bmiValue = parseFloat($("#bmi").text());
                             alert("資料新增成功");
                             // 比較 bmiValue 與 18.5
@@ -714,7 +714,7 @@
                             //$("#Lv1").text() = tv1Value * 1.2
 
                             self.myBW = data//將值存入DB
-                           // location.href="/BW/AddBW/@ViewBag.userid"
+                           // location.href="/BW/AddBW/@ViewBag.myuserid"
                     }
                     })
                 },

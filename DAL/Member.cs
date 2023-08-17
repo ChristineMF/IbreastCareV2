@@ -17,11 +17,9 @@ namespace IbreastCare.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Member()
         {
-            this.Personal_Datas = new HashSet<Personal_Data>();
             this.BWs = new HashSet<BW>();
-            this.SeverityLevels = new HashSet<SeverityLevel>();
-            this.SymptomDetails = new HashSet<SymptomDetail>();
-            this.Symptoms = new HashSet<Symptom>();
+            this.Personal_Datas = new HashSet<Personal_Datas>();
+            this.MySymptoms = new HashSet<MySymptom>();
         }
     
         public int UserId { get; set; }
@@ -38,16 +36,12 @@ namespace IbreastCare.DAL
         public string SettingUser { get; set; }
         public Nullable<System.DateTime> SettingDate { get; set; }
     
-        public virtual Role Role { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Personal_Data> Personal_Datas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BW> BWs { get; set; }
+        public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SeverityLevel> SeverityLevels { get; set; }
+        public virtual ICollection<Personal_Datas> Personal_Datas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SymptomDetail> SymptomDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Symptom> Symptoms { get; set; }
+        public virtual ICollection<MySymptom> MySymptoms { get; set; }
     }
 }

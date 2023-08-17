@@ -8,13 +8,21 @@ namespace IbreastCare.ViewModel
 {
     public class SymptomViewModel
     {
+        public int UserId { get; set; }
         public int SymptomID { get; set; }
-        public IEnumerable<SelectListItem> Category { get; set; }
-        public string SymptomName { get; set; }
+        public string Category { get; set; }
         public int SeverityLevelID { get; set; }
-        public string SeverityLevel { get; set; }
-        
+   
+        public string SeverityLevelName { get; set; }
+
+
+        public int SymptomDetailID { get; set; }
         public string Description { get; set; }
-        public int UserID { get; set; }
+        
+
+        public int MySymptomsId { get; set; }
+        public System.DateTime OnsetDate { get; set; }
+        public System.DateTime InputDate { get; set; }
+        public Nullable<System.DateTime> ModificationDate { get; set; }
     }
 }

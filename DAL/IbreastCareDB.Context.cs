@@ -25,18 +25,19 @@ namespace IbreastCare.DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BW> BWs { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<MyOperation> MyOperations { get; set; }
         public virtual DbSet<MyTreat> MyTreats { get; set; }
         public virtual DbSet<OperationType> OperationTypes { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
-        public virtual DbSet<Personal_Data> Personal_Data { get; set; }
+        public virtual DbSet<Personal_Datas> Personal_Datas { get; set; }
         public virtual DbSet<RolePermission> RolePermissions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<TreatPlan> TreatPlans { get; set; }
-        public virtual DbSet<BW> BWs { get; set; }
-        public virtual DbSet<SeverityLevel> SeverityLevels { get; set; }
         public virtual DbSet<SymptomDetail> SymptomDetails { get; set; }
         public virtual DbSet<Symptom> Symptoms { get; set; }
+        public virtual DbSet<TreatPlan> TreatPlans { get; set; }
+        public virtual DbSet<SeverityLevel> SeverityLevels { get; set; }
+        public virtual DbSet<MySymptom> MySymptoms { get; set; }
     }
 }

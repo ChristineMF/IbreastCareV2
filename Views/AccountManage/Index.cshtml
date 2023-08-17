@@ -1,0 +1,85 @@
+﻿@model IEnumerable<IbreastCare.ViewModel.AccountViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageRecord.cshtml";
+}
+
+<h2>AccountList</h2>
+
+<table class="table">
+<tr>
+    <th>
+        @Html.DisplayNameFor(model => model.UserId)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.RealName)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.NickName)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.UserName)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Password)
+    </th>
+
+    <th>
+        @Html.DisplayNameFor(model => model.CellPhone)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Email)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.BirthDate)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.InputDate)
+    </th>
+
+
+
+</tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.UserId
+        </td>
+        <td>
+            @item.RealName
+        </td>
+        <td>
+            @item.NickName
+        </td>
+        <td>
+            @item.UserName
+        </td>
+        <td>
+            @item.Password
+        </td>
+
+        <td>
+            @item.CellPhone
+        </td>
+        <td>
+            @item.Email
+        </td>
+        <td>
+            @item.BirthDate
+        </td>
+        <td>
+            @item.InputDate
+        </td>
+
+
+        <td>
+            @Html.ActionLink("編輯", "Edit", new { id = item.UserId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+        </td>
+    </tr>
+}
+
+            </table>

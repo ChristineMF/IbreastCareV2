@@ -12,10 +12,10 @@ namespace IbreastCare.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Personal_Data
+    public partial class Personal_Datas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Personal_Data()
+        public Personal_Datas()
         {
             this.MyOperations = new HashSet<MyOperation>();
             this.MyTreats = new HashSet<MyTreat>();

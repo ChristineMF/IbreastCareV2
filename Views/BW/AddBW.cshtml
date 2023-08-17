@@ -57,12 +57,12 @@
             </button>
             <h1 class="h3 mb-0 text-gray-800">我的體重</h1>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="./">Home</a></li>
+                @*<li class="breadcrumb-item"><a href="./">Home</a></li>
                 <li class="breadcrumb-item">Tables</li>
-                <li class="breadcrumb-item" aria-current="page">DataTables</li>
+                <li class="breadcrumb-item" aria-current="page">DataTables</li>*@
             </ol>
-            @Html.MvcSiteMap().Menu()
-            @Html.MvcSiteMap().SiteMapPath()
+            @*@Html.MvcSiteMap().Menu()/
+            @Html.MvcSiteMap().SiteMapPath()/*@
             @*<ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
@@ -275,9 +275,9 @@
                         <h6 class="m-0 font-weight-bold text-primary">體重</h6>
                     </div>
                     <div class="form-group">
-                        <a href="/BW/Index/@ViewBag.userid"><input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getData()" /></a>
+                        <a href="/BW/Index/@ViewBag.myuserid"><input type="button" id="myBtn" value="我的體重" class="btn" v-on:click="getData()" /></a>
                         @*<a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>*@
-                        <a href="/BW/AddBW/@ViewBag.userid" class="btn">新增體重</a>
+                        <a href="/BW/AddBW/@ViewBag.myuserid" class="btn">新增體重</a>
                     </div>
                     <div class="card-body">
                         @*<p>Select2 is a jQuery based replacement for select boxes</p>*@
@@ -337,9 +337,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
-                                        <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit" style="margin:10px">新增</button>
+                                        <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit" style="margin:10px">儲存</button>
 
-                                        <a href="/BW/AddBW/@ViewBag.userid" class="btn btn-primary" type="submit" style="p">再記一筆</a>
+                                        <a href="/BW/AddBW/@ViewBag.myuserid" class="btn btn-primary" type="submit" style="p">再記一筆</a>
                                     </div>
                                     <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
 
@@ -477,6 +477,7 @@
                     </div>
 
                     <!-- PRODUCT ITEM END -->
+                    @Html.ActionLink("回列表", "Index", "BW", new { id = @ViewBag.myuserid }, null)
 
                 </div>
 
@@ -493,7 +494,6 @@
 </div>
 
                 </div>
-@Html.ActionLink("回列表", "Index", "BW", new { id = @ViewBag.userid }, null)
             </div>
         </div>
 <!--Row-->
@@ -501,10 +501,10 @@
 <div class="row">
     <div class="col-lg-12">
         <p>
-            DataTables is a third party plugin that is used to generate the demo table below. For more information
+            @*DataTables is a third party plugin that is used to generate the demo table below. For more information
             about DataTables, please visit the official <a href="https://datatables.net/" target="_blank">
                 DataTables
-                documentation.
+                documentation.*@
             </a>
         </p>
     </div>
@@ -575,10 +575,10 @@
                         BWId: '',
                         BW1: 0,
                         Height: @ViewBag.myHeight,
-                        databaseHeight: 0,
+                        //databaseHeight: 0,
                         BMI: "",
                         InpuDate: "",
-                        UserId: @ViewBag.userid,
+                        UserId: @ViewBag.myuserid,
                         MeasureDate: "",
                         BMR: "",
                         Age: "@ViewBag.myAge",
@@ -591,13 +591,12 @@
             mounted() {
                 // 加入載入後的程式
                 // 計算 BMI
-                this.fetchDbHeight();
                 /* this.calculateBMI();*/
 
             },
             created() {
                 // 從資料庫獲取資料庫中的身高值
-                this.fetchDbHeight();
+                //this.fetchDbHeight();
             },
 
             computed: {
@@ -611,7 +610,7 @@
                     return (this.myBW.BW1 / (heightInMeter * heightInMeter)).toFixed(2);
                 },
                 BMR() {
-                    return this.bmrCalculation.toFixed(2);
+                    return (this.bmrCalculation).toFixed(2);
                 },
                 Lv1() {
                     return (this.bmrCalculation * 1.2).toFixed(2);
@@ -646,19 +645,7 @@
                 IsInRange(number) {
                     return number > 30 && number <= 100;
                 },
-                fetchDbHeight() {
-                    const xhr = new XMLHttpRequest();
-                    xhr.onreadystatechange = () => {
-                        if (xhr.readyState == 4 && xhr.status == 200) {
-                            this.myBW.databaseHeight = JSON.parse(xhr.responseText);
-                        }
-                    };
-                    xhr.open('GET', '/api/BWAPI/GetHeight/@ViewBag.userid');
-                    xhr.send();
-                },
-                //calculateBMI() {
-                //    console.log(`BMI: ${this.BMI}`);
-                //},
+                
 
                 addData: function () {
                     var self = this;
@@ -666,7 +653,7 @@
                     self.myBW.BW1 = $("#weight").val();
                     self.myBW.Height = $("#height").val();
                     self.myBW.MeasureDate = $("#canMeasureDate")[0].value;
-                    self.myBW.UserId =@ViewBag.userid;
+                    self.myBW.UserId =@ViewBag.myuserid;
                     $.ajax({
                         type: 'POST',
                         url: '/api/BWAPI/{id}',
@@ -676,7 +663,7 @@
                         success: function (data) {
 
 
-                            //location.href="/BW/Index/@ViewBag.userid"
+                            //location.href="/BW/Index/@ViewBag.myuserid"
                             var bmiValue = parseFloat($("#bmi").text());
                             alert("資料新增成功");
                             // 比較 bmiValue 與 18.5
@@ -703,7 +690,7 @@
                             //$("#Lv1").text() = tv1Value * 1.2
 
                             self.myBW = data//將值存入DB
-                            //location.href="/BW/AddBW/@ViewBag.userid"
+                            //location.href="/BW/AddBW/@ViewBag.myuserid"
                     }
                     })
                 },

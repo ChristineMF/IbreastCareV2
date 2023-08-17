@@ -18,7 +18,7 @@ namespace IbreastCare.DAL
         public int MyId { get; set; }
         public Nullable<int> TreatId { get; set; }
     
-        public virtual Personal_Data Personal_Datas { get; set; }
+        public virtual Personal_Datas Personal_Datas { get; set; }
         public virtual TreatPlan TreatPlan { get; set; }
     }
 }

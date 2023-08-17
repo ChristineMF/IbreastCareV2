@@ -14,16 +14,16 @@ namespace IbreastCare.ViewModel
     {
         private IbreastDBEntities Db = new IbreastDBEntities();
         // GET: api/MydataAPI
-        public IEnumerable<Personal_Data> GetMydatas()
+        public IEnumerable<Personal_Datas> GetMydatas()
         {
-            return Db.Personal_Data;
+            return Db.Personal_Datas;
         }
 
         // GET: api/MydataAPI/5
-        [ResponseType(typeof(Personal_Data))]
+        [ResponseType(typeof(Personal_Datas))]
         public async Task<IHttpActionResult> GetMydata(int id)
         {
-            Personal_Data mydata = await Db.Personal_Data.FindAsync(id);
+            Personal_Datas mydata = await Db.Personal_Datas.FindAsync(id);
             if (mydata == null)
             {
                 return NotFound();
@@ -32,7 +32,7 @@ namespace IbreastCare.ViewModel
         }
 
         // POST: api/MydataAPI
-        public void Post(Personal_Data mydata)
+        public void Post(Personal_Datas mydata)
         {
 
             mydata.InputDate = DateTime.Now;
@@ -80,7 +80,7 @@ namespace IbreastCare.ViewModel
             //{
            
            
-            Db.Personal_Data.Add(mydata);
+            Db.Personal_Datas.Add(mydata);
 
             Db.SaveChanges();
         }
@@ -94,8 +94,8 @@ namespace IbreastCare.ViewModel
         // DELETE: api/MydataAPI/5
         public void Delete(int id)
         {
-            Personal_Data personData = Db.Personal_Data.FirstOrDefault(p => p.MyId == id);
-            Db.Personal_Data.Remove(personData);
+            Personal_Datas personData = Db.Personal_Datas.FirstOrDefault(p => p.MyId == id);
+            Db.Personal_Datas.Remove(personData);
             Db.SaveChanges();
         }
     }

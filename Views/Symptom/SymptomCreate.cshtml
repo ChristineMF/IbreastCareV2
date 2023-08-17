@@ -1,0 +1,597 @@
+﻿@model IbreastCare.ViewModel.SymptomViewModel
+
+@{
+    ViewBag.Title = "SymptomCreate";
+    Layout = "~/Views/Shared/_LayoutPageRecord.cshtml";
+}
+
+@section Styles{
+
+    <link href="/img/logo/logo.png" rel="icon">
+    @*<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">*@
+    @*<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">*@
+    <!--非共用Vendor -->
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <!-- RuangAdmin CSS -->
+    <link href="/css/ruang-admin.min.css" rel="stylesheet">
+    <!-- datatables CSS -->
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Bootstrap DatePicker -->
+    <link href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <style>
+        .row .bmi-grade div {
+            border: 1px solid green;
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .row .tdee-item {
+            border: 1px solid green;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .tdee span {
+            font: 1.5rem bold red;
+            color: red;
+        }
+    </style>
+}
+
+<!-- Sidebar -->
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+        <!-- TopBar -->
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" style="background-color: #F3F6F4 ">
+            <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+            <h1 class="h3 mb-0 text-gray-800">我的症狀</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Home</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item" aria-current="page">DataTables</li>
+            </ol>
+            @Html.MvcSiteMap().Menu()
+            @Html.MvcSiteMap().SiteMapPath()
+            @*<ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                             aria-labelledby="searchDropdown">
+                            <form class="navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
+                                           aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <span class="badge badge-danger badge-counter">3+</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Alerts Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 12, 2019</div>
+                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-donate text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 7, 2019</div>
+                                    $290.29 has been deposited into your account!
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-warning">
+                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 2, 2019</div>
+                                    Spending Alert: We've noticed unusually high spending for your account.
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-envelope fa-fw"></i>
+                            <span class="badge badge-warning badge-counter">2</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">
+                                Message Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="img/man.png" style="max-width: 60px" alt="">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">
+                                        Hi there! I am wondering if you can help me with a problem I've been
+                                        having.
+                                    </div>
+                                    <div class="small text-gray-500">Udin Cilok · 58m</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="img/girl.png" style="max-width: 60px" alt="">
+                                    <div class="status-indicator bg-default"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">
+                                        Am I a good boy? The reason I ask is because someone told me that people
+                                        say this to all dogs, even if they aren't good...
+                                    </div>
+                                    <div class="small text-gray-500">Jaenab · 2w</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-tasks fa-fw"></i>
+                            <span class="badge badge-success badge-counter">3</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">
+                                Task
+                            </h6>
+                            <a class="dropdown-item align-items-center" href="#">
+                                <div class="mb-3">
+                                    <div class="small text-gray-500">
+                                        Design Button
+                                        <div class="small float-right"><b>50%</b></div>
+                                    </div>
+                                    <div class="progress" style="height: 12px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item align-items-center" href="#">
+                                <div class="mb-3">
+                                    <div class="small text-gray-500">
+                                        Make Beautiful Transitions
+                                        <div class="small float-right"><b>30%</b></div>
+                                    </div>
+                                    <div class="progress" style="height: 12px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item align-items-center" href="#">
+                                <div class="mb-3">
+                                    <div class="small text-gray-500">
+                                        Create Pie Chart
+                                        <div class="small float-right"><b>75%</b></div>
+                                    </div>
+                                    <div class="progress" style="height: 12px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">View All Taks</a>
+                        </div>
+                    </li>
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
+                            <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>*@
+        </nav>
+    </div>
+    <!-- Topbar -->
+    <!-- Container Fluid-->
+    <!--SiteMap-->
+    <!-- Container Fluid-->
+    <div class="container-fluid" id="container-wrapper">
+        <!--<div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">DataTables</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Home</a>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item active" aria-current="page">DataTables</li>
+            </ol>
+        </div>-->
+        <!-- Row -->
+        <div class="row" id="app">
+            <!-- Datatables -->
+            <!-- DataTable with Hover -->
+            <div class="col-lg-6">
+                <!-- Select2 -->
+                <div class="card lg-2">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">症狀</h6>
+                    </div>
+                    <div class="form-group">
+                        <a href="/BW/Index/@ViewBag.userid"><input type="button" id="myBtn" value="我的症狀" class="btn" /></a>
+                        @*<a href="/BW/ShowLine/@ViewBag.userid" class="btn">體重圖</a>*@
+                        <a href="/BW/AddBW/@ViewBag.userid" class="btn">新增症狀</a>
+                    </div>
+                    
+                        <div class="card-body">
+                            @*<p>Select2 is a jQuery based replacement for select boxes</p>*@
+                            <div class="row">
+                                <div class="col-6">
+                                    @using (Html.BeginForm("SymptomCreate", "Symptom", FormMethod.Post))
+                                    {
+                                        <div class="form-group">
+                                            <label class="col-lg-8 control-label" for="SymptomID">請選擇您的症狀</label>
+                                            <div class="col-lg-12">
+                                                @*@Html.DropDownList("mySelect", (List<SelectListItem>)ViewBag.symptomList)*@
+                                                @Html.DropDownListFor(model => model.SymptomID, (SelectList)ViewBag.symptomList,"請選擇症狀", new { @class = "form-control" })
+                                                <input class="form-control" id="weight" name="weight" type="number" />
+
+                                            </div>
+                                        </div>
+                                    }
+                                    <hr />
+                                    用Html.Partial設RadioButtonList
+                                    @using (Html.BeginForm("ShowDetails", "Symptom", FormMethod.Post))
+                                    {
+                                        @*@Html.Partial("_ShowDetails", (List<SelectListItem>)ViewBag.symptomDetail)*@
+                                        <div class="form-group">
+                                            @*<label class="col-lg-4 control-label" for="height">我的身高(cm)</label>
+                                            <div class="col-lg-12">
+                                                <input v-model="myBW.Height" class="form-control" id="height" name="height" type="number" disabled="disabled" />
+
+                                            </div>*@
+                                        </div>
+
+                                        <div class="form-group" id="simple-date1">
+                                            <label for="canMeasureDate">發生日期</label>
+                                            <div class="col-lg-12 input-group date">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                </div>
+                                                <input name="OnsetDate" class="form-control" id="OnsetDate" type="date">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-8 control-label">身體質量指數(BMI)</label>
+                                            <div class="col-lg-12">
+                                                @*<br>
+                    <button v-on:click="calculateBMI()">計算 BMI</button>
+                    <br>*@
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-8 control-label">年齡</label>
+                                            <div class="col-lg-12">
+                                                @*<br>
+                    
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-8 control-label">基礎代謝率(BMR)</label>
+                                            <div class="col-lg-12">
+                                                @*<br>
+                    <button v-on:click="calculateBMI()">計算 BMI</button>
+                    <br>*@
+                                                <p class="form-control" id="bmr">{{BMR}}</p>
+                                                BMR 指人體在休息狀態下，維持新陳代謝所需的熱量，例如：呼吸、器官運作、體溫維持等，即使整天躺著不動也會消耗的最低熱量。BMR 會隨著年紀增加或體重減輕而降低，會隨著肌肉量增加而上升。
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                                                <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit" style="margin:10px">新增</button>
+
+                                                <a href="/BW/AddBW/@ViewBag.userid" class="btn btn-primary" type="submit" style="p">再記一筆</a>
+                                            </div>
+                                            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+
+                                            </div>
+                                        </div>
+                                    @*</div>*@
+                                    }
+
+                                <div class="col-6 col-md-6">
+                                    <p style="text-align: center;margin-top: 0px;font-size: 18px;">我是18歲 (含) 以上的成人，我的體重正常嗎？</p>
+                                    <ul class="container mt-20">
+                                        <div class="row bmi-grade">
+                                            <div class="col-12" id="bmi1">
+                                        <li>
+                                            <b>
+                                                BMI &lt;
+                                                <span class="number-style">18.5</span>
+                                            </b>
+                                            <span class="grade-content"><br>「體重過輕」</span>，需要多運動，均衡飲食，以增加體能，維持健康！
+                                        </li>
+                                </div>
+
+                                <div class="col-12" id="bmi2">
+                                    <li>
+                                        <b>
+                                            <span class="number-style">18.5</span> ≤ BMI &lt; <span class="number-style">24</span>
+                                        </b> <br>恭喜！<span class="grade-content">「健康體重」</span>，要繼續保持！
+                                    </li>
+                                </div>
+                                <div class="col-12" id="bmi3">
+                                    <li>
+                                        <b>
+                                            <span class="number-style">24</span> ≤ BMI &lt; <span class="number-style">27</span>
+                                        </b> <span class="grade-content"><br>「體重過重」</span>了，要小心囉，趕快力行「健康體重管理」！
+                                    </li>
+                                </div>
+                                <div class="col-12" id="bmi4">
+                                    <li>
+                                        <b>BMI ≥ <span class="number-style">27</span></b> <br> 啊～<span class="grade-content">「肥胖」</span>，需要立刻力行「健康體重管理」囉！
+                                    </li>
+                                </div>
+
+
+
+
+                                @*<div class="col-12">
+                        <div class="bmr-link">
+                            <p style="line-height: 32px;">
+                                想知道自己的每日總消耗熱量嗎？ <a href="https://tools.heho.com.tw/bmr/"
+                                                   target="_blank" class="btn btn-info">基礎代謝率 (BMR) 計算機 ＞</a>
+                            </p>
+                        </div>
+                    </div>*@
+                            </div>
+                            <div style="line-height: 24px;font-size: 12px;color: #808080;padding-left: 15px;">
+                                資料來源：衛生福利部國民健康署
+                            </div>
+                            </ul>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">每日總熱量消耗 (TDEE)</h6>
+                <p>TDEE 是身體一整天下來，包括基礎代謝、活動量、吃東西所消耗的熱量。不同的生活型態需要的熱量也不一樣，當每天攝取的熱量和 TDEE 相等，便達到「熱量平衡」。</p>
+            </div>
+            <div class="card-body">
+                <div class="row tdee-list">
+                    <!-- PRODUCT ITEM START -->
+
+                    <div class="col-md-4 col-sm-6 col-xs-12" style="margin-bottom:30px">
+                        <div class="tdee-item">
+                            <div class="pi-img-wrapper">
+                                <img src="~/img/tdee/lv1_2.png" class="img-responsive" alt="Berry Lace Dress">
+                            </div>
+                            <h3>@*<a href="/Product/ShopItem/@item.Id">@item.Name</a>*@</h3>
+                            <h4>身體活動趨於靜態</h4>
+                            <p>(幾乎不運動)</p>
+                            <div class="tdee">BMR x 1.2 = <span id="Lv1">{{Lv1}}</span></div>
+                            @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="tdee-item">
+                            <div class="pi-img-wrapper">
+                                <img src="~/img/tdee/lv2_2.png" class="img-responsive" alt="Berry Lace Dress">
+                            </div>
+                            <h3>@*<a href="/Product/ShopItem/@item.Id">@item.Name</a>*@</h3>
+                            <h4>身體活動程度較低</h4>
+                            <p>(每週運動 1-3 天)</p>
+                            <div class="tdee">BMR x 1.3.75 = <span id="Lv2">{{Lv2}}</span></div>
+                            @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="tdee-item">
+                            <div class="pi-img-wrapper">
+                                <img src="~/img/tdee/lv3_2.png" class="img-responsive" alt="Berry Lace Dress">
+                            </div>
+                            <h3>@*<a href="/Product/ShopItem/@item.Id">@item.Name</a>*@</h3>
+                            <h4>身體活動程度正常</h4>
+                            <p>(每週運動 3-5 天)</p>
+                            <div class="tdee">BMR x 1.55 = <span id="Lv3">{{Lv3}}</span></div>
+                            @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="tdee-item">
+                            <div class="pi-img-wrapper">
+                                <img src="~/img/tdee/lv4_2.png" class="img-responsive" alt="Berry Lace Dress">
+                            </div>
+                            <h3>@*<a href="/Product/ShopItem/@item.Id">@item.Name</a>*@</h3>
+                            <h4>身體活動程度較高</h4>
+                            <p>(每週運動 6-7 天)</p>
+                            <div class="tdee">BMR x 1.72 = <span id="Lv4">{{Lv4}}</span></div>
+                            @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="tdee-item">
+                            <div class="pi-img-wrapper">
+                                <img src="~/img/tdee/lv5_2.png" class="img-responsive" alt="Berry Lace Dress">
+                            </div>
+                            <h3>@*<a href="/Product/ShopItem/@item.Id">@item.Name</a>*@</h3>
+                            <h4>身體活動程度激烈 </h4>
+                            <p>(長時間運動或體力勞動工作)</p>
+                            <div class="tdee">BMR x 1.9 = <span id="Lv5">{{Lv5}}</span></div>
+                            @*<a href="/Home/ShoppingCart" class="btn btn-default add2cart">Add to cart</a>*@
+                        </div>
+                    </div>
+
+                    <!-- PRODUCT ITEM END -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @*<div class="row">
+            <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                <button v-on:click="addData()" id="myBtn" class="btn btn-primary" type="submit">新增</button>
+            </div>
+        </div>*@
+
+</div>
+
+                </div>
+@Html.ActionLink("回列表", "Index", "Symptom", new { id = @ViewBag.userid }, null)
+            </div>
+        </div>
+<!--Row-->
+<!-- Documentation Link -->
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            DataTables is a third party plugin that is used to generate the demo table below. For more information
+            about DataTables, please visit the official <a href="https://datatables.net/" target="_blank">
+                DataTables
+                documentation.
+            </a>
+        </p>
+    </div>
+</div>
+
+<!-- Modal Logout -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to logout?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                <a href="login.html" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+<!---Container Fluid-->
+</div>
+
+
+
+
+<!-- Scroll to top -->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="/js/ruang-admin.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Bootstrap Datepicker -->
+    <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script>
+        //$(document).ready(function () {
+
+        //    //$('#dataTable').DataTable(); // ID From dataTable
+        //    // $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+        //});
+    </script>
+    
+    <script>
+                        //$(document).ready(function () {
+                        //    // 獲取 #bmi 的內容
+                        //    var bmiValue = parseFloat($("#bmi").val());
+
+                        //    // 比較 bmiValue 與 18.5
+                        //    if (bmiValue < 18.5) {
+                        //        // 如果 bmiValue 小於 18.5，將 #bmi1 的 div 樣式變紅色
+                        //        $("#bmi1 div").css("border", "1px solid red")
+                        //    }
+                        //});
+
+    </script>
+
+}
+
